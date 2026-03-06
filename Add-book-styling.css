@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&family=Changa:wght@200..800&family=Jomhuria&display=swap');
+
+:root {
+    /* Brand */
+    --primary: #1E3A8A;
+    /* Ink Blue */
+    --secondary: #0F766E;
+    /* Teal */
+    --accent: #F59E0B;
+    /* Gold */
+
+    /* Backgrounds */
+    --bg: #F8FAFC;
+    /* page background */
+    --surface: #FFFFFF;
+    /* cards, forms */
+    --surface-2: #F1F5F9;
+    /* soft sections */
+
+    /* Text */
+    --text: #0F172A;
+    /* main text */
+    --text-muted: #475569;
+    /* secondary text */
+    --text-soft: #94A3B8;
+    /* placeholders/disabled */
+
+    /* Status */
+    --success: #16A34A;
+    /* available */
+    --danger: #DC2626;
+    /* borrowed */
+    --warning: #D97706;
+    --info: #2563EB;
+
+    /* Borders & Effects */
+    --border-color: #E2E8F0;
+    --ring: rgba(30, 58, 138, 0.35);
+    --shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+
+    /* Radius & Spacing */
+    --radius-sm: 10px;
+    --radius-md: 14px;
+    --radius-lg: 18px;
+
+    --space-1: 6px;
+    --space-2: 10px;
+    --space-3: 14px;
+    --space-4: 18px;
+    --space-5: 24px;
+
+    /* Typography */
+    --font: "Cairo", sans-serif, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --fs-sm: 0.9rem;
+    --fs-md: 1rem;
+    --fs-lg: 1.25rem;
+    --fs-xl: 1.6rem;
+
+    /* Component Sizes */
+    --nav-height: 64px;
+    --btn-height: 42px;
+    --input-height: 42px;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    margin-top: 75px;
+    font-family: var(--font);
+    color: var(--text);
+    min-height: 100vh;
+    background-color: var(--bg);
+
+}
+
+nav ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text);
+}
+
+.navbar {
+    background-color: var(--primary);
+    height: 60px;
+    display: flex;
+    position: fixed;
+    top: 0;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px 0 100px;
+    width: 100%;
+}
+
+
+.navbar img {
+    height: 40px;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+}
+
+.navbar span {
+    margin-left: 5px;
+    color: #1fa7df;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+
+.navbar nav ul {
+    display: grid;
+    grid-template-columns: repeat(4, 150px);
+    justify-content: space-between;
+}
+
+.navbar nav ul li {
+    position: relative;
+}
+
+.navbar nav ul li a {
+    display: flex;
+    color: #1fa7df;
+    font-weight: 500;
+    justify-content: center;
+}
+
+.navbar nav ul li::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    height: 50%;
+    width: 2px;
+    top: 25%;
+    background-color: #1fa7df;
+}
+
+.navbar nav ul li:last-child::after {
+    display: none;
+}
+
+.navbar a:hover {
+    text-decoration: underline;
+    color: #24bcfe;
+}
+
+.navbar nav ul li:hover {
+    border-radius: 3px;
+    background-color: #24bdff29;
+}
+
+
+
+header,
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main div {
+    display: flex;
+    flex-flow: column wrap;
+    margin-bottom: 15px;
+}
+
+main div input,
+main div textarea,
+main div select,
+main form button {
+    width: 100%;
+    max-width: 500px;
+    height: 40px;
+    padding-left: 20px;
+    border-radius: var(--radius-lg);
+    outline: none;
+    border: solid var(--border-color) 2px;
+}
+
+main div label {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+#description {
+    resize: none;
+    width: 100%;
+    min-width: 500px;
+    height: 100px;
+    padding-top: 10px;
+}
+
+main div input:focus,
+main div textarea:focus,
+main div select:focus,
+main form button:focus {
+    caret-color: var(--secondary);
+    border: var(--secondary) solid 1px;
+
+}
+
+main form button {
+    outline: none;
+    width: 250px;
+    display: block;
+    margin: 30px auto 0;
+    padding: 10px;
+    border-radius: calc(var(--radius-lg) + 5px);
+    background-color: var(--primary);
+    color: var(--surface);
+}
+
+main form button:hover {
+    background-color: #2548a9;
+    cursor: pointer;
+}
+
+
+main form .image input {
+    background-color: #fff;
+    padding-top: 8.4px;
+}
+
+
+footer {
+    font-size: 13px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 80px;
+}
