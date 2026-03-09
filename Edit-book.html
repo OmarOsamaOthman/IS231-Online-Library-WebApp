@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Edit-book-styling.css">
+    <link rel="icon" type="image/png" href="book-logo.png">
+    <title>Edit Book</title>
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="#"><img src="book-logo.png" alt="logo of"> <span>Online Library</span> </a>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Books</a></li>
+                <li><a href="Add-book.html">Add Book</a></li>
+                <li><a href="#">Borrowed</a></li>
+            </ul>
+        </nav>
+    </div>
+    <section class="editing">
+        <header>
+            <h1>Edit Book Details</h1>
+        </header>
+
+        <main>
+            <form method="get" action="">
+                <div class="content-container">
+                    <div>
+                        <label for="book-title">Book Title:</label>
+                        <input type="text" id="book-title" name="book_title" required autofocus>
+                    </div>
+                    <div>
+                        <label for="author">Author:</label>
+                        <input type="text" id="author" name="author" required>
+                    </div>
+
+                    <div>
+                        <label for="category">Category:</label>
+                        <select id="category" name="category">
+                            <option value="" selected>Choose Category</option>
+                            <option value="fiction">Fiction</option>
+                            <option value="science">Science</option>
+                            <option value="history">History</option>
+                            <option value="technology">Technology</option>
+                            <option value="education">Education</option>
+                            <option value="biography">Biography</option>
+                        </select>
+                    </div>
+                    <div class="description">
+                        <label for="description">Description:</label>
+                        <textarea id="description" name="description"></textarea>
+                    </div>
+                    <div>
+                        <label for="status">Status:</label>
+                        <select id="status" name="status">
+                            <option value="available" selected>Available</option>
+                            <option value="borrowed">Borrowed</option>
+                            <option value="out of stock">Out of stock</option>
+                            <option value="maintenance">Maintenance</option>
+                        </select>
+                    </div>
+
+                    <div class="image">
+                        <label for="book-image">Upload Book Image:
+                            <!-- <img src="upload-image.png" alt=""> -->
+                        </label>
+                        <input type="file" id="book-image" accept="image/*">
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button type="submit" class="save">Save Changes</button>
+                    <button type="button" class="cancel">Cancel</button>
+                    <button type="button" class="delete">Delete Book</button>
+
+                </div>
+
+            </form>
+
+        </main>
+    </section>
+
+    <section class="preview">
+
+        <iframe src="Add-book.html" frameborder="0" title="Book preview"></iframe>
+    </section>
+    <footer>
+        <p>© 2026 Online Library. All Rights Reserved. | Developed by Omar Osama</p>
+    </footer>
+</body>
+
+</html>
