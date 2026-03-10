@@ -1,53 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Signup.css">
+    <link rel="stylesheet" href="../Styling/Signup.css">
     <title>Sign Up</title>
 </head>
-<body>
-     <div class="head">
-     <nav class="navbar">
-        <div class="Library">
-           <img src="Arabic.png" alt="logo" class="image">
-           <p>our library</p>
-        </div>
 
-      <div class="HCA">
-                <a href="Home"> Home</a>
-                <a href="About"> About</a>
+<body>
+    <div class="head">
+        <nav class="navbar">
+            <div class="Library">
+                <img src="../img/Arabic.png" alt="logo" class="image">
+                <p>our library</p>
             </div>
-     </nav>
+
+            <div class="HCA">
+                <a href="../html/library.html"> Home</a>
+                <a href="#"> About</a>
+            </div>
+        </nav>
     </div>
-    <form class="form"> 
+    <form class="form">
         <label> First Name</label>
         <input type="text" name="First Name" id="FirstName" placeholder="First Name" required>
-         <br>
-         <label> Second Name</label>
+        <br>
+        <label> Second Name</label>
         <input type="text" name="Second Name" id="SecondName" placeholder="Second Name" required>
-         <br>
+        <br>
         <label> User Name</label>
         <input type="text" name="User Name" id="UserName" placeholder="User Name" required>
-         <br>
-         <label>Password</label>
+        <br>
+        <label>Password</label>
         <input type="password" name="Password" id="Password" placeholder="Password" required>
         <br>
-          <label> Confirm Password</label>
+        <label> Confirm Password</label>
         <input type="password" name="Confirm Password" id="Confirm Password" placeholder="Confirm Password" required>
-         <br>
-         <label>Email</label>
-         <input type="email" name="Email" id="Email" placeholder="Email" required>
-          <br>
-          <label>Phone</label>
-         <input type="tel" name="Phone" id="Phone" placeholder="Phone" required>
+        <br>
+        <label>Email</label>
+        <input type="email" name="Email" id="Email" placeholder="Email" required>
+        <br>
+        <label>Phone</label>
+        <input type="tel" name="Phone" id="Phone" placeholder="Phone" required>
         <label>Role</label>
         <input type="radio" name="role" id="Admin" value="Admin">
         <label for="Admin">Admin</label>
         <input type="radio" name="role" id="User" value="User">
-         <label for="User">User</label>
-         <br>
-         <button type="submit">Sign Up </button>
+        <label for="User">User</label>
+        <br>
+        <button type="submit">Sign Up </button>
     </form>
 </body>
+
 </html>

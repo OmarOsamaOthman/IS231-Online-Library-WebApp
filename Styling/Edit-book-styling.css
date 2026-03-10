@@ -184,7 +184,7 @@ a {
 .preview {
     border: 2px solid var(--surface);
     border-radius: var(--radius-md);
-    background-color: var(--surface);
+    background-color: ;
     padding: 15px 0 30px;
     width: 46%;
     box-shadow: 0px 0px 20px -10px var(--primary);
@@ -256,11 +256,12 @@ main .content-container select,
     border-radius: 35px;
     outline: none;
     border: solid var(--border-color) 2px;
+    background-color: #fefefe;
 }
 
 #description {
     resize: none;
-    height: 75px;
+    height: 100px;
     padding-top: 10px;
     border-radius: 25px;
 }
@@ -269,13 +270,13 @@ main div input:focus,
 main div select:focus {
     caret-color: var(--secondary);
     border: var(--secondary) solid 1px;
-    box-shadow: 0 3px 30px -14px var(--secondary);
+    box-shadow: 0 3px 30px -18px var(--secondary);
 }
 
 main div textarea:focus {
     caret-color: var(--secondary);
     border: var(--secondary) solid 1px;
-    box-shadow: 0 3px 30px -25px var(--secondary);
+    box-shadow: 0 3px 30px -23px var(--secondary);
 }
 
 
