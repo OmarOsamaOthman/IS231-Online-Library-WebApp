@@ -3,6 +3,8 @@
 :root {
     /* Brand */
     --primary: #1E3A8A;
+
+    --primary-hover: #2548A9;
     /* Ink Blue */
     --secondary: #0F766E;
     /* Teal */
@@ -27,10 +29,15 @@
 
     /* Status */
     --success: #16A34A;
+    --success-hover: #22C55E;
     /* available */
     --danger: #DC2626;
+    --danger-hover: #EF4444;
+
     /* borrowed */
     --warning: #D97706;
+    --warning-hover: #F59E0B;
+
     --info: #2563EB;
 
     /* Borders & Effects */
@@ -202,24 +209,74 @@ main div label {
 }
 
 main div input:focus,
-main div textarea:focus,
 main div select:focus,
 main form button:focus {
     caret-color: var(--secondary);
     border: var(--secondary) solid 1px;
+    box-shadow: 0 3px 30px -17px var(--secondary);
 
 }
 
-main form button {
+
+main div textarea:focus {
+    caret-color: var(--secondary);
+    border: var(--secondary) solid 1px;
+    box-shadow: 0 3px 30px -23px var(--secondary);
+}
+
+main form #book-image {
+    margin-bottom: 20px;
+}
+
+main form .buttons {
+    display: flex;
+    flex-flow: row;
+    /* background-color: red; */
+    justify-content: center;
+}
+
+main form .buttons button {
     outline: none;
-    width: 250px;
-    display: block;
-    margin: 30px auto 0;
+    display: inline-block;
     padding: 10px;
     border-radius: calc(var(--radius-lg) + 5px);
     background-color: var(--primary);
     color: var(--surface);
 }
+
+
+main form .buttons .add {
+    margin-right: 15px;
+    width: 160px;
+    justify-self: center;
+    background-color: var(--primary);
+}
+
+main form .add:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px -3px var(--primary);
+}
+
+
+main form .buttons .cancel {
+    justify-self: center;
+    background-color: var(--surface);
+    border-color: var(--border-color);
+    color: var(--primary);
+    width: 120px;
+}
+
+main form .buttons .cancel:hover {
+    border: solid var(--border-color) 2px;
+    color: var(--danger);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px -5px var(--danger-hover);
+
+}
+
+
+
 
 main form button:hover {
     background-color: #2548a9;
