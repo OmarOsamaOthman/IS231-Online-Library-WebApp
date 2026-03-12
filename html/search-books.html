@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Books</title>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <a href="../html/library.html"><img src="../img/book-logo.png" alt="logo of"> <span>Online Library</span>
+            </a>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="../html/library.html">Home</a></li>
+                <li><a href="../html/books.html">Books</a></li>
+                <li><a href="../html/Add-book.html">Add Book</a></li>
+                <li><a href="#">Borrowed</a></li>
+            </ul>
+        </nav>
+    </div>
+    <header>
+        <h1>Search Books</h1>
+    </header>
+    <main>
+        <form method="get" action="">
+            <div>
+                <label for="search-query">Search:</label>
+                <input type="text" id="search-query" name="search_query" placeholder="Search by Title or Author" required autofocus>
+            </div>
+            <div>
+                <label for="category">Category:</label>
+                <select id="category" name="category">
+                    <option value="" selected>All Categories</option>
+                    <option value="fiction">Fiction</option>
+                    <option value="science">Science</option>
+                    <option value="history">History</option>
+                    <option value="technology">Technology</option>
+                    <option value="education">Education</option>
+                    <option value="biography">Biography</option>
+                </select>
+            <button type="submit">Search</button>
+        </form>
+</body>
+<footer>
+    <p>&copy; 2026 Online Library. All rights reserved. | Developed by Yasser Mohamed</p>
+</footer>
+</html>
