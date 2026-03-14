@@ -76,7 +76,7 @@
 }
 
 body {
-    padding-top: 90px;
+    padding-top: 280px;
     font-family: var(--font);
     color: var(--text);
     height: 100vh;
@@ -84,8 +84,10 @@ body {
 
     /* background-color: var(--bg); */
     display: flex;
-    flex-flow: wrap row;
-    justify-content: space-evenly;
+    flex-flow: nowrap column;
+    align-items: center;
+    justify-content: center;
+    /* justify-content: space-evenly; */
 }
 
 
@@ -178,7 +180,9 @@ a {
 
 /*-----------------------------------------*/
 
-
+.editing {
+    /* display: flex; */
+}
 
 .editing,
 .preview {
