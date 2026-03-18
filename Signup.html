@@ -20,7 +20,7 @@
             </div>
      </nav>
     </div>
-    <form class="form"> 
+    <form class="form" onsubmit="handleLogin(event)"> 
         <label> First Name</label>
         <input type="text" name="First Name" id="FirstName" placeholder="First Name" required>
          <br>
@@ -47,8 +47,8 @@
         <input type="radio" name="role" id="User" value="User">
          <label for="User">User</label>
          <br>
-         <button type="submit">Sign Up </button>
+         <button type="submit" id="signupbtn">Sign Up </button>
     </form>
-       <script src="main.js"></script>
+           <script src="signup.js"></script>
 </body>
 </html>
