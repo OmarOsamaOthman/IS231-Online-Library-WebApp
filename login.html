@@ -22,7 +22,7 @@
 
 
     <div class="content">
-    <form class="form"> 
+    <form class="form" onsubmit="handleLogin(event)"> 
         <h1>
             Login
         </h1>
@@ -30,9 +30,9 @@
         <input type="text" name="User Name" id="UserName" placeholder="User Name" required>
          <label>Password</label>
         <input type="password" name="Password" id="Password" placeholder="Password" required>
-         <button type="submit"   onsubmit="login(event)" id="login">Login</button>
+         <button type="submit"  id="loginBtn">Login</button>
     </form>
     </div>
-       <script src="main.js"></script>
+       <script src="login.js"></script>
 </body>
 </html>
