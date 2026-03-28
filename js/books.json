@@ -1,0 +1,137 @@
+[
+  {
+    "id": 1,
+    "title": "Zero to One",
+    "author": "Peter A. Thiel",
+    "category": "Trending",
+    "status": "available",
+    "description": "A startup guide about building innovative companies and creating new markets.",
+    "image": "../img/books/b1.jpg"
+  },
+  {
+    "id": 2,
+    "title": "The Ice People",
+    "author": "René Barjavel",
+    "category": "Trending",
+    "status": "available",
+    "description": "A science fiction novel exploring love and humanity across time.",
+    "image": "../img/books/b2.jpg"
+  },
+  {
+    "id": 3,
+    "title": "The Da Vinci Code",
+    "author": "Dan Brown",
+    "category": "Trending",
+    "status": "borrowed",
+    "description": "A mystery thriller involving secret societies and hidden historical truths.",
+    "image": "../img/books/b3.jpg"
+  },
+  {
+    "id": 4,
+    "title": "Forbidden knowledge",
+    "author": "Roger Shattuck",
+    "category": "Trending",
+    "status": "available",
+    "description": "A philosophical exploration of human curiosity and dangerous knowledge.",
+    "image": "../img/books/b4.jpg"
+  },
+  {
+    "id": 5,
+    "title": "Clean Code",
+    "author": "Robert C. Martin",
+    "category": "Coding",
+    "status": "available",
+    "description": "A handbook of best practices for writing clean and maintainable code.",
+    "image": "../img/books/c1.jpg"
+  },
+  {
+    "id": 6,
+    "title": "Python",
+    "author": "codeprowess",
+    "category": "Coding",
+    "status": "available",
+    "description": "An introductory guide to Python programming and problem solving.",
+    "image": "../img/books/c2.jpg"
+  },
+  {
+    "id": 7,
+    "title": "CODE",
+    "author": "Charles Petzold",
+    "category": "Coding",
+    "status": "borrowed",
+    "description": "Explains how computers work from simple logic to complex systems.",
+    "image": "../img/books/c3.jpg"
+  },
+  {
+    "id": 8,
+    "title": "Cracking the Coding Interview",
+    "author": "Gayle Laakmann McDowell",
+    "category": "Coding",
+    "status": "available",
+    "description": "A complete guide to technical interviews with coding problems and solutions.",
+    "image": "../img/books/c4.jpg"
+  },
+  {
+    "id": 9,
+    "title": "1984",
+    "author": "George Orwell",
+    "category": "Novels",
+    "status": "available",
+    "description": "A dystopian novel about surveillance, control, and totalitarianism.",
+    "image": "../img/books/n1.jpg"
+  },
+  {
+    "id": 10,
+    "title": "The Alchemist",
+    "author": "Paulo Coelho",
+    "category": "Novels",
+    "status": "borrowed",
+    "description": "A philosophical story about following dreams and personal destiny.",
+    "image": "../img/books/n2.jpg"
+  },
+  {
+    "id": 11,
+    "title": "Harry Potter",
+    "author": "J.K. Rowling",
+    "category": "Novels",
+    "status": "available",
+    "description": "A young wizard discovers his magical heritage and begins his journey.",
+    "image": "../img/books/n3.jpg"
+  },
+  {
+    "id": 12,
+    "title": "Pride and Prejudice",
+    "author": "Jane Austen",
+    "category": "Novels",
+    "status": "available",
+    "description": "A romantic novel exploring class, marriage, and societal expectations.",
+    "image": "../img/books/n4.jpg"
+  },
+  {
+    "id": 13,
+    "title": "Atomic Habits",
+    "author": "James Clear",
+    "category": "Trending",
+    "status": "Available",
+    "image": "../img/books/a1.webp",
+    "description": "A book about building good habits."
+  },
+  {
+    "id": 14,
+    "title": "JavaScript: The Good Parts",
+    "author": "Douglas Crockford",
+    "category": "Coding",
+    "status": "Available",
+    "image": "../img/books/c5.jpg",
+    "description": "A deep dive into the core features of JavaScript and best practices."
+  },
+  {
+    "id": 15,
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "category": "Novels",
+    "status": "Available",
+    "image": "../img/books/n5.jpg",
+    "description": "A classic novel about wealth, love, and the American dream."
+  }
+]

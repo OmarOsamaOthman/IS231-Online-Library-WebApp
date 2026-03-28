@@ -1,0 +1,13 @@
+const myBook = localStorage.getItem("selectedBook");
+const bookObj = JSON.parse(myBook);
+console.log("book: " + bookObj);
+console.log(bookObj.title);
+console.log(bookObj.author);
+console.log(bookObj.category);
+console.log(bookObj.status);
+document.getElementById("title-book").innerText = bookObj.title;
+document.getElementById("author-book").innerText = bookObj.author;
+document.getElementById("category-book").innerText = bookObj.category;
+document.getElementById("status-book").innerText = bookObj.status;
+document.getElementById("description-book").innerText = bookObj.description;
+document.getElementById("image-book").src = bookObj.image;
