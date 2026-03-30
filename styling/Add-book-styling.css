@@ -191,7 +191,7 @@ main form button {
     max-width: 500px;
     height: 40px;
     padding-left: 20px;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-sm);
     outline: none;
     border: solid var(--border-color) 2px;
 }

@@ -76,18 +76,16 @@
 }
 
 body {
-    padding-top: 280px;
+    padding-top: 90px;
     font-family: var(--font);
     color: var(--text);
     height: 100vh;
     background-color: var(--surface-2);
 
-    /* background-color: var(--bg); */
     display: flex;
     flex-flow: nowrap column;
     align-items: center;
-    justify-content: center;
-    /* justify-content: space-evenly; */
+
 }
 
 
@@ -180,6 +178,14 @@ a {
 
 /*-----------------------------------------*/
 
+
+body .container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row;
+    width: 100%;
+}
+
 .editing {
     /* display: flex; */
 }
@@ -211,8 +217,9 @@ a {
 
 
 
-.editing header {
+.editing header h1 {
     text-align: center;
+    font-size: 25px;
 }
 
 main {
@@ -244,7 +251,7 @@ main .content-container>div {
 
 main div label {
     font-weight: 500;
-    font-size: 20px;
+    font-size: 18px;
     margin-bottom: 3px;
 }
 
@@ -254,10 +261,10 @@ main .content-container select,
 #description {
     font-size: 16px;
     width: 90%;
-    height: 50px;
+    height: 37px;
     padding-left: 20px;
     padding-right: 20px;
-    border-radius: 35px;
+    border-radius: var(--radius-sm);
     outline: none;
     border: solid var(--border-color) 2px;
 }
@@ -266,7 +273,7 @@ main .content-container select,
     resize: none;
     height: 75px;
     padding-top: 10px;
-    border-radius: 25px;
+    border-radius: var(--radius-sm);
 }
 
 main div input:focus,
@@ -282,6 +289,10 @@ main div textarea:focus {
     box-shadow: 0 3px 30px -25px var(--secondary);
 }
 
+main form .image input {
+    background-color: #fff;
+    padding-top: 5.6px;
+}
 
 main form button {
     min-width: 120px;
@@ -372,10 +383,6 @@ main form .delete:hover {
 }
 
 
-main form .image input {
-    background-color: #fff;
-    padding-top: 11.5px;
-}
 
 
 footer {
