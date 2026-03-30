@@ -13,9 +13,21 @@ document.getElementById("status-book").innerText = bookObj.status;
 document.getElementById("description-book").innerText = bookObj.description;
 document.getElementById("image-book").src = bookObj.image;
 const borrowBtn = document.getElementById("borrow");
-borrowBtn.addEventListener("click", function () {
-  handleBtnBorrow(bookObj.id);
-});
+
+const isAdmin = JSON.parse(localStorage.getItem("is_admin"));
+console.log(isAdmin);
+
+if (isAdmin) {
+  borrowBtn.innerText = "Edit";
+  borrowBtn.style.backgroundColor = "red";
+  borrowBtn.addEventListener("click", function () {
+    handleEditBtn(bookObj);
+  });
+} else {
+  borrowBtn.addEventListener("click", function () {
+    handleBtnBorrow(bookObj.id);
+  });
+}
 
 if (bookObj.status !== "available") {
   console.log("not avil");
@@ -44,6 +56,12 @@ function handleBtnBorrow(id) {
       break;
     }
   }
+}
+
+function handleEditBtn(book) {
+  localStorage.setItem("selectedBookToEdit", JSON.stringify(book));
+  console.log("book selected");
+  window.location.href = "../html/Edit-book.html";
 }
 
 function showCongrats() {

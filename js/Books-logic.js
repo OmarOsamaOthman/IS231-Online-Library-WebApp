@@ -4,21 +4,35 @@ const novelsSection = document.getElementById("Novels");
 const adminCheckbox = document.getElementById("is-admin");
 
 adminCheckbox.addEventListener("change", function () {
+  const isAdmin = adminCheckbox.checked;
+
+  localStorage.setItem("is_admin", JSON.stringify(isAdmin));
+
   const statusTexts = document.querySelectorAll(".statusofbook");
-  const btns = document.querySelectorAll(".borrowbtn")
-  btns.forEach((btn) => {
-    btn.style.display = "none";
-  })
+  const btns = document.querySelectorAll(".borrowbtn");
 
-  statusTexts.forEach((statusText) => {
-    if (adminCheckbox.checked) {
-      statusText.style.display = "block";
-    } else {
-      statusText.style.display = "none";
-    }
-  });
+  if (isAdmin) {
+    console.log("yes");
+
+    statusTexts.forEach((el) => {
+      el.style.display = "block";
+    });
+
+    btns.forEach((btn) => {
+      btn.style.display = "none";
+    });
+  } else {
+    console.log("no");
+
+    statusTexts.forEach((el) => {
+      el.style.display = "none";
+    });
+
+    btns.forEach((btn) => {
+      btn.style.display = "block";
+    });
+  }
 });
-
 
 let borrowed = JSON.parse(localStorage.getItem("Borrowed-Books")) || [];
 
