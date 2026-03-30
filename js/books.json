@@ -58,7 +58,7 @@
     "title": "CODE",
     "author": "Charles Petzold",
     "category": "Coding",
-    "status": "borrowed",
+    "status": "available",
     "description": "Explains how computers work from simple logic to complex systems.",
     "image": "../img/books/c3.jpg"
   },
@@ -85,7 +85,7 @@
     "title": "The Alchemist",
     "author": "Paulo Coelho",
     "category": "Novels",
-    "status": "borrowed",
+    "status": "available",
     "description": "A philosophical story about following dreams and personal destiny.",
     "image": "../img/books/n2.jpg"
   },
