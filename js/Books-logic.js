@@ -7,8 +7,11 @@ let borrowed = JSON.parse(localStorage.getItem("Borrowed-Books")) || [];
 let storedBooks = JSON.parse(localStorage.getItem("allBooks"));
 
 if (storedBooks) {
+  console.log("local storage accessed")
+  console.log(storedBooks)
   renderBooks(storedBooks);
 } else {
+  console.log("local storage no")
   fetch("../js/books.json")
     .then((response) => response.json())
     .then((books) => {
@@ -21,6 +24,10 @@ function renderBooks(books) {
   localStorage.setItem("allBooks", JSON.stringify(books));
   let count = 0;
   books.forEach((book) => {
+    // console.log(book.title)
+    // console.log(book.image)
+    // console.log(book.author)
+    // console.log(book.category)
     count++;
     const bookCard = document.createElement("div");
     bookCard.className = "book";
