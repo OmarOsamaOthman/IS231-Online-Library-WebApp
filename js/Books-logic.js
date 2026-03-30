@@ -1,17 +1,34 @@
 const trendingSection = document.getElementById("main-books");
 const codingSection = document.getElementById("Coding-books");
 const novelsSection = document.getElementById("Novels");
+const adminCheckbox = document.getElementById("is-admin");
+
+adminCheckbox.addEventListener("change", function () {
+  const statusTexts = document.querySelectorAll(".statusofbook");
+  const btns = document.querySelectorAll(".borrowbtn")
+  btns.forEach((btn) => {
+    btn.style.display = "none";
+  })
+
+  statusTexts.forEach((statusText) => {
+    if (adminCheckbox.checked) {
+      statusText.style.display = "block";
+    } else {
+      statusText.style.display = "none";
+    }
+  });
+});
+
 
 let borrowed = JSON.parse(localStorage.getItem("Borrowed-Books")) || [];
 
 let storedBooks = JSON.parse(localStorage.getItem("allBooks"));
-
 if (storedBooks) {
-  console.log("local storage accessed")
-  console.log(storedBooks)
+  console.log("local storage accessed");
+  console.log(storedBooks);
   renderBooks(storedBooks);
 } else {
-  console.log("local storage no")
+  console.log("local storage no");
   fetch("../js/books.json")
     .then((response) => response.json())
     .then((books) => {
@@ -37,7 +54,9 @@ function renderBooks(books) {
           <img src="${book.image}" alt="${book.title}" />
         </a>
         <p>by ${book.author}</p>
-        <button id= "${count}" onclick = "handleBtnBorrow(${count})" style= "background-color: ${book.status === "available" ? "#2d64d8" : "red"}">${book.status === "available" ? "Borrow" : "Borrowed"}</button>
+        <p style="display: none" class="statusofbook">${book.status}</p>
+        <button class="borrowbtn" id= "${count}" onclick = "handleBtnBorrow(${count})" style= "background-color: ${book.status === "available" ? "#2d64d8" : "red"}">${book.status === "available" ? "Borrow" : "Borrowed"}</button>
+        
       `;
 
     if (book.category === "Trending") {
