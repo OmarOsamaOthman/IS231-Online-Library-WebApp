@@ -30,7 +30,7 @@ function renderBooks(books) {
           <img src="${book.image}" alt="${book.title}" />
         </a>
         <p>by ${book.author}</p>
-        <button id= "${count}" onclick = "handleBtnBorrow(${count})">Borrow</button>
+        <button id= "${count}" onclick = "handleBtnBorrow(${count})" style= "background-color: ${book.status === "available" ? "#2d64d8" : "red"}">${book.status === "available" ? "Borrow" : "Borrowed"}</button>
       `;
 
     if (book.category === "Trending") {
@@ -69,10 +69,12 @@ function handleBtnBorrow(id) {
         borrowed.push(booksList[i]);
         booksList[i].status = "borrowed";
         localStorage.setItem("allBooks", JSON.stringify(booksList));
-
         localStorage.setItem("Borrowed-Books", JSON.stringify(borrowed));
         console.log(`Book avilabile`);
         showCongrats();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       } else {
         warning();
         console.log(`Book Unavilabile`);
