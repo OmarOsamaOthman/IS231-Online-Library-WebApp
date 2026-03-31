@@ -1,5 +1,6 @@
 let borrowed = JSON.parse(localStorage.getItem("Borrowed-Books")) || [];
 const myBook = localStorage.getItem("selectedBook");
+const allBooks = JSON.parse(localStorage.getItem("allBooks"))
 const bookObj = JSON.parse(myBook);
 console.log("book: " + bookObj);
 console.log(bookObj.title);
@@ -12,12 +13,14 @@ document.getElementById("category-book").innerText = bookObj.category;
 document.getElementById("status-book").innerText = bookObj.status;
 document.getElementById("description-book").innerText = bookObj.description;
 document.getElementById("image-book").src = bookObj.image;
+const changeStatus = document.getElementById("changeStatus");
 const borrowBtn = document.getElementById("borrow");
 
 const isAdmin = JSON.parse(localStorage.getItem("is_admin"));
 console.log(isAdmin);
 
 if (isAdmin) {
+  changeStatus.style.display = "block";
   borrowBtn.innerText = "Edit";
   borrowBtn.style.backgroundColor = "red";
   borrowBtn.addEventListener("click", function () {
@@ -33,6 +36,19 @@ if (isAdmin) {
     handleBtnBorrow(bookObj.id);
   });
 }
+
+changeStatus.onclick = function () {
+  console.log("changing...");
+  bookObj.status === "available" ? bookObj.status = "borrowed" : bookObj.status = "available";
+  console.log(bookObj.status)
+  document.getElementById("status-book").innerText = bookObj.status;
+  allBooks.forEach(book => {
+    if(book.id === bookObj.id){
+      book.status = bookObj.status
+    }
+  });
+  localStorage.setItem("allBooks", JSON.stringify(allBooks))
+};
 
 function handleBtnBorrow(id) {
   const booksList = JSON.parse(localStorage.getItem("allBooks"));
