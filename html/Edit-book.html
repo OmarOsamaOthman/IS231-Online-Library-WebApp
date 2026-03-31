@@ -32,7 +32,7 @@
             </header>
 
             <main>
-                <form method="get" action="">
+                <form method="get" action="" id="form">
                     <div class="content-container">
                         <div>
                             <label for="book-title">Book Title:</label>
@@ -46,13 +46,11 @@
                         <div>
                             <label for="category">Category:</label>
                             <select id="category" name="category">
-                                <option value="" selected>Choose Category</option>
-                                <option value="fiction">Fiction</option>
-                                <option value="science">Science</option>
-                                <option value="history">History</option>
-                                <option value="technology">Technology</option>
-                                <option value="education">Education</option>
-                                <option value="biography">Biography</option>
+                                <option value="" id="choosed" selected>Choose Category</option>
+                                <option value="Trending">Trending</option>
+                                <option value="Coding">Coding</option>
+                                <option value="Novels">Novels</option>
+
                             </select>
                         </div>
                         <div class="description">
@@ -71,7 +69,6 @@
 
                         <div class="image">
                             <label for="book-image">Upload Book Image:
-                                <!-- <img src="upload-image.png" alt=""> -->
                             </label>
                             <input type="file" id="book-image" accept="image/*">
                         </div>
@@ -89,7 +86,9 @@
             </main>
         </section>
         <section class="preview">
-            <!-- <iframe src="book-detail.html" frameborder="0" title="Book preview"></iframe> -->
+
+
+
         </section>
     </section>
     <footer>
