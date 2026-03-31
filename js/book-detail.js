@@ -24,15 +24,14 @@ if (isAdmin) {
     handleEditBtn(bookObj);
   });
 } else {
+  if (bookObj.status !== "available") {
+    console.log("not avil");
+    borrowBtn.style.backgroundColor = "red";
+    borrowBtn.innerText = "borrowed";
+  }
   borrowBtn.addEventListener("click", function () {
     handleBtnBorrow(bookObj.id);
   });
-}
-
-if (bookObj.status !== "available") {
-  console.log("not avil");
-  borrowBtn.style.backgroundColor = "red";
-  borrowBtn.innerText = "borrowed";
 }
 
 function handleBtnBorrow(id) {

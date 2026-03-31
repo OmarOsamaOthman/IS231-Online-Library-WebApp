@@ -3,14 +3,19 @@ const codingSection = document.getElementById("Coding-books");
 const novelsSection = document.getElementById("Novels");
 const adminCheckbox = document.getElementById("is-admin");
 
+let isAdmin = JSON.parse(localStorage.getItem("is_admin")) || false;
+adminCheckbox.checked = isAdmin;
+
 adminCheckbox.addEventListener("change", function () {
-  const isAdmin = adminCheckbox.checked;
-
+  isAdmin = adminCheckbox.checked;
   localStorage.setItem("is_admin", JSON.stringify(isAdmin));
+  console.log("isadmin " + isAdmin);
+  updateUI();
+});
 
+function updateUI() {
   const statusTexts = document.querySelectorAll(".statusofbook");
   const btns = document.querySelectorAll(".borrowbtn");
-
   if (isAdmin) {
     console.log("yes");
 
@@ -32,7 +37,7 @@ adminCheckbox.addEventListener("change", function () {
       btn.style.display = "block";
     });
   }
-});
+}
 
 let borrowed = JSON.parse(localStorage.getItem("Borrowed-Books")) || [];
 
@@ -50,6 +55,7 @@ if (storedBooks) {
       renderBooks(books);
     });
 }
+updateUI();
 
 function renderBooks(books) {
   localStorage.setItem("allBooks", JSON.stringify(books));

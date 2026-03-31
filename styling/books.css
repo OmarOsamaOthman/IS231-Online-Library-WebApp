@@ -37,7 +37,7 @@ body {
   text-align: center;
 }
 
-.book button {
+.book button, .statusofbook {
   margin-top: auto;
   padding: 8px;
   border: none;
@@ -46,8 +46,11 @@ body {
   color: white;
   cursor: pointer;
 }
+.statusofbook{
+  cursor: auto;
+}
 
-.book button:hover {
+.book button:hover,.statusofbook:hover {
   background-color: #123277;
 }
 
