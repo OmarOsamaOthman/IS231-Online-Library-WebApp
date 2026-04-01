@@ -1,12 +1,11 @@
-let editBook = JSON.parse(localStorage.getItem("selectedBookToEdit")) || [];
-
+const bookId = Number(localStorage.getItem("selectedBookId"));
 let allBooks = JSON.parse(localStorage.getItem("allBooks")) || [];
+
+const editBook = allBooks.find((book) => book.id === bookId);
 
 let preview = document.getElementsByClassName("preview")[0];
 
 const formSub = document.getElementById("form");
-
-
 
 // preview elements section
 
@@ -26,8 +25,6 @@ let categoryText = document.createTextNode(editBook.category);
 let statusText = document.createTextNode(editBook.status);
 let descriptionText = document.createTextNode(editBook.description);
 let cover = document.createElement("img");
-
-
 
 // set values
 title.appendChild(titleText);
@@ -65,7 +62,7 @@ card.innerHTML = `
                     <p>Description:</p>
                 </div>
             </div>
-`
+`;
 
 // appending the elements
 preview.appendChild(card);
@@ -77,13 +74,9 @@ card.querySelector(".cover").appendChild(cover);
 card.querySelector(".author-cont").firstElementChild.appendChild(author);
 card.querySelector(".category-cont").firstElementChild.appendChild(category);
 card.querySelector(".status-cont").firstElementChild.appendChild(status);
-card.querySelector(".description-cont").firstElementChild.appendChild(description);
-
-
-
-
-
-
+card
+  .querySelector(".description-cont")
+  .firstElementChild.appendChild(description);
 
 // editing section
 
@@ -95,130 +88,109 @@ let descriptionInput = document.querySelector("main form #description");
 let statusInput = document.querySelector("main form #status");
 let imageInput = document.querySelector("main form #book-image");
 
-
-
 titleInput.setAttribute("value", titleText.nodeValue);
 authorInput.setAttribute("value", authorText.nodeValue);
 
-
 for (let i = 0; i < categoryInput.length; i++) {
-    if (categoryInput.children[i].innerHTML == categoryText.nodeValue) {
-        categoryInput.children[i].setAttribute("selected", "");
-        break;
-    }
+  if (categoryInput.children[i].innerHTML == categoryText.nodeValue) {
+    categoryInput.children[i].setAttribute("selected", "");
+    break;
+  }
 }
 
 descriptionInput.innerHTML = editBook.description;
 
 for (let i = 0; i < statusInput.length; i++) {
-    statusText.nodeValue = statusText.nodeValue[0].toUpperCase() + statusText.textContent.slice(1);
-    if (statusInput.children[i].innerHTML == statusText.nodeValue) {
-        statusInput.children[i].setAttribute("selected", "");
-        break;
-    }
+  statusText.nodeValue =
+    statusText.nodeValue[0].toUpperCase() + statusText.textContent.slice(1);
+  if (statusInput.children[i].innerHTML == statusText.nodeValue) {
+    statusInput.children[i].setAttribute("selected", "");
+    break;
+  }
 }
 
-
-
-
 titleInput.addEventListener("input", function () {
-    title.textContent = titleInput.value.trim() || "Book Title";
+  title.textContent = titleInput.value.trim() || "Book Title";
 });
 
 authorInput.addEventListener("input", function () {
-    author.textContent = authorInput.value.trim() || "Book Author";
-
+  author.textContent = authorInput.value.trim() || "Book Author";
 });
 
-
 categoryInput.addEventListener("input", function () {
-    category.textContent = categoryInput.value.trim() || "Book category";
-
+  category.textContent = categoryInput.value.trim() || "Book category";
 });
 
 descriptionInput.addEventListener("input", function () {
-    description.textContent = descriptionInput.value.trim() || "Book category";
-
+  description.textContent = descriptionInput.value.trim() || "Book category";
 });
 
 statusInput.addEventListener("input", function () {
-    status.textContent = statusInput.value.trim() || "Book category";
+  status.textContent = statusInput.value.trim() || "Book category";
 });
-
 
 imageInput.addEventListener("change", function () {
+  let file = imageInput.files[0];
 
-    let file = imageInput.files[0];
+  if (!file) return;
 
-    if (!file) return;
+  cover.src = URL.createObjectURL(file);
 
-    cover.src = URL.createObjectURL(file);
-
-    cover.setAttribute("alt", editBook.title);
+  cover.setAttribute("alt", editBook.title);
 });
-
-
-
 
 console.log(allBooks);
 
 formSub.onsubmit = function (p) {
+  let titleValue = document.getElementById("book-title").value;
+  let authorValue = document.getElementById("author").value;
+  let categoryValue = document.getElementById("category").value;
+  let descriptionValue = document.getElementById("description").value;
+  let statusValue = document.getElementById("status").value;
 
-    let titleValue = document.getElementById("book-title").value;
-    let authorValue = document.getElementById("author").value;
-    let categoryValue = document.getElementById("category").value;
-    let descriptionValue = document.getElementById("description").value;
-    let statusValue = document.getElementById("status").value;
+  let file = document.getElementById("book-image").files[0];
 
-    let file = document.getElementById("book-image").files[0];
+  p.preventDefault();
 
-    p.preventDefault();
+  console.log(titleValue);
+  console.log(authorValue);
 
+  editBook.title = titleValue;
+  editBook.author = authorValue;
+  editBook.category = categoryValue;
+  editBook.description = descriptionValue;
+  editBook.status = statusValue;
 
-    console.log(titleValue);
-    console.log(authorValue);
+  // if (!file) {
+  //     alert("Please choose an image");
+  //     return;
+  // }
 
-    editBook.title = titleValue;
-    editBook.author = authorValue;
-    editBook.category = categoryValue;
-    editBook.description = descriptionValue;
-    editBook.status = statusValue;
+  const reader = new FileReader();
 
+  reader.onload = function (e) {
+    const imageBase64 = e.target.result;
 
-    // if (!file) {
-    //     alert("Please choose an image");
-    //     return;
-    // }
+    console.log(imageBase64.src);
 
-    const reader = new FileReader();
+    for (let i = 0; i < allBooks.length; i++) {
+      console.log(editBook);
+      if (allBooks[i].id == editBook.id) {
+        allBooks[i].title = titleValue;
+        allBooks[i].author = authorValue;
+        allBooks[i].category = categoryValue;
+        allBooks[i].description = descriptionValue;
+        allBooks[i].status = statusValue;
+        allBooks[i].id = editBook.id;
+        allBooks[i].image = imageBase64;
+      }
 
-    reader.onload = function (e) {
-        const imageBase64 = e.target.result;
-
-        console.log(imageBase64.src);
-
-
-        for (let i = 0; i < allBooks.length; i++) {
-
-            console.log(editBook);
-            if (allBooks[i].id == editBook.id) {
-
-                allBooks[i].title = titleValue;
-                allBooks[i].author = authorValue;
-                allBooks[i].category = categoryValue;
-                allBooks[i].description = descriptionValue;
-                allBooks[i].status = statusValue;
-                allBooks[i].id = editBook.id;
-                allBooks[i].image = imageBase64;
-            }
-
-            console.log(allBooks[i]);
-        }
-
-        localStorage.setItem("allBooks", JSON.stringify(allBooks));
-
+      console.log(allBooks[i]);
     }
 
-    reader.readAsDataURL(file);
-    window.location.href = ("../html/books.html");
+    localStorage.setItem("allBooks", JSON.stringify(allBooks));
+  };
+
+  reader.readAsDataURL(file);
+  window.location.href = "../html/books.html";
 };

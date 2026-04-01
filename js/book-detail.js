@@ -1,84 +1,106 @@
+// 📦 Data
+const allBooks = JSON.parse(localStorage.getItem("allBooks")) || [];
 let borrowed = JSON.parse(localStorage.getItem("Borrowed-Books")) || [];
-const myBook = localStorage.getItem("selectedBook");
-const allBooks = JSON.parse(localStorage.getItem("allBooks"))
-const bookObj = JSON.parse(myBook);
-console.log("book: " + bookObj);
-console.log(bookObj.title);
-console.log(bookObj.author);
-console.log(bookObj.category);
-console.log(bookObj.status);
-document.getElementById("title-book").innerText = bookObj.title;
-document.getElementById("author-book").innerText = bookObj.author;
-document.getElementById("category-book").innerText = bookObj.category;
-document.getElementById("status-book").innerText = bookObj.status;
-document.getElementById("description-book").innerText = bookObj.description;
-document.getElementById("image-book").src = bookObj.image;
+const bookId = Number(localStorage.getItem("selectedBookId"));
+const bookObj = allBooks.find((book) => book.id === bookId);
+const isAdmin = JSON.parse(localStorage.getItem("is_admin")) || false;
+
+// 🛑 حماية
+if (!bookObj) {
+  console.log("No selected book found");
+}
+
+// 📌 Elements
+const title = document.getElementById("title-book");
+const author = document.getElementById("author-book");
+const category = document.getElementById("category-book");
+const status = document.getElementById("status-book");
+const description = document.getElementById("description-book");
+const image = document.getElementById("image-book");
+
 const changeStatus = document.getElementById("changeStatus");
 const borrowBtn = document.getElementById("borrow");
 
-const isAdmin = JSON.parse(localStorage.getItem("is_admin"));
-console.log(isAdmin);
+// 🎯 Render Book Data
+title.innerText = bookObj.title;
+author.innerText = bookObj.author;
+category.innerText = bookObj.category;
+status.innerText = bookObj.status;
+description.innerText = bookObj.description;
+image.src = bookObj.image;
 
+// 👨‍💼 Admin Mode
 if (isAdmin) {
   changeStatus.style.display = "block";
+
   borrowBtn.innerText = "Edit";
   borrowBtn.style.backgroundColor = "red";
-  borrowBtn.addEventListener("click", function () {
+
+  borrowBtn.onclick = function () {
     handleEditBtn(bookObj);
-  });
-} else {
-  if (bookObj.status !== "available") {
-    console.log("not avil");
-    borrowBtn.style.backgroundColor = "red";
-    borrowBtn.innerText = "borrowed";
-  }
-  borrowBtn.addEventListener("click", function () {
-    handleBtnBorrow(bookObj.id);
-  });
+  };
 }
 
+// 👤 User Mode
+else {
+  changeStatus.style.display = "none";
+
+  if (bookObj.status !== "available") {
+    borrowBtn.style.backgroundColor = "red";
+    borrowBtn.innerText = "Borrowed";
+  }
+
+  borrowBtn.onclick = function () {
+    handleBtnBorrow(bookObj.id);
+  };
+}
+
+// 🔁 Change Status (Admin)
 changeStatus.onclick = function () {
-  console.log("changing...");
-  bookObj.status === "available" ? bookObj.status = "borrowed" : bookObj.status = "available";
-  console.log(bookObj.status)
-  document.getElementById("status-book").innerText = bookObj.status;
-  allBooks.forEach(book => {
-    if(book.id === bookObj.id){
-      book.status = bookObj.status
+  bookObj.status = bookObj.status === "available" ? "borrowed" : "available";
+
+  status.innerText = bookObj.status;
+
+  allBooks.forEach((book) => {
+    if (book.id === bookObj.id) {
+      book.status = bookObj.status;
     }
   });
-  localStorage.setItem("allBooks", JSON.stringify(allBooks))
+
+  localStorage.setItem("allBooks", JSON.stringify(allBooks));
+  localStorage.setItem("selectedBookId", bookId);
 };
 
+// 📚 Borrow Logic
 function handleBtnBorrow(id) {
-  const booksList = JSON.parse(localStorage.getItem("allBooks"));
-  for (let i = 0; i < booksList.length; i++) {
-    if (id === booksList[i].id) {
-      console.log("YES - found book:", booksList[i]);
-      if (booksList[i].status === "available") {
-        borrowed.push(booksList[i]);
-        booksList[i].status = "borrowed";
-        localStorage.setItem("allBooks", JSON.stringify(booksList));
+  for (let i = 0; i < allBooks.length; i++) {
+    if (id === allBooks[i].id) {
+      if (allBooks[i].status === "available") {
+        allBooks[i].status = "borrowed";
+        borrowed.push(allBooks[i]);
+
+        localStorage.setItem("allBooks", JSON.stringify(allBooks));
         localStorage.setItem("Borrowed-Books", JSON.stringify(borrowed));
-        console.log(`Book avilabile`);
-        showCongrats();
+
+        borrowBtn.innerText = "Borrowed";
         borrowBtn.style.backgroundColor = "red";
-        borrowBtn.innerText = "borrowed";
+
+        showCongrats();
       } else {
         warning();
-        console.log(`Book Unavilabile`);
       }
       break;
     }
   }
 }
 
+// ✏️ Edit
 function handleEditBtn(book) {
-  localStorage.setItem("selectedBookToEdit", JSON.stringify(book));
-  console.log("book selected");
+  localStorage.setItem("selectedBookId", bookId);
   window.location.href = "../html/Edit-book.html";
 }
 
+// 🎉 Alerts
 function showCongrats() {
   const congrats = document.getElementById("congrats");
   congrats.style.display = "block";
