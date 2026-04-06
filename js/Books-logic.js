@@ -75,7 +75,7 @@ function renderBooks(books) {
         </a>
         <p>by ${book.author}</p>
         <p style="display: none" class="statusofbook">${book.status}</p>
-        <button class="borrowbtn" id= "${count}" onclick = "handleBtnBorrow(${count})" style= "background-color: ${book.status === "available" ? "#2d64d8" : "red"}">${book.status === "available" ? "Borrow" : "Borrowed"}</button>
+        <button class="borrowbtn" id= "${count}" onclick = "handleBtnBorrow(${book.id})" style= "background-color: ${book.status === "available" ? "#2d64d8" : "red"}">${book.status === "available" ? "Borrow" : "Borrowed"}</button>
         
       `;
 
@@ -93,15 +93,25 @@ function renderBooks(books) {
 
 function addBookClickEvents(books) {
   const bookAnchors = document.querySelectorAll(".book a");
+
   bookAnchors.forEach((anchor) => {
     anchor.addEventListener("click", function (e) {
       e.preventDefault();
 
       const bookId = Number(anchor.dataset.id);
+      console.log(`bookId: ${bookId}`);
+
       const selectedBook = books.find((book) => book.id === bookId);
 
-      localStorage.setItem("selectedBook", JSON.stringify(selectedBook));
-      window.location.href = "./book-detail.html";
+      console.log("selectedBook:", selectedBook);
+
+      if (!selectedBook) {
+        console.log("Book not found ❌");
+        return;
+      }
+
+      localStorage.setItem("selectedBookId", bookId);
+      window.location.href = "./book-detail.html"; // رجعها
     });
   });
 }
