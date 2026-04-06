@@ -41,6 +41,15 @@ formSub.onsubmit = function (p) {
   };
 
   reader.readAsDataURL(file);
+
 };
+
+
+
+const cansel_btn = document.getElementById("cancel");
+
+cansel_btn.onclick = function () {
+  window.location.href = ("../html/books.html");
+}
 
 console.log(storedBooks);
