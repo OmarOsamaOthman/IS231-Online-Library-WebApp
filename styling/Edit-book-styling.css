@@ -321,7 +321,7 @@ main form .buttons {
     grid-template-columns: repeat(6, 1fr);
     grid-template-areas:
         "save save save save save save"
-        ". . cancel delete . .";
+        ". . cancel cancel . .";
     row-gap: 12px;
     column-gap: 5px;
     width: 100%;
@@ -339,21 +339,12 @@ main form .save {
 
 main form .cancel {
     grid-area: cancel;
-    justify-self: center;
     background-color: var(--surface);
     border-color: var(--border-color);
     color: var(--primary);
-    width: 120px;
+    width: 260px;
 }
 
-main form .delete {
-    color: var(--danger);
-    grid-area: delete;
-    justify-self: center;
-    background-color: var(--surface);
-    border-color: var(--border-color);
-    width: 120px;
-}
 
 
 main form .save:hover {
@@ -370,13 +361,6 @@ main form .cancel:hover {
     transform: translateY(-1px);
     box-shadow: 0 3px 10px -5px var(--danger-hover);
 
-}
-
-main form .delete:hover {
-    color: var(--surface);
-    background-color: var(--danger-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 3px 10px -4px var(--danger);
 }
 
 .preview div {
