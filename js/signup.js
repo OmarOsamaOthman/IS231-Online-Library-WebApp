@@ -1,7 +1,7 @@
 function handleLogin(event) {
-    event.preventDefault(); 
+    event.preventDefault();
     let nameInput = document.getElementById("UserName");
-    
+
     if (nameInput) {
         let name = nameInput.value;
         sessionStorage.setItem("UserName", name);
@@ -11,18 +11,18 @@ function handleLogin(event) {
 
 
 function logout() {
-    sessionStorage.removeItem("UserName"); 
+    sessionStorage.removeItem("UserName");
     window.location.reload();
 }
 
-window.onload = function() {
+window.onload = function () {
     let username = sessionStorage.getItem("UserName");
-    let loginContainer = document.querySelector(".login"); 
+    let loginContainer = document.querySelector(".login");
 
     if (username && loginContainer) {
         loginContainer.innerHTML = `
-            <span style="color: white; margin-right: 10px;">مرحباً ${username}</span>
-            <button onclick="logout()" style="cursor:pointer; padding: 5px 10px;">Logout</button>
-        `;
+                <span style="color: white; margin-right: 10px;">مرحباً ${username}</span>
+                <button onclick="logout()" style="cursor:pointer; padding: 5px 10px;">Logout</button>
+            `;
     }
 };

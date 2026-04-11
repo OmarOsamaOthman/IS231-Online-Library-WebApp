@@ -6,7 +6,7 @@ const sections = {
 };
 
 const adminCheckbox = document.getElementById("is-admin");
-const addBtn = document.getElementById("Add-book");
+// const addBtn = document.getElementById("Add-book");
 let isAdmin = JSON.parse(localStorage.getItem("is_admin")) || false;
 let borrowed = JSON.parse(localStorage.getItem("Borrowed-Books")) || [];
 let books = JSON.parse(localStorage.getItem("allBooks")) || [];
@@ -29,11 +29,11 @@ function setupAdmin() {
   statusTexts.forEach((el) => (el.style.display = isAdmin ? "block" : "none"));
   btns.forEach((btn) => (btn.style.display = isAdmin ? "none" : "block"));
 
-  addBtn.style.display = isAdmin ? "block" : "none";
+  // addBtn.style.display = isAdmin ? "block" : "none";
 
-  if (isAdmin) {
-    addBtn.onclick = () => (window.location.href = "../html/Add-book.html");
-  }
+  // if (isAdmin) {
+  //   addBtn.onclick = () => (window.location.href = "../html/Add-book.html");
+  // }
 }
 
 // get books data
