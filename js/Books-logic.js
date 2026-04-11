@@ -5,21 +5,13 @@ const sections = {
   Novels: document.getElementById("Novels"),
 };
 
-const adminCheckbox = document.getElementById("is-admin");
 // const addBtn = document.getElementById("Add-book");
 let isAdmin = JSON.parse(localStorage.getItem("is_admin")) || false;
 let borrowed = JSON.parse(localStorage.getItem("Borrowed-Books")) || [];
 let books = JSON.parse(localStorage.getItem("allBooks")) || [];
 
-adminCheckbox.checked = isAdmin;
 setupAdmin();
 loadBooks();
-
-adminCheckbox.addEventListener("change", () => {
-  isAdmin = adminCheckbox.checked;
-  localStorage.setItem("is_admin", JSON.stringify(isAdmin));
-  setupAdmin();
-});
 
 // if the user is admin...
 function setupAdmin() {
