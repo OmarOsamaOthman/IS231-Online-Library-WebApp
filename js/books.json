@@ -134,4 +134,24 @@
     "image": "../img/books/n5.jpg",
     "description": "A classic novel about wealth, love, and the American dream."
   }
+  ,
+  {
+    "id": 15,
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "category": "Novels",
+    "status": "Available",
+    "image": "../img/books/n5.jpg",
+    "description": "A classic novel about wealth, love, and the American dream."
+  }
+  ,
+  {
+    "id": 15,
+    "title": "The Great Gatsby",
+    "author": "F. Scott Fitzgerald",
+    "category": "Novels",
+    "status": "Available",
+    "image": "../img/books/n5.jpg",
+    "description": "A classic novel about wealth, love, and the American dream."
+  }
 ]

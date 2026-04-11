@@ -1,181 +1,157 @@
-const trendingSection = document.getElementById("main-books");
-const codingSection = document.getElementById("Coding-books");
-const novelsSection = document.getElementById("Novels");
+// initialize elements
+const sections = {
+  Trending: document.getElementById("main-books"),
+  Coding: document.getElementById("Coding-books"),
+  Novels: document.getElementById("Novels"),
+};
+
 const adminCheckbox = document.getElementById("is-admin");
-
+const addBtn = document.getElementById("Add-book");
 let isAdmin = JSON.parse(localStorage.getItem("is_admin")) || false;
-adminCheckbox.checked = isAdmin;
+let borrowed = JSON.parse(localStorage.getItem("Borrowed-Books")) || [];
+let books = JSON.parse(localStorage.getItem("allBooks")) || [];
 
-adminCheckbox.addEventListener("change", function () {
+adminCheckbox.checked = isAdmin;
+setupAdmin();
+loadBooks();
+
+adminCheckbox.addEventListener("change", () => {
   isAdmin = adminCheckbox.checked;
   localStorage.setItem("is_admin", JSON.stringify(isAdmin));
-  console.log("isadmin " + isAdmin);
-  updateUI();
+  setupAdmin();
 });
 
-function updateUI() {
+// if the user is admin...
+function setupAdmin() {
   const statusTexts = document.querySelectorAll(".statusofbook");
   const btns = document.querySelectorAll(".borrowbtn");
+
+  statusTexts.forEach((el) => (el.style.display = isAdmin ? "block" : "none"));
+  btns.forEach((btn) => (btn.style.display = isAdmin ? "none" : "block"));
+
+  addBtn.style.display = isAdmin ? "block" : "none";
+
   if (isAdmin) {
-    console.log("yes");
-
-    statusTexts.forEach((el) => {
-      el.style.display = "block";
-    });
-
-    btns.forEach((btn) => {
-      btn.style.display = "none";
-    });
-  } else {
-    console.log("no");
-
-    statusTexts.forEach((el) => {
-      el.style.display = "none";
-    });
-
-    btns.forEach((btn) => {
-      btn.style.display = "block";
-    });
+    addBtn.onclick = () => (window.location.href = "../html/Add-book.html");
   }
 }
 
-let borrowed = JSON.parse(localStorage.getItem("Borrowed-Books")) || [];
-
-let storedBooks = JSON.parse(localStorage.getItem("allBooks"));
-if (storedBooks) {
-  console.log("local storage accessed");
-  console.log(storedBooks);
-  renderBooks(storedBooks);
-} else {
-  console.log("local storage no");
-  fetch("../js/books.json")
-    .then((response) => response.json())
-    .then((books) => {
-      localStorage.setItem("allBooks", JSON.stringify(books));
-      renderBooks(books);
-    });
+// get books data
+function loadBooks() {
+  if (books.length > 0) {
+    renderBooks(books);
+  } else {
+    fetch("../js/books.json")
+      .then((res) => res.json())
+      .then((data) => {
+        books = data;
+        localStorage.setItem("allBooks", JSON.stringify(books));
+        renderBooks(books);
+      });
+  }
 }
-updateUI();
 
+// render books in the UI
 function renderBooks(books) {
-  localStorage.setItem("allBooks", JSON.stringify(books));
-  let count = 0;
+  sections.Trending.innerHTML = "";
+  sections.Coding.innerHTML = "";
+  sections.Novels.innerHTML = "";
   books.forEach((book) => {
-    // console.log(book.title)
-    // console.log(book.image)
-    // console.log(book.author)
-    // console.log(book.category)
-    count++;
     const bookCard = document.createElement("div");
     bookCard.className = "book";
+
     bookCard.innerHTML = `
       <h2>${book.title}</h2>
-        <a href="#" data-id="${book.id}">
-          <img src="${book.image}" alt="${book.title}" />
-        </a>
-        <p>by ${book.author}</p>
-        <p style="display: none" class="statusofbook">${book.status}</p>
-        <button class="borrowbtn" id= "${count}" onclick = "handleBtnBorrow(${book.id})" style= "background-color: ${book.status === "available" ? "#2d64d8" : "red"}">${book.status === "available" ? "Borrow" : "Borrowed"}</button>
-        
-      `;
+      <a href="#" data-id="${book.id}">
+        <img src="${book.image}" alt="${book.title}" />
+      </a>
+      <p>by ${book.author}</p>
+      <p class="statusofbook" style="display:none">${book.status}</p>
+      <button class="borrowbtn"
+        onclick="handleBtnBorrow(${book.id})"
+        ${book.status !== "available" ? "disabled" : ""}
+        style="background-color: ${book.status === "available" ? "#2d64d8" : "red"}"
+      >
+        ${book.status === "available" ? "Borrow" : "Borrowed"}
+      </button>
 
+    `;
     if (book.category === "Trending") {
-      trendingSection.appendChild(bookCard);
+      sections.Trending.appendChild(bookCard);
     } else if (book.category === "Coding") {
-      codingSection.appendChild(bookCard);
+      sections.Coding.appendChild(bookCard);
     } else if (book.category === "Novels") {
-      novelsSection.appendChild(bookCard);
+      sections.Novels.appendChild(bookCard);
     }
   });
-
   addBookClickEvents(books);
+  initCategorySliders();
+  setupAdmin();
 }
 
+// if the admin click add button...
 function addBookClickEvents(books) {
-  const bookAnchors = document.querySelectorAll(".book a");
-
-  bookAnchors.forEach((anchor) => {
-    anchor.addEventListener("click", function (e) {
+  document.querySelectorAll(".book a").forEach((anchor) => {
+    anchor.onclick = (e) => {
       e.preventDefault();
 
-      const bookId = Number(anchor.dataset.id);
-      console.log(`bookId: ${bookId}`);
+      const id = Number(anchor.dataset.id);
+      localStorage.setItem("selectedBookId", id);
 
-      const selectedBook = books.find((book) => book.id === bookId);
-
-      console.log("selectedBook:", selectedBook);
-
-      if (!selectedBook) {
-        console.log("Book not found ❌");
-        return;
-      }
-
-      localStorage.setItem("selectedBookId", bookId);
-      window.location.href = "./book-detail.html"; // رجعها
-    });
+      window.location.href = "./book-detail.html";
+    };
   });
 }
 
+// when the user click borrow
 function handleBtnBorrow(id) {
-  const booksList = JSON.parse(localStorage.getItem("allBooks"));
-  for (let i = 0; i < booksList.length; i++) {
-    if (id === booksList[i].id) {
-      console.log("YES - found book:", booksList[i]);
-      if (booksList[i].status === "available") {
-        borrowed.push(booksList[i]);
-        booksList[i].status = "borrowed";
-        localStorage.setItem("allBooks", JSON.stringify(booksList));
-        localStorage.setItem("Borrowed-Books", JSON.stringify(borrowed));
-        console.log(`Book avilabile`);
-        showCongrats();
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
-      } else {
-        warning();
-        console.log(`Book Unavilabile`);
-      }
-      break;
-    }
+  const book = books.find((b) => b.id === id);
+
+  if (!book) return;
+
+  if (book.status === "available") {
+    book.status = "borrowed";
+    borrowed.push(book);
+
+    saveData();
+    showCongrats();
+    setTimeout(() => location.reload(), 800);
+  } else {
+    warning();
   }
+}
+
+// handle local storage
+function saveData() {
+  localStorage.setItem("allBooks", JSON.stringify(books));
+  localStorage.setItem("Borrowed-Books", JSON.stringify(borrowed));
+}
+
+// Books Slider
+function initCategorySliders() {
+  document.querySelectorAll(".slider-btn").forEach((btn) => {
+    const track = document.getElementById(btn.dataset.target);
+    if (!track) return;
+
+    const width = track.clientWidth;
+
+    btn.onclick = () => {
+      const dir = btn.classList.contains("next") ? 1 : -1;
+      track.scrollBy({ left: dir * width, behavior: "smooth" });
+    };
+  });
 }
 
 function showCongrats() {
-  const congrats = document.getElementById("congrats");
-  congrats.style.display = "block";
-
-  setTimeout(() => {
-    congrats.style.display = "none";
-  }, 3000);
+  toggleMessage("congrats");
 }
 
 function warning() {
-  const warn = document.getElementById("warning");
-  warn.style.display = "block";
-
-  setTimeout(() => {
-    warn.style.display = "none";
-  }, 3000);
+  toggleMessage("warning");
 }
 
-// const myAnchors = document.querySelectorAll("a");
-// console.log(myAnchors);
-// const title = document.getElementById("title-book");
-// const MyBooksAnchors = Array.from(myAnchors).slice(5);
-// console.log(MyBooksAnchors);
-// MyBooksAnchors.forEach((book) => {
-//   book.removeAttribute("href");
-//   book.onclick = function (e) {
-//     e.preventDefault();
-//     console.log(book);
-//     const number = book.id;
-//     console.log(number);
-//     fetch("./books.json")
-//       .then((response) => response.json())
-//       .then((json) => {
-//         const storedBook = json[number - 1];
-//         localStorage.setItem("selectedBook", JSON.stringify(storedBook));
-//         window.location.href = "./book-detail.html";
-//       });
-//   };
-// });
+function toggleMessage(id) {
+  const el = document.getElementById(id);
+  el.style.display = "block";
+  setTimeout(() => (el.style.display = "none"), 3000);
+}
