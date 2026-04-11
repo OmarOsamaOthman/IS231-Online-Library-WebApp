@@ -38,12 +38,14 @@ formSub.onsubmit = function (p) {
     console.log(storedBooks);
     alert("Book added successfully");
     formSub.reset();
+    window.location.href = "../html/books.html";
   };
 
   reader.readAsDataURL(file);
 
 };
 
+console.log(storedBooks);
 
 
 const cansel_btn = document.getElementById("cancel");

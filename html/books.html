@@ -18,6 +18,8 @@
         </a>
       </div>
 
+
+      
       <nav>
         <ul>
           <li><a href="../html/library.html">Home</a></li>
@@ -29,19 +31,35 @@
       </nav>
     </div>
 
+    <button id="Add-book" style="display: none;">Add Book</button>
+
     <div class="books-list">
-      <h2 class="head">Trending</h2>
-      <section id="main-books"></section>
+      <div class="book-category">
+        <h2 class="head">Trending</h2>
+        <div class="category-row">
+          <button class="slider-btn prev" data-target="main-books">‹</button>
+          <section id="main-books" class="book-track"></section>
+          <button class="slider-btn next" data-target="main-books">›</button>
+        </div>
+      </div>
 
-      <hr />
+      <div class="book-category">
+        <h2 class="head">Coding</h2>
+        <div class="category-row">
+          <button class="slider-btn prev" data-target="Coding-books">‹</button>
+          <section id="Coding-books" class="book-track"></section>
+          <button class="slider-btn next" data-target="Coding-books">›</button>
+        </div>
+      </div>
 
-      <h2 class="head">Coding</h2>
-      <section id="Coding-books"></section>
-
-      <hr />
-
-      <h2 class="head">Novels</h2>
-      <section id="Novels"></section>
+      <div class="book-category">
+        <h2 class="head">Novels</h2>
+        <div class="category-row">
+          <button class="slider-btn prev" data-target="Novels">‹</button>
+          <section id="Novels" class="book-track"></section>
+          <button class="slider-btn next" data-target="Novels">›</button>
+        </div>
+      </div>
     </div>
     <div
       id="congrats"
@@ -61,7 +79,7 @@
       "
     >
       Book borrowed Succesfully✅!
-    </div>
+    
 
     <div
       id="warning"
