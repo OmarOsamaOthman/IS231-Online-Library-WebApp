@@ -24,7 +24,7 @@
     <div class="content">
     <form class="form" onsubmit="handleLogin(event)"> 
         <h1>
-            Login
+            Login-
         </h1>
        <label> User Name</label>
         <input type="text" name="User Name" id="UserName" placeholder="User Name" required>
@@ -36,3 +36,82 @@
        <script src="login.js"></script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+<!--
+
+
+function login(event) {
+    event.preventDefault(); // علشان الصفحة متعملش reload
+
+    let username = document.getElementById("UserName").value;
+
+    // نخزن اليوزر
+    localStorage.setItem("username", username);
+
+    // نروح للصفحة الرئيسية
+    window.location.href = "library.html";
+}
+
+window.onload = function () {
+    let username = localStorage.getItem("username");
+
+    if (username) {
+        // نخفي login و signup
+        document.querySelector(".login").innerHTML = 
+        `<p>Welcome ${username}</p>`;
+    }
+};
+
+function logout() {
+    localStorage.removeItem("username");
+    window.location.reload();
+}
+
+document.querySelector(".login").innerHTML = 
+`<p>Welcome ${username}</p> 
+<button onclick="logout()">Logout</button>`;
+
+
+let login=document.querySelector(".login");
+
+
+
+function login(event){
+    event.preventDefault();
+    let name= document.getElementsById("UserName").value;
+    localStorage.setItem("UserName",name);
+    window.location.href="library.html";
+}
+
+
+
+window.onload=function(){
+    let UserName=localStorage.getItem("UserName");
+    if(UserName){
+
+    document.querySelector(".login").innerHTML = 
+`<p>Welcome ${UserName}</p> 
+<button onclick="logout()">Logout</button>`;
+
+    }
+}
+
+-->
+
+<!--
+
+window.onbeforeunload = function () {
+    sessionStorage.removeItem("username");
+};
+
+-->
