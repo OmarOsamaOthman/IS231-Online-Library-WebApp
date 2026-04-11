@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../styling/Add-book-styling.css">
+    <link rel="stylesheet" href="../styling/main-styling.css">
+
     <link rel="icon" type="image/png" href="../img/book-logo.png">
 
     <title>Add Book</title>
@@ -21,8 +23,8 @@
             <ul>
                 <li><a href="../html/library.html">Home</a></li>
                 <li><a href="../html/books.html">Books</a></li>
-                <li><a href="../html/Add-book.html">Add Book</a></li>
-                <li><a href="borrowed-books.html">Borrowed</a></li>
+                <li><a href="../html/about.html">About</a></li>
+
             </ul>
         </nav>
     </div>
@@ -34,16 +36,16 @@
     <main>
         <form method="get" action="" id="form">
             <div>
-                <label for="book-title">Book Title:</label>
+                <label for="book-title">Book Title</label>
                 <input type="text" id="book-title" name="book_title" required autofocus>
             </div>
             <div>
-                <label for="author">Author:</label>
+                <label for="author">Author</label>
                 <input type="text" id="author" name="author" required>
             </div>
 
             <div>
-                <label for="category">Category:</label>
+                <label for="category">Category</label>
                 <select id="category" name="category">
                     <option value="" selected>Choose Category</option>
                     <option value="Trending">Trending</option>
@@ -52,12 +54,12 @@
                 </select>
             </div>
             <div>
-                <label for="description">Description:</label>
+                <label for="description">Description</label>
                 <textarea id="description" name="description"></textarea>
 
             </div>
             <div>
-                <label for="status">Status:</label>
+                <label for="status">Status</label>
                 <select id="status" name="status">
                     <option value="available" selected>Available</option>
                     <option value="borrowed">Borrowed</option>
@@ -67,9 +69,7 @@
             </div>
 
             <div class="image">
-                <label for="book-image">Upload Book Image:
-                    <!-- <img src="upload-image.png" alt=""> -->
-                </label>
+                <label for="book-image">Upload Book Image </label>
                 <input type="file" id="book-image" accept="image/*">
             </div>
 

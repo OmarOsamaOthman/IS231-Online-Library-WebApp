@@ -1,55 +1,54 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Book Details</title>
-    <link rel="stylesheet" href="../styling/book-detail.css" />
-    <link rel="stylesheet" href="../styling/Add-book-styling.css" />
-    <link rel="icon" type="image/png" href="../img/book-logo.png" />
-  </head>
 
-  <body>
-    <div class="navbar">
-      <div class="logo">
-        <a href="../html/library.html"
-          ><img src="../img/book-logo.png" alt="logo of" />
-          <span>Online Library</span>
-        </a>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Details</title>
+  <link rel="stylesheet" href="../styling/book-detail.css" />
+  <link rel="stylesheet" href="../styling/main-styling.css">
 
-      <nav>
-        <ul>
-          <li><a href="../html/library.html">Home</a></li>
-          <li><a href="../html/books.html">Books</a></li>
-          <li><a href="../html/about.html">About</a></li>
-          <li><a href="#">Logout</a></li>
-        </ul>
-      </nav>
+  <link rel="icon" type="image/png" href="../img/book-logo.png" />
+</head>
+
+<body>
+  <div class="navbar">
+    <div class="logo">
+      <a href="../html/library.html"><img src="../img/book-logo.png" alt="logo of" />
+        <span>Online Library</span>
+      </a>
     </div>
 
-    <div class="details-container">
-      <div class="details-card">
-        <img id="image-book" src="" alt="" />
+    <nav>
+      <ul>
+        <li><a href="../html/library.html">Home</a></li>
+        <li><a href="../html/books.html">Books</a></li>
+        <li><a href="../html/about.html">About</a></li>
+        <li><a href="#">Logout</a></li>
+      </ul>
+    </nav>
+  </div>
 
-        <div class="book-info">
-          <h2 id="title-book"></h2>
-          <p><strong>Author:</strong> <span id="author-book"></span></p>
-          <p><strong>Category:</strong> <span id="category-book"></span></p>
-          <p><strong>Status:</strong> <span id="status-book"></span></p>
-          <p>
-            <strong>Description:</strong> <span id="description-book"></span>
-          </p>
+  <div class="details-container">
+    <div class="details-card">
+      <img id="image-book" src="" alt="" />
 
-          <button id="borrow">Borrow</button>
-          <button id="deleteBtn" style="display: none;">Delete Book</button>
-          <button id="changeStatus" style="display: none;" >change Status</button>
-        </div>
+      <div class="book-info">
+        <h2 id="title-book"></h2>
+        <p><strong>Author:</strong> <span id="author-book"></span></p>
+        <p><strong>Category:</strong> <span id="category-book"></span></p>
+        <p><strong>Status:</strong> <span id="status-book"></span></p>
+        <p>
+          <strong>Description:</strong> <span id="description-book"></span>
+        </p>
+
+        <button id="borrow">Borrow</button>
+        <button id="deleteBtn" style="display: none;">Delete Book</button>
+        <button id="changeStatus" style="display: none;">change Status</button>
       </div>
     </div>
-    <div
-      id="congrats"
-      style="
+  </div>
+  <div id="congrats" style="
         display: none;
         position: fixed;
         top: 20px;
@@ -62,13 +61,10 @@
         font-size: 18px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         z-index: 1000;
-      "
-    >
-      Book borrowed Succesfully✅!
-    </div>
-    <div
-      id="deleted"
-      style="
+      ">
+    Book borrowed Succesfully✅!
+  </div>
+  <div id="deleted" style="
         display: none;
         position: fixed;
         top: 20px;
@@ -81,16 +77,13 @@
         font-size: 18px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         z-index: 1000;
-      "
-    >
-      Book Deleted Succesfully ✖️!
-    </div>
+      ">
+    Book Deleted Succesfully ✖️!
+  </div>
 
-    
 
-    <div
-      id="warning"
-      style="
+
+  <div id="warning" style="
         display: none;
         position: fixed;
         top: 20px;
@@ -103,10 +96,10 @@
         font-size: 18px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         z-index: 1000;
-      "
-    >
-      Sorry, Book is Unavilabile ☹️
-    </div>
-    <script src="../js/book-detail.js" type="module"></script>
-  </body>
+      ">
+    Sorry, Book is Unavilabile ☹️
+  </div>
+  <script src="../js/book-detail.js" type="module"></script>
+</body>
+
 </html>
