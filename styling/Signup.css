@@ -1,6 +1,6 @@
 .navbar nav ul {
     display: grid;
-    grid-template-columns: repeat(4, 150px);
+    grid-template-columns: repeat(3, 150px);
 }
 
 header,
@@ -96,6 +96,25 @@ main form button:focus {
     box-shadow: 0 3px 30px -17px var(--secondary);
 
 }
+
+main form .admin {
+    margin-top: 5px;
+    display: flex;
+    flex-flow: row;
+    gap: 15px;
+}
+
+main form .admin label,
+main form .admin input {
+    cursor: pointer;
+
+}
+
+
+main form .admin input {
+    width: 20px;
+}
+
 
 .login-link {
     text-align: center;

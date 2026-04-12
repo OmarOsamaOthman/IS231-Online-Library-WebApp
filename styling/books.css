@@ -1,3 +1,20 @@
+.navbar nav ul {
+  display: grid;
+  grid-template-columns: repeat(4, 150px);
+}
+
+
+
+.navbar nav ul li {
+  align-items: center;
+  height: 29.6px;
+  display: flex;
+  color: #1fa7df;
+  font-weight: 500;
+  justify-content: center;
+}
+
+
 body {
   background-color: var(--bg);
   color: #111;
