@@ -1,3 +1,5 @@
+localStorage.setItem("is_admin", JSON.stringify(false));
+
 function handleLogin(event) {
   event.preventDefault();
   let nameInput = document.getElementById("UserName");
