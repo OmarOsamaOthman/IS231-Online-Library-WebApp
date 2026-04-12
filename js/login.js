@@ -4,17 +4,7 @@ function handleLogin(event) {
   sessionStorage.setItem("UserName", name);
   window.location.href = "../html/books.html";
 }
-const adminCheckbox = document.getElementById("is-admin");
 
-let isAdmin = JSON.parse(localStorage.getItem("is_admin")) || false;
-
-// adminCheckbox.checked = isAdmin;
-
-adminCheckbox.addEventListener("change", function () {
-  isAdmin = adminCheckbox.checked;
-  console.log(isAdmin)
-  localStorage.setItem("is_admin", JSON.stringify(isAdmin));
-});
 
 
 function logout() {
