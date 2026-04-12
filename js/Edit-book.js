@@ -142,55 +142,76 @@ imageInput.addEventListener("change", function () {
 console.log(allBooks);
 
 formSub.onsubmit = function (p) {
-  let titleValue = document.getElementById("book-title").value;
-  let authorValue = document.getElementById("author").value;
-  let categoryValue = document.getElementById("category").value;
-  let descriptionValue = document.getElementById("description").value;
-  let statusValue = document.getElementById("status").value;
 
-  let file = document.getElementById("book-image").files[0];
+    let titleValue = document.getElementById("book-title").value;
+    let authorValue = document.getElementById("author").value;
+    let categoryValue = document.getElementById("category").value;
+    let descriptionValue = document.getElementById("description").value;
+    let statusValue = document.getElementById("status").value;
 
-  p.preventDefault();
+    let file = document.getElementById("book-image").files[0];
 
-  console.log(titleValue);
-  console.log(authorValue);
+    p.preventDefault();
 
-  editBook.title = titleValue;
-  editBook.author = authorValue;
-  editBook.category = categoryValue;
-  editBook.description = descriptionValue;
-  editBook.status = statusValue;
 
-  // if (!file) {
-  //     alert("Please choose an image");
-  //     return;
-  // }
+    editBook.title = titleValue;
+    editBook.author = authorValue;
+    editBook.category = categoryValue;
+    editBook.description = descriptionValue;
+    editBook.status = statusValue;
 
-  const reader = new FileReader();
 
-  reader.onload = function (e) {
-    const imageBase64 = e.target.result;
+    function Update(image) {
 
-    console.log(imageBase64.src);
+        try {
+            for (let i = 0; i < allBooks.length; i++) {
 
-    for (let i = 0; i < allBooks.length; i++) {
-      console.log(editBook);
-      if (allBooks[i].id == editBook.id) {
-        allBooks[i].title = titleValue;
-        allBooks[i].author = authorValue;
-        allBooks[i].category = categoryValue;
-        allBooks[i].description = descriptionValue;
-        allBooks[i].status = statusValue;
-        allBooks[i].id = editBook.id;
-        allBooks[i].image = imageBase64;
-      }
+                console.log(editBook);
+                if (allBooks[i].id == editBook.id) {
 
-      console.log(allBooks[i]);
+
+                    editBook.title = allBooks[i].title = titleValue;
+                    editBook.author = allBooks[i].author = authorValue;
+                    editBook.category = allBooks[i].category = categoryValue;
+                    editBook.description = allBooks[i].description = descriptionValue;
+                    editBook.status = allBooks[i].status = statusValue;
+                    editBook.id = allBooks[i].id = editBook.id;
+                    if (image) {
+                        editBook.image = allBooks[i].image = image;
+                    }
+                    localStorage.setItem("selectedBook", JSON.stringify(allBooks[i]));
+                    localStorage.setItem("selectedBookToEdit", JSON.stringify(allBooks[i]));
+                    break;
+                }
+            }
+
+            localStorage.setItem("allBooks", JSON.stringify(allBooks));
+            window.location.href = ("../html/book-detail.html");
+        }
+        catch (e) {
+            if (e.code === 22 || e.name === 'QuotaExceededError') {
+                alert("المساحة ممتلئة! يرجى استخدام صورة بحجم أصغر أو مسح بعض الكتب.");
+            } else {
+                console.error("خطأ آخر:", e);
+            }
+        }
     }
 
-    localStorage.setItem("allBooks", JSON.stringify(allBooks));
-  };
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            Update(e.target.result);
+        };
+        reader.readAsDataURL(file);
+    } else {
+        Update(editBook.image);
+    }
 
-  reader.readAsDataURL(file);
-  window.location.href = "../html/books.html";
-};
+}
+
+
+const cansel_btn = document.getElementById("cancel");
+
+cansel_btn.onclick = function () {
+    window.location.href = ("../html/book-detail.html");
+}
