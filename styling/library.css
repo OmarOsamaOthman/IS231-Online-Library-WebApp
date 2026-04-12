@@ -1,43 +1,16 @@
-.image {
-    width: 90px;
-    height: 70px;
-}
-
-
-/* .navbar{
-    background-color:lightpink;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-
-        border-radius: 10px;
-}
-
-.navbar a{
-    text-decoration: none;
-    color: #000;
-     margin   : 0 10px;
-    padding: 10px;
-    font-size: 20px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-.navbar p{
-    font-size: 20px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;  
-} */
-
-
 .navbar nav ul {
     display: grid;
-    grid-template-columns: repeat(5, 150px);
+    grid-template-columns: repeat(3, 150px);
 }
 
 .nav .login {
     display: flex;
     flex-flow: row;
+}
 
-
+.image {
+    width: 90px;
+    height: 70px;
 }
 
 .main {

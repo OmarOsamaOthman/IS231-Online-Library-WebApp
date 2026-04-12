@@ -1,72 +1,65 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../styling/login.css" />
-    <link rel="stylesheet" href="../styling/main-styling.css" />
 
-    <link rel="icon" type="image/png" href="../img/book-logo.png" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../styling/login.css" />
+  <link rel="stylesheet" href="../styling/main-styling.css" />
 
-    <title>Login</title>
-  </head>
+  <link rel="icon" type="image/png" href="../img/book-logo.png" />
 
-  <body>
-    <div class="navbar">
-      <div class="logo">
-        <a href="../html/library.html"
-          ><img src="../img/book-logo.png" alt="logo of" />
-          <span>Online Library</span>
-        </a>
-      </div>
+  <title>Login</title>
+</head>
 
-      <nav>
-        <ul>
-          <li><a href="../html/library.html">Home</a></li>
-          <li><a href="../html/books.html">Books</a></li>
-          <li><a href="../html/Signup.html">Sign Up</a></li>
-          <li><a href="../html/about.html">About</a></li>
-        </ul>
-      </nav>
+<body>
+  <div class="navbar">
+    <div class="logo">
+      <a href="../html/library.html"><img src="../img/book-logo.png" alt="logo of" />
+        <span>Online Library</span>
+      </a>
     </div>
 
-    <!-- <div class="head">
-        <nav class="navbar">
-            <div>
-                <img src="../img/library_book.jpg" class="image">
-                <p>our library</p>
-            </div>
-            <div class="HCA">
-                <a href="library.html"> Home</a>
-                <a href="about.html"> About</a>
-            </div>
-        </nav>
-    </div> -->
+    <nav>
+      <ul>
+        <li><a href="../html/library.html">Home</a></li>
+        <li><a href="../html/books.html">Books</a></li>
+        <li><a href="../html/Signup.html">Sign Up</a></li>
+        <li><a href="../html/about.html">About</a></li>
+      </ul>
+    </nav>
+  </div>
 
-    <header>
-      <h1>Login</h1>
-    </header>
+  <header>
+    <h1>Login</h1>
+  </header>
 
-    <main class="content">
-      <form class="form" onsubmit="handleLogin(event)">
-        <div>
-          <label> User Name</label>
-          <input type="text" name="User Name" id="UserName" required />
-        </div>
+  <main class="content">
+    <form class="form" onsubmit="handleLogin(event)">
+      <div>
+        <label> User Name</label>
+        <input type="text" name="User Name" id="UserName" required />
+      </div>
 
+      <div>
+        <label>Password</label>
+        <input type="password" name="Password" id="Password" required />
+        <input type="checkbox" name="" id="is-admin" />Are You Admin?
+      </div>
         <div>
           <label>Password</label>
           <input type="password" name="Password" id="Password" required />
         </div>
 
-        <div class="buttons">
-          <button type="submit" class="login-btn">Login</button>
-        </div>
-        <p class="signup-link">
-          Don't have an account? <a href="Signup.html">Create an account</a>
-        </p>
-      </form>
-    </main>
-    <script src="../js/login.js"></script>
-  </body>
+      <div class="buttons">
+        <button type="submit" class="login-btn">Login</button>
+      </div>
+      <p class="signup-link">
+        Don't have an account? <a href="Signup.html">Create an account</a>
+      </p>
+    </form>
+  </main>
+  <script src="../js/login.js"></script>
+</body>
+
 </html>
