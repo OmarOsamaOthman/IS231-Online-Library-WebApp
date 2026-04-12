@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styling/Add-book-styling.css">
     <link rel="stylesheet" href="../styling/search-books.css">
     <link rel="icon" type="image/png" href="../img/book-logo.png" />
     <title>Search Books</title>
@@ -32,27 +33,27 @@
         <form method="get" action="">
             <div>
                 <label for="search-query">Search:</label>
-                <input type="text" id="search-query" name="search_query" placeholder="Search by Title or Author"
-                    required autofocus>
+                <input type="text" id="search-query" name="search_query" placeholder="Search by Title or Author" required autofocus>
             </div>
             <div>
                 <label for="category">Category:</label>
                 <select id="category" name="category">
                     <option value="" selected>All Categories</option>
-                    <option value="fiction">Fiction</option>
-                    <option value="science">Science</option>
-                    <option value="history">History</option>
-                    <option value="technology">Technology</option>
-                    <option value="education">Education</option>
-                    <option value="biography">Biography</option>
+                    <option value="biography">Trending</option>
+                    <option value="coding">Coding</option>
+                    <option value="novels">Novels</option>
                 </select>
             </div>
             <div class="buttons">
-                <button type="submit">Search</button>
-                <button type="reset">Reset</button>
+                <button id="search-button" type="submit">Search</button>
+                <button id="reset-button" type="reset">Reset</button>
             </div>
-
+            <div id="search-results">
+                <!-- Search results will be displayed here -->
+            </div>
         </form>
+    </main>
+    <script src="../js/search.js"></script>
 </body>
 <footer>
     <p>Developed by Yasser Mohamed</p>
