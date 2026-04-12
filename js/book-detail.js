@@ -29,7 +29,7 @@ if (isAdmin) {
   deleteBtn.style.display = "block";
 
   borrowBtn.innerText = "Edit";
-  borrowBtn.style.backgroundColor = "red";
+  borrowBtn.style.backgroundColor = "green";
 
   borrowBtn.onclick = function () {
     handleEditBtn(bookObj);

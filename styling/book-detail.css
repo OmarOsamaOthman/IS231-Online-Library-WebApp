@@ -50,3 +50,9 @@
   transform: translateY(-4px);
   box-shadow: 0 0 15px black;
 }
+
+
+.buttons-needed{
+  display: flex;
+  gap: 10px;
+}
