@@ -8,6 +8,8 @@
     /* Ink Blue */
     --secondary: #0F766E;
     --third: #1fa7df;
+    --third-hover: #178fc0;
+    --third-active: #0f6f98;
     /* Teal */
     --accent: #F59E0B;
     /* Gold */
@@ -31,9 +33,11 @@
     /* Status */
     --success: #16A34A;
     --success-hover: #22C55E;
+    --success-active: #15803d;
     /* available */
     --danger: #DC2626;
     --danger-hover: #EF4444;
+    --danger-active: #b91c1c;
 
     /* borrowed */
     --warning: #D97706;
@@ -89,6 +93,7 @@ body {
 /*---------------------------------------*/
 
 .navbar {
+    opacity: 97%;
     background-color: var(--primary);
     height: 60px;
     display: flex;
