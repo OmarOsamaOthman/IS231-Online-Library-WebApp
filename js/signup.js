@@ -5,7 +5,7 @@ function handleLogin(event) {
   if (nameInput) {
     let name = nameInput.value;
     sessionStorage.setItem("UserName", name);
-    window.location.href = "library.html";
+    window.location.href = "../html/books.html";
   }
 }
 
