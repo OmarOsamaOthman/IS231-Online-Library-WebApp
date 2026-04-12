@@ -1,10 +1,9 @@
 body {
-    padding-top: 90px;
+    padding-top: 20px;
     font-family: var(--font);
     color: var(--text);
     height: 100vh;
     background-color: var(--surface-2);
-
     display: flex;
     flex-flow: nowrap column;
     align-items: center;
@@ -20,15 +19,14 @@ body {
 
 
 body .container {
+    margin-bottom: 30px;
     display: flex;
     justify-content: space-evenly;
     flex-flow: row;
     width: 100%;
 }
 
-.editing {
-    /* display: flex; */
-}
+
 
 .editing,
 .preview {
@@ -43,9 +41,10 @@ body .container {
 .preview {
     position: relative;
     width: 45%;
-    top: 60px;
+    top: 150px;
     height: 55%;
     padding: 0;
+    padding-left: 10px;
 }
 
 
@@ -202,7 +201,11 @@ main form .cancel:hover {
 
 }
 
+
+/*--------------------------------*/
+
 .preview div {
+    font-size: 18px;
     display: flex;
     flex-flow: column;
 }
@@ -210,9 +213,9 @@ main form .cancel:hover {
 
 .preview .card-div {
     display: flex;
-    color: white;
+    color: var(--text);
     flex-flow: row;
-    background-color: #123;
+    background-color: #fff;
     height: 100%;
     border-radius: var(--radius-md);
 }
@@ -227,6 +230,7 @@ main form .cancel:hover {
 
 .card-div .info {
     display: flex;
+    max-width: 370px;
 }
 
 .card-div .info p {
@@ -239,10 +243,13 @@ main form .cancel:hover {
 }
 
 .card-div .info .header {
+    font-size: 20px;
+    color: var(--primary);
     position: relative;
     margin-top: 30px;
 
 }
+
 
 .card-div .info div {
     margin-top: 10px;
@@ -250,6 +257,7 @@ main form .cancel:hover {
 }
 
 .preview div footer {
+    margin-top: 30px;
     font-size: 13px;
     padding: 10px;
     display: flex;

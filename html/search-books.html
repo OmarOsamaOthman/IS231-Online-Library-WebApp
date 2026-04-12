@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styling/Add-book-styling.css">
+
+    <link rel="stylesheet" href="../styling/main-styling.css">
     <link rel="stylesheet" href="../styling/search-books.css">
     <link rel="icon" type="image/png" href="../img/book-logo.png" />
     <title>Search Books</title>
@@ -21,8 +22,8 @@
             <ul>
                 <li><a href="library.html">Home</a></li>
                 <li><a href="books.html">Books</a></li>
-                <li><a href="Add-book.html">Add Book</a></li>
                 <li><a href="borrowed-books.html">Borrowed</a></li>
+                <li><a href="about.html">About</a></li>
             </ul>
         </nav>
     </div>
@@ -33,7 +34,8 @@
         <form method="get" action="">
             <div>
                 <label for="search-query">Search:</label>
-                <input type="text" id="search-query" name="search_query" placeholder="Search by Title or Author" required autofocus>
+                <input type="text" id="search-query" name="search_query" placeholder="Search by Title or Author"
+                    required autofocus>
             </div>
             <div>
                 <label for="category">Category:</label>
@@ -48,10 +50,10 @@
                 <button id="search-button" type="submit">Search</button>
                 <button id="reset-button" type="reset">Reset</button>
             </div>
-            <div id="search-results">
-                <!-- Search results will be displayed here -->
-            </div>
         </form>
+        <div id="search-results">
+            <!-- Search results will be displayed here -->
+        </div>
     </main>
     <script src="../js/search.js"></script>
 </body>

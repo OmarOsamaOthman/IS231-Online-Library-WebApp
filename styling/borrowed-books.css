@@ -1,63 +1,57 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.navbar{
-    background-color: #1E3A8A;
-    height: 60px;
-    display: flex;
-    position: fixed;
-    top: 0;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 50px 0 100px;
-    width: 100%;
-}
-
-.navbar img {
-    height: 40px;
-}
-
-.logo a {
-    display: flex;
-    align-items: center;
-}
-
-nav ul {
+.navbar nav ul {
     display: grid;
     grid-template-columns: repeat(4, 150px);
-    justify-content: space-between;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    font-weight: 500;
-}
-
-nav ul li a:hover {
-    color:  #0F766E;
 }
 
 header {
-    margin: 80px;
+    /* margin: 80px; */
     text-align: center;
 }
 
 main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto 100px;
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 25px;
+}
+
+.book {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.book h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #1E3A8A;
+}
+
+.book img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.book p {
+    margin-bottom: 10px;
+    color: #334155;
 }
 
 button {
     background-color: white;
     color: #1E3A8A;
-    border: none;;
+    border: none;
+    ;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -67,7 +61,7 @@ footer {
     color: rgba(255, 255, 255, 0.357);
     text-align: center;
     padding: 15px 0;
-    position: fixed;
+    position: static;
     bottom: 0;
     width: 100%;
 }

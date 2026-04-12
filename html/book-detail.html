@@ -32,19 +32,21 @@
   <div class="details-container">
     <div class="details-card">
       <img id="image-book" src="" alt="" />
+      <div>
+        <div class="book-info">
+          <h2 id="title-book"></h2>
+          <p class="author"><strong>Author:</strong> <span id="author-book"></span></p>
+          <p><strong>Category:</strong> <span id="category-book"></span></p>
+          <p><strong>Status:</strong> <span id="status-book"></span></p>
+          <p>
+            <strong>Description:</strong> <span id="description-book"></span>
+          </p>
 
-      <div class="book-info">
-        <h2 id="title-book"></h2>
-        <p><strong>Author:</strong> <span id="author-book"></span></p>
-        <p><strong>Category:</strong> <span id="category-book"></span></p>
-        <p><strong>Status:</strong> <span id="status-book"></span></p>
-        <p>
-          <strong>Description:</strong> <span id="description-book"></span>
-        </p>
+        </div>
 
         <div class="buttons-needed">
           <button id="borrow">Borrow</button>
-          <button id="deleteBtn" style="display: none; background-color: red;">Delete Book</button>
+          <button id="deleteBtn">Delete Book</button>
           <button id="changeStatus" style="display: none">
             change Status
           </button>
@@ -52,6 +54,8 @@
       </div>
     </div>
   </div>
+
+
   <div id="congrats" style="
         display: none;
         position: fixed;
