@@ -1,3 +1,8 @@
+.navbar nav ul {
+    display: grid;
+    grid-template-columns: repeat(4, 150px);
+}
+
 header,
 main {
     display: flex;

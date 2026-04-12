@@ -81,7 +81,6 @@ body {
     margin-top: 75px;
     font-family: var(--font);
     color: var(--text);
-    min-height: 100vh;
     background-color: var(--bg);
 }
 
