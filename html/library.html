@@ -1,77 +1,135 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../styling/main-styling.css" />
-    <link rel="stylesheet" href="../styling/library.css" />
-    <link rel="stylesheet" href="../styling/books.css" />
 
-    <link rel="icon" type="image/png" href="../img/book-logo.png" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../styling/main-styling.css" />
+  <link rel="stylesheet" href="../styling/books.css" />
+  <link rel="stylesheet" href="../styling/library.css" />
 
-    <title>Library Finder Website</title>
-  </head>
+  <link rel="icon" type="image/png" href="../img/book-logo.png" />
 
-  <body>
-    <div class="navbar">
-      <div class="logo">
-        <a href="../html/library.html"
-          ><img src="../img/book-logo.png" alt="logo of" />
-          <span>Online Library</span>
-        </a>
-      </div>
+  <title>Library Finder Website</title>
+</head>
 
-      <nav>
-        <ul>
-          <li><a href="../html/login.html">Login</a></li>
-          <li><a href="../html/Signup.html">Sign Up</a></li>
-          <li><a href="../html/about.html">About</a></li>
-        </ul>
-      </nav>
-
-      <!-- <div class="login">
-        </div> -->
+<body>
+  <div class="navbar">
+    <div class="logo">
+      <a href="../html/library.html"><img src="../img/book-logo.png" alt="logo of" />
+        <span>Online Library</span>
+      </a>
     </div>
 
-    <div class="main">
-      <main class="main">
-        <h1>Welcome To Our Library</h1>
-        <div class="books-list">
-          <div class="book-category">
-            <h2 class="head">Trending</h2>
-            <div class="category-row">
-              <button class="slider-btn prev" data-target="main-books">
-                ‹
-              </button>
-              <section id="main-books" class="book-track"></section>
-              <button class="slider-btn next" data-target="main-books">
-                ›
-              </button>
-            </div>
-          </div>
+    <nav>
+      <ul>
+        <li><a href="../html/login.html">Login</a></li>
+        <li><a href="../html/Signup.html">Sign Up</a></li>
+        <li><a href="../html/about.html">About</a></li>
+      </ul>
+    </nav>
 
-          <div class="book-category">
-            <h2 class="head">Coding</h2>
-            <div class="category-row">
-              <button class="slider-btn prev" data-target="Coding-books">
-                ‹
-              </button>
-              <section id="Coding-books" class="book-track"></section>
-              <button class="slider-btn next" data-target="Coding-books">
-                ›
-              </button>
-            </div>
-          </div>
+    <!-- <div class="login">
+        </div> -->
+  </div>
 
-          <div class="book-category">
-            <h2 class="head">Novels</h2>
-            <div class="category-row">
-              <button class="slider-btn prev" data-target="Novels">‹</button>
-              <section id="Novels" class="book-track"></section>
-              <button class="slider-btn next" data-target="Novels">›</button>
-            </div>
+  <div class="main">
+    <main class="main">
+      <h1>Welcome To Our Library</h1>
+      <div class="books-list">
+        <div class="book-category">
+          <h2 class="head">Trending</h2>
+          <div class="category-row">
+            <button class="slider-btn prev" data-target="main-books">
+              ‹
+            </button>
+            <section id="main-books" class="book-track"></section>
+            <button class="slider-btn next" data-target="main-books">
+              ›
+            </button>
           </div>
         </div>
+
+        <div class="book-category">
+          <h2 class="head">Coding</h2>
+          <div class="category-row">
+            <button class="slider-btn prev" data-target="Coding-books">
+              ‹
+            </button>
+            <section id="Coding-books" class="book-track"></section>
+            <button class="slider-btn next" data-target="Coding-books">
+              ›
+            </button>
+          </div>
+        </div>
+
+        <div class="book-category">
+          <h2 class="head">Novels</h2>
+          <div class="category-row">
+            <button class="slider-btn prev" data-target="Novels">‹</button>
+            <section id="Novels" class="book-track"></section>
+            <button class="slider-btn next" data-target="Novels">›</button>
+          </div>
+        </div>
+      </div>
+      <!-- <img src="../img/image.png" class="phImg"> -->
+    </main>
+  </div>
+
+  <!-- <script src="../js/signup.js"></script>
+    <script src="../js/login.js"></script> -->
+  <script>
+    const sections = {
+      Trending: document.getElementById("main-books"),
+      Coding: document.getElementById("Coding-books"),
+      Novels: document.getElementById("Novels"),
+    };
+    function loadBooks() {
+      fetch("../js/books.json")
+        .then((res) => res.json())
+        .then((data) => {
+          books = data;
+          localStorage.setItem("allBooks", JSON.stringify(books));
+          renderBooks(books);
+        });
+    }
+
+    // render books in the UI
+    function renderBooks(books) {
+      sections.Trending.innerHTML = "";
+      sections.Coding.innerHTML = "";
+      sections.Novels.innerHTML = "";
+      books.forEach((book) => {
+        const bookCard = document.createElement("div");
+        bookCard.className = "book";
+
+        bookCard.innerHTML = `
+      <h2>${book.title}</h2>
+      <a href="#" data-id="${book.id}">
+        <img src="${book.image}" alt="${book.title}" />
+      </a>
+      <p>by ${book.author}</p>
+      <p class="statusofbook" style="display:none">${book.status}</p>
+      
+
+    `;
+        if (book.category === "Trending") {
+          sections.Trending.appendChild(bookCard);
+        } else if (book.category === "Coding") {
+          sections.Coding.appendChild(bookCard);
+        } else if (book.category === "Novels") {
+          sections.Novels.appendChild(bookCard);
+        }
+      });
+      // addBookClickEvents(books);
+      initCategorySliders();
+      // setupAdmin();
+    }
+    loadBooks();
+  </script>
+</body>
+
+</html>
         <!-- <img src="../img/image.png" class="phImg"> -->
       </main>
     </div>
