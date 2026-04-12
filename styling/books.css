@@ -1,13 +1,13 @@
 .navbar nav ul {
   display: grid;
-  grid-template-columns: repeat(4, 150px);
+  grid-template-columns: repeat(3, 150px);
 }
 
 
 
 .navbar nav ul li {
   align-items: center;
-  height: 29.6px;
+  height: 18.6px;
   display: flex;
   color: #1fa7df;
   font-weight: 500;

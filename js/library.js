@@ -1,12 +1,14 @@
 
-localStorage.clear();
-
-
 const sections = {
   Trending: document.getElementById("main-books"),
   Coding: document.getElementById("Coding-books"),
   Novels: document.getElementById("Novels"),
 };
+
+localStorage.clear();
+
+
+
 function loadBooks() {
   fetch("../js/books.json")
     .then((res) => res.json())

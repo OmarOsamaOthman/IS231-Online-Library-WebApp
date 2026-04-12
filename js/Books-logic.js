@@ -17,15 +17,16 @@ loadBooks();
 function setupAdmin() {
   const statusTexts = document.querySelectorAll(".statusofbook");
   const btns = document.querySelectorAll(".borrowbtn");
+  if (isAdmin) {
+    document.getElementById("borrowed-li").style.display = "none";
+    document.getElementById("Add-li").style.display = "block";
+  } else {
+    document.getElementById("borrowed-li").style.display = "block";
+    document.getElementById("Add-li").style.display = "none";
+  }
 
   statusTexts.forEach((el) => (el.style.display = isAdmin ? "block" : "none"));
   btns.forEach((btn) => (btn.style.display = isAdmin ? "none" : "block"));
-
-  // addBtn.style.display = isAdmin ? "block" : "none";
-
-  // if (isAdmin) {
-  //   addBtn.onclick = () => (window.location.href = "../html/Add-book.html");
-  // }
 }
 
 // get books data

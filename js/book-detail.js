@@ -38,6 +38,8 @@ if (isAdmin) {
   };
 } else {
   changeStatus.style.display = "none";
+  deleteBtn.style.display = "none";
+  borrowBtn.style.marginRight = "450px";
 
   if (bookObj.status !== "available") {
     borrowBtn.style.backgroundColor = "red";

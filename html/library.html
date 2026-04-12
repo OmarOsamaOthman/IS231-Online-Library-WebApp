@@ -78,55 +78,6 @@
 
   <!-- <script src="../js/signup.js"></script>
     <script src="../js/login.js"></script> -->
-  <script>
-    const sections = {
-      Trending: document.getElementById("main-books"),
-      Coding: document.getElementById("Coding-books"),
-      Novels: document.getElementById("Novels"),
-    };
-    function loadBooks() {
-      fetch("../js/books.json")
-        .then((res) => res.json())
-        .then((data) => {
-          books = data;
-          localStorage.setItem("allBooks", JSON.stringify(books));
-          renderBooks(books);
-        });
-    }
-
-    // render books in the UI
-    function renderBooks(books) {
-      sections.Trending.innerHTML = "";
-      sections.Coding.innerHTML = "";
-      sections.Novels.innerHTML = "";
-      books.forEach((book) => {
-        const bookCard = document.createElement("div");
-        bookCard.className = "book";
-
-        bookCard.innerHTML = `
-      <h2>${book.title}</h2>
-      <a href="#" data-id="${book.id}">
-        <img src="${book.image}" alt="${book.title}" />
-      </a>
-      <p>by ${book.author}</p>
-      <p class="statusofbook" style="display:none">${book.status}</p>
-      
-
-    `;
-        if (book.category === "Trending") {
-          sections.Trending.appendChild(bookCard);
-        } else if (book.category === "Coding") {
-          sections.Coding.appendChild(bookCard);
-        } else if (book.category === "Novels") {
-          sections.Novels.appendChild(bookCard);
-        }
-      });
-      // addBookClickEvents(books);
-      initCategorySliders();
-      // setupAdmin();
-    }
-    loadBooks();
-  </script>
 </body>
 
 </html>

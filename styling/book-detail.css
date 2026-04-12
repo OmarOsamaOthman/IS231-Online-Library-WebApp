@@ -134,7 +134,8 @@ html {
 
 
 .buttons-needed {
-  margin-top: 40px;
+  margin-top: 50px;
+  margin-right: 180px;
   display: flex;
   gap: 10px;
 }
