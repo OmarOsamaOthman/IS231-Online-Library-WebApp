@@ -15,7 +15,7 @@ function handleLogin(event) {
 
 function logout() {
   sessionStorage.clear();
-  window.location.href = "../html/library.html";
+  window.location.href = "../html/index.html";
 }
 
 window.onload = function () {
