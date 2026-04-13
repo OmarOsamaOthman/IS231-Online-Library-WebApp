@@ -7,11 +7,15 @@
 
 .navbar nav ul li {
   align-items: center;
-  height: 18.6px;
+  height: 29.6px;
   display: flex;
   color: #1fa7df;
   font-weight: 500;
   justify-content: center;
+}
+
+ul:first-child li a {
+  display: none;
 }
 
 

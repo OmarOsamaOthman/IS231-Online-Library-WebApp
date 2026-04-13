@@ -19,9 +19,9 @@ function setupAdmin() {
   const btns = document.querySelectorAll(".borrowbtn");
   if (isAdmin) {
     document.getElementById("borrowed-li").style.display = "none";
-    document.getElementById("Add-li").style.display = "block";
+    document.getElementById("Add-li").style.visibility = "block";
   } else {
-    document.getElementById("borrowed-li").style.display = "block";
+    document.getElementById("borrowed-li").style.visibility = "block";
     document.getElementById("Add-li").style.display = "none";
   }
 

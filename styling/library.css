@@ -3,9 +3,6 @@
     grid-template-columns: repeat(3, 150px);
 }
 
-.navbar nav ul li {
-    height: 29.6px;
-}
 
 .nav .login {
     display: flex;
