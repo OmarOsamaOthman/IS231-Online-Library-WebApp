@@ -78,7 +78,6 @@ function renderBooks(books) {
     }
   });
   addBookClickEvents(books);
-  initCategorySliders();
   setupAdmin();
 }
 
@@ -120,20 +119,6 @@ function saveData() {
   localStorage.setItem("Borrowed-Books", JSON.stringify(borrowed));
 }
 
-// Books Slider
-function initCategorySliders() {
-  document.querySelectorAll(".slider-btn").forEach((btn) => {
-    const track = document.getElementById(btn.dataset.target);
-    if (!track) return;
-
-    const width = track.clientWidth;
-
-    btn.onclick = () => {
-      const dir = btn.classList.contains("next") ? 1 : -1;
-      track.scrollBy({ left: dir * width, behavior: "smooth" });
-    };
-  });
-}
 
 function showCongrats() {
   toggleMessage("congrats");
