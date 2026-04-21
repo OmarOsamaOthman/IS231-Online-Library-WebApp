@@ -34,24 +34,21 @@ formSub.onsubmit = function (p) {
 
     storedBooks.push(obj);
     localStorage.setItem("allBooks", JSON.stringify(storedBooks));
-
-    console.log(storedBooks);
-    alert("Book added successfully");
-    formSub.reset();
-    window.location.href = "../html/books.html";
   };
 
+  console.log(storedBooks);
+  alert("Book added successfully");
+  formSub.reset();
+  window.location.href = "../html/books.html";
   reader.readAsDataURL(file);
-
 };
 
 console.log(storedBooks);
 
-
 const cansel_btn = document.getElementById("cancel");
 
 cansel_btn.onclick = function () {
-  window.location.href = ("../html/books.html");
-}
+  window.location.href = "../html/books.html";
+};
 
 console.log(storedBooks);

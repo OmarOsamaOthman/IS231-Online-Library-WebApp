@@ -77,12 +77,12 @@ function renderBooks(books) {
       sections.Novels.appendChild(bookCard);
     }
   });
-  addBookClickEvents(books);
+  handleDetailsPage(books);
   setupAdmin();
 }
 
 // if the admin click add button...
-function addBookClickEvents(books) {
+function handleDetailsPage(books) {
   document.querySelectorAll(".book a").forEach((anchor) => {
     anchor.onclick = (e) => {
       e.preventDefault();
@@ -124,9 +124,9 @@ function showCongrats() {
   toggleMessage("congrats");
 }
 
-function warning() {
-  toggleMessage("warning");
-}
+// function warning() {
+//   toggleMessage("warning");
+// }
 
 function toggleMessage(id) {
   const el = document.getElementById(id);
