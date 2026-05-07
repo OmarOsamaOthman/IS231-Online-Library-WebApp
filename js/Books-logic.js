@@ -124,10 +124,6 @@ function showCongrats() {
   toggleMessage("congrats");
 }
 
-// function warning() {
-//   toggleMessage("warning");
-// }
-
 function toggleMessage(id) {
   const el = document.getElementById(id);
   el.style.display = "block";

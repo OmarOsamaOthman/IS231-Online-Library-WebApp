@@ -1,7 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login 
 from .forms import LoginForm ,SignupForm
-from .models import Login ,Signup
 from django.contrib.auth.hashers import check_password
 # Create your views here.
 

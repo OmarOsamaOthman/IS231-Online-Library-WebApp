@@ -1,9 +1,9 @@
 from django import forms
-from .models import Login ,Signup
+from .models import  Signup
 
 class LoginForm(forms.ModelForm):
     class Meta :
-        model=Login
+        model=Signup
         fields='__all__'
         widgets={
             'password':forms.PasswordInput
