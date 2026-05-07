@@ -1,0 +1,72 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}Add Book{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'pages/css/Add-book-styling.css' %}">
+{% endblock extra_css%}
+
+{% block nav_links %}
+<li><a href="#">Books</a></li>
+<li><a href="{% url 'about' %}">About</a></li>
+{% endblock nav_links %}
+
+{% block content %}
+
+<header>
+    <h1>Add New Book</h1>
+</header>
+
+<main>
+    <form method="get" action="" id="form">
+        <div>
+            <label for="book-title">Book Title</label>
+            <input type="text" id="book-title" name="book_title" required autofocus>
+        </div>
+        <div>
+            <label for="author">Author</label>
+            <input type="text" id="author" name="author" required>
+        </div>
+
+        <div>
+            <label for="category">Category</label>
+            <select id="category" name="category">
+                <option value="" selected>Choose Category</option>
+                <option value="Trending">Trending</option>
+                <option value="Coding">Coding</option>
+                <option value="Novels">Novels</option>
+            </select>
+        </div>
+        <div>
+            <label for="description">Description</label>
+            <textarea id="description" name="description"></textarea>
+
+        </div>
+        <div>
+            <label for="status">Status</label>
+            <select id="status" name="status">
+                <option value="available" selected>Available</option>
+                <option value="borrowed">Borrowed</option>
+            </select>
+        </div>
+
+        <div class="image">
+            <label for="book-image">Upload Book Image </label>
+            <input type="file" id="book-image" accept="image/*">
+        </div>
+
+        <div class="buttons">
+            <button class="add" id="add">Add Book</button>
+            <button class="cancel" id="cancel">Cancel</button>
+        </div>
+    </form>
+
+</main>
+<footer>
+    <p>© 2026 Online Library. All Rights Reserved. | Developed by Omar Osama</p>
+</footer>
+
+<script src="../js/Add-book.js"></script>
+
+{% endblock content %}

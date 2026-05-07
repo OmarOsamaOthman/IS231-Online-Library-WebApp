@@ -1,0 +1,20 @@
+{% load static %}
+
+
+<div class="navbar">
+    <div class="logo">
+        <a href="{% url 'library' %}"><img src="{% static 'pages/images/book-logo.png' %}" alt="logo of" />
+            <span>Online Library</span>
+        </a>
+    </div>
+
+    <nav>
+        <ul>
+            {% block nav_links %}
+            {% endblock nav_links %}
+        </ul>
+    </nav>
+
+    <!-- <div class="login">
+        </div> -->
+</div>

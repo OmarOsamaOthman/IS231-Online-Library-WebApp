@@ -1,0 +1,20 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'pages/css/Signup.css'%}">
+{% endblock extra_css %}
+
+{% block nav_links %}
+<li><a href="{% url 'login_view' %}">Login</a></li>
+<li><a href="{% url 'signup' %}">Signup</a></li>
+{% endblock nav_links %}
+
+{% block form %}
+<form method="POST" class="form" onsubmit="handleLogin(event)">
+    {% csrf_token %}
+    {{lf.as_p}}
+    <button type="submit">send</button>
+</form>
+
+{% endblock form%}

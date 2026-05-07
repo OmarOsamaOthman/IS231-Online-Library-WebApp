@@ -1,9 +1,0 @@
- {% load static %}
-{% block form %}
-<form method="POST" class="form" onsubmit="handleLogin(event)">
-    {% csrf_token %}
-    {{lf.as_p}}
-<button type="submit">send</button>
-</form>
-
-{% endblock form%}

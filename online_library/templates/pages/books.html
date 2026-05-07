@@ -1,0 +1,86 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %}Books{% endblock title %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'pages/css/books.css' %}">
+{% endblock extra_css%}
+
+
+
+{% block nav_links %}
+<li id="borrowed-li"><a href="#">borrowed Books</a></li>
+<li><a href="{% url 'add_book' %}">Add Book</a></li>
+<li><a href="{% url 'about' %}">About</a></li>
+<li><a href="#">Logout</a></li>
+{% endblock nav_links %}
+
+{% block content %}
+
+
+<nav>
+  <ul>
+  </ul>
+</nav>
+</div>
+
+<!-- <button id="Add-book" style="display: none;">Add Book</button> -->
+
+<div class="books-list">
+  <div class="book-category">
+    <h2 class="head">Trending</h2>
+    <div class="category-row">
+      <section id="main-books" class="book-track"></section>
+    </div>
+  </div>
+
+  <div class="book-category">
+    <h2 class="head">Coding</h2>
+    <div class="category-row">
+      <section id="Coding-books" class="book-track"></section>
+    </div>
+  </div>
+
+  <div class="book-category">
+    <h2 class="head">Novels</h2>
+    <div class="category-row">
+      <section id="Novels" class="book-track"></section>
+    </div>
+  </div>
+</div>
+<div id="congrats" style="
+        display: none;
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #4caf50;
+        color: white;
+        padding: 15px 30px;
+        border-radius: 10px;
+        font-size: 18px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        ">
+  Book borrowed Succesfully✅!
+
+
+  <div id="warning" style="
+        display: none;
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: red;
+        color: white;
+        padding: 15px 30px;
+        border-radius: 10px;
+        font-size: 18px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        z-index: 1000;
+        ">
+    Sorry, Book is Unavilabile ☹️
+  </div>
+  <script src="../js/Books-logic.js"></script>
+  {% endblock content %}
