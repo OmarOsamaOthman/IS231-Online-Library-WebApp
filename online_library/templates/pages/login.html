@@ -1,9 +1,26 @@
- {% load static %}
-{% block form %}
-<form method="post" class="form" onsubmit="return handleLogin(event)">
-    {% csrf_token %}
-    {{lf}} <button type="submit">send</button>
-</form>
-   <script src="{% static 'js/login.js' %}"></script>
-{% endblock form%}
+{% extends 'pages/base.html' %}
+{% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'pages/css/login.css'%}">
+{% endblock extra_css %}
+
+{% block nav_links %}
+<li><a href="{% url 'login_view' %}">Login</a></li>
+<li><a href="{% url 'signup' %}">Signup</a></li>
+{% endblock nav_links %}
+
+{% block form %}
+<form method="POST" class="form" onsubmit="handleLogin(event)">
+    {% csrf_token %}
+    {% for field in form %}
+
+    {{field.label}}
+    {{field}}
+    {% endfor %}
+
+    {{form.errors}}
+    <button type="submit" name="Create User">login</button>
+</form>
+
+{% endblock form%}
