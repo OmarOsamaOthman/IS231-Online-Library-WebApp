@@ -7,10 +7,8 @@
 <link rel="stylesheet" href="{% static 'pages/css/books.css' %}">
 {% endblock extra_css%}
 
-
-
 {% block nav_links %}
-<li id="borrowed-li"><a href="#">borrowed Books</a></li>
+<li id="borrowed-li"><a href="#">Borrowed Books</a></li>
 <li><a href="{% url 'add_book' %}">Add Book</a></li>
 <li><a href="{% url 'about' %}">About</a></li>
 <li><a href="#">Logout</a></li>
@@ -18,69 +16,121 @@
 
 {% block content %}
 
-
-<nav>
-  <ul>
-  </ul>
-</nav>
-</div>
-
-<!-- <button id="Add-book" style="display: none;">Add Book</button> -->
-
 <div class="books-list">
+
+  <!-- Trending Books -->
   <div class="book-category">
     <h2 class="head">Trending</h2>
     <div class="category-row">
-      <section id="main-books" class="book-track"></section>
+      <section id="main-books" class="book-track">
+        {% for book in books %}
+          {% if book.category == "trending" %}
+            <div class="book">
+              {% if book.image %}
+                <img src="{{ book.image.url }}" alt="{{ book.title }}">
+              {% else %}
+                <img src="{% static 'pages/images/default-cover.png' %}" alt="No Cover">
+              {% endif %}
+              <h2>{{ book.title }}</h2>
+              <p>{{ book.author }}</p>
+              <button class="borrowbtn" data-book-id="{{ book.id }}"
+                {% if book.status == 'Borrowed' %}disabled{% endif %}>
+                {{ book.status }}
+              </button>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </section>
     </div>
   </div>
 
+  <!-- Coding Books -->
   <div class="book-category">
     <h2 class="head">Coding</h2>
     <div class="category-row">
-      <section id="Coding-books" class="book-track"></section>
+      <section id="Coding-books" class="book-track">
+        {% for book in books %}
+          {% if book.category == "coding" %}
+            <div class="book">
+              {% if book.image %}
+                <img src="{{ book.image.url }}" alt="{{ book.title }}">
+              {% else %}
+                <img src="{% static 'pages/images/default-cover.png' %}" alt="No Cover">
+              {% endif %}
+              <h2>{{ book.title }}</h2>
+              <p>{{ book.author }}</p>
+              <button class="borrowbtn" data-book-id="{{ book.id }}"
+                {% if book.status == 'Borrowed' %}disabled{% endif %}>
+                {{ book.status }}
+              </button>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </section>
     </div>
   </div>
 
+  <!-- Novels -->
   <div class="book-category">
     <h2 class="head">Novels</h2>
     <div class="category-row">
-      <section id="Novels" class="book-track"></section>
+      <section id="Novels" class="book-track">
+        {% for book in books %}
+          {% if book.category == "novels" %}
+            <div class="book">
+              {% if book.image %}
+                <img src="{{ book.image.url }}" alt="{{ book.title }}">
+              {% else %}
+                <img src="{% static 'pages/images/default-cover.png' %}" alt="No Cover">
+              {% endif %}
+              <h2>{{ book.title }}</h2>
+              <p>{{ book.author }}</p>
+              <button class="borrowbtn" data-book-id="{{ book.id }}"
+                {% if book.status == 'Borrowed' %}disabled{% endif %}>
+                {{ book.status }}
+              </button>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </section>
     </div>
   </div>
+
 </div>
+
+<!-- Success Toast -->
 <div id="congrats" style="
-        display: none;
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: #4caf50;
-        color: white;
-        padding: 15px 30px;
-        border-radius: 10px;
-        font-size: 18px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-        ">
-  Book borrowed Succesfully✅!
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 1000;">
+  Book Borrowed Successfully ✅
+</div>
 
+<!-- Warning Toast -->
+<div id="warning" style="
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: red;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 1000;">
+  Sorry, Book is Unavailable ☹️
+</div>
+<script src="{% static 'pages/js/Books-logic.js' %}"></script>
 
-  <div id="warning" style="
-        display: none;
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background-color: red;
-        color: white;
-        padding: 15px 30px;
-        border-radius: 10px;
-        font-size: 18px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-        z-index: 1000;
-        ">
-    Sorry, Book is Unavilabile ☹️
-  </div>
-  <script src="../js/Books-logic.js"></script>
-  {% endblock content %}
+{% endblock content %}

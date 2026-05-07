@@ -1,4 +1,7 @@
 from django.shortcuts import render,redirect
+from django.contrib.auth import login 
+from .forms import LoginForm ,SignupForm
+from .models import Book
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import check_password
@@ -104,4 +107,6 @@ def edit_book(request):
     return render(request, 'pages/Edit-book.html')
 
 def books(request):
-    return render(request, 'pages/books.html')
+    books = Book.objects.all()
+    print (books)
+    return render(request, 'pages/Books.html', {'books': books})
