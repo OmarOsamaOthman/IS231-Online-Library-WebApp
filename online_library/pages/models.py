@@ -33,6 +33,12 @@ class Book(models.Model):
         ('Available', 'Available'),
         ('Borrowed', 'Borrowed'),
     ]
+    category_choices = [
+    ('trending', 'Trending'),
+    ('coding', 'Coding'),
+    ('novels', 'Novels'),
+    ]
+    category = models.CharField(max_length=20, choices=category_choices, default='trending')
     title=models.CharField(max_length=100)
     author=models.CharField(max_length=50)
     description=models.TextField()

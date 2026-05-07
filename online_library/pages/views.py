@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import login 
 from .forms import LoginForm ,SignupForm
+from .models import Book
 from django.contrib.auth.hashers import check_password
 # Create your views here.
 
@@ -48,4 +49,6 @@ def edit_book(request):
     return render(request, 'pages/Edit-book.html')
 
 def books(request):
-    return render(request, 'pages/books.html')
+    books = Book.objects.all()
+    print (books)
+    return render(request, 'pages/Books.html', {'books': books})
