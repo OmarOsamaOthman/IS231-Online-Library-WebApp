@@ -37,19 +37,3 @@ class LoginForm(forms.Form):
             'placeholder': 'Password'
         })
     )
-<<<<<<< HEAD
-=======
-
-# class SignupForm(forms.ModelForm):
-#     class Meta :
-#         model=User
-#         fields='__all__'
-#         widgets={
-#             'password':forms.PasswordInput
-#         }
-#         initial={
-#             'email':'Email',
-#             'Lname':'Last Name',
-#             'Fname':'First Name'
-#         }
->>>>>>> 0dab6e249bf4928447cc4a1c16d5130d5db62d97

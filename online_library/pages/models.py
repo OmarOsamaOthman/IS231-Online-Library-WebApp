@@ -1,18 +1,10 @@
 from django.db import models
 from django.contrib.auth.models import User
-<<<<<<< HEAD
 
 # Create your models here.
 
 class Profile(models.Model):
 
-=======
-# Create your models here.
-
-
-class Profile(models.Model):
-
->>>>>>> 0dab6e249bf4928447cc4a1c16d5130d5db62d97
     ROLE_CHOICES = [
         ('Admin', 'Admin'),
         ('User', 'User'),
@@ -34,10 +26,6 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.user.username
-<<<<<<< HEAD
-
-=======
->>>>>>> 0dab6e249bf4928447cc4a1c16d5130d5db62d97
 
 
 # Book Database...
