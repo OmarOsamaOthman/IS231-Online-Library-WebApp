@@ -1,30 +1,32 @@
 from django.db import models
+from django.contrib.auth.models import User
+
 # Create your models here.
 
-class Login (models.Model):
-    username=models.CharField(max_length=50)
-    password=models.CharField(max_length=50 )#,widget=forms.PasswordInput
-    admin = models.BooleanField(default=False)
-    def __str__(self):
-        return self.username
-    
+class Profile(models.Model):
 
-class Signup(models.Model):
-    x=[
-        ('Admin' , 'Admin'),
-        ('User' ,'User' )
+    ROLE_CHOICES = [
+        ('Admin', 'Admin'),
+        ('User', 'User'),
     ]
-    Fname=models.CharField(max_length=50  )#,initial='FirstName'
-    Lname=models.CharField(max_length=50 )#,initial='LastName'
-    username=models.CharField(max_length=50 )
-    email=models.CharField(max_length=100)#, initial='Email'
-    password=models.CharField(max_length=50)# ,widget=forms.PasswordInput,initial='Password'
-    role=models.CharField(max_length=20 ,choices=x)
-    phone=models.CharField(max_length=11)
+    address = models.TextField(
+    blank=True,
+    null=True
+    )
+
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    role = models.CharField(
+        max_length=20,
+        choices=ROLE_CHOICES,
+        default='User'
+    )
+
+    phone = models.CharField(max_length=11, blank=True, null=True)
+
     def __str__(self):
-        return self.username
-    
-    
+        return self.user.username
+
 
 
 # Book Database...

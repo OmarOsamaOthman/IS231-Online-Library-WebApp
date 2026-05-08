@@ -1,25 +1,39 @@
 from django import forms
-from .models import  Signup
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from .models import  Profile
 
-class LoginForm(forms.ModelForm):
-    class Meta :
-        model=Signup
-        fields='__all__'
-        widgets={
-            'password':forms.PasswordInput
-        }
+
+
+class CreateUserForm(UserCreationForm):
+    role = forms.ChoiceField(
+        choices=[
+            ('User', 'User'),
+            ('Admin', 'Admin'),
     
+        ],initial='User'
+    ) 
+    
+    phone = forms.CharField(
+        max_length=11
+    )
+    class Meta:
+        model = User
+        fields = ['first_name','last_name','username','email', 'password1', 'password2' ]
 
 
-class SignupForm(forms.ModelForm):
-    class Meta :
-        model=Signup
-        fields='__all__'
-        widgets={
-            'password':forms.PasswordInput
-        }
-        initial={
-             'email':'Email',
-             'Lname':'Last Name',
-             'Fname':'First Name'
-        }
+
+class LoginForm(forms.Form):
+    
+    username = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            'placeholder': 'Username'
+        })
+    )
+
+    password = forms.CharField(
+        widget=forms.PasswordInput(attrs={
+            'placeholder': 'Password'
+        })
+    )
