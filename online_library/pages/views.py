@@ -1,9 +1,25 @@
 from django.shortcuts import render,redirect
+<<<<<<< HEAD
+=======
+from django.contrib.auth import login 
+from .forms import LoginForm ,SignupForm
+from .models import Book
+>>>>>>> 0dab6e249bf4928447cc4a1c16d5130d5db62d97
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+<<<<<<< HEAD
+=======
+
+from .forms import LoginForm , CreateUserForm
+from .models import  Profile
+from django.db import transaction
+
+
+# Create your views here.
+>>>>>>> 0dab6e249bf4928447cc4a1c16d5130d5db62d97
 
 from .forms import LoginForm , CreateUserForm
 from .models import  Profile
@@ -78,11 +94,25 @@ def login_view(request):
         else:
             messages.error(request, 'Invalid username or password')
 
+<<<<<<< HEAD
     return render(request, 'pages/login.html', {'form': form})
 
 def logoutUser(request):
     logout(request)
     return redirect('login_view')
+=======
+    return render(request, 'pages/library.html', {'form': form})
+
+    #    form=LoginForm(request.POST)
+    #    if form.is_valid():
+    #        form.save()
+    #        return redirect('library')
+    #  else:
+    #      form=LoginForm()
+    #  return render(request,'pages/login.html' , {'lf':form})
+
+
+>>>>>>> 0dab6e249bf4928447cc4a1c16d5130d5db62d97
 
 def library(request):
      return render(request,'pages/library.html')
@@ -95,4 +125,6 @@ def edit_book(request):
     return render(request, 'pages/Edit-book.html')
 
 def books(request):
-    return render(request, 'pages/books.html')
+    books = Book.objects.all()
+    print (books)
+    return render(request, 'pages/Books.html', {'books': books})
