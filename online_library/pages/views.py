@@ -129,4 +129,15 @@ def update_status(request, book_id):
         book.status = 'Available'
     book.save()
     print(f"Updated status of {book.title} to {book.status}")
-    return redirect('books')
+    return redirect('books')    
+
+
+from django.shortcuts import render, get_object_or_404
+def book_detail(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+    print("book in details....")
+    print(book)
+
+    return render(request, 'pages/book-detail.html', {
+        'book': book
+    })
