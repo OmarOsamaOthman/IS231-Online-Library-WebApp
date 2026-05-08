@@ -9,9 +9,9 @@
 
 {% block nav_links %}
 <li id="borrowed-li"><a href="#">Borrowed Books</a></li>
-<li><a href="{% url 'add_book' %}">Add Book</a></li>
+<li id="Add-li"><a href="{% url 'add_book' %}">Add Book</a></li>
 <li><a href="{% url 'about' %}">About</a></li>
-<li><a href="#">Logout</a></li>
+<li><a href="{% url 'logout' %}">Logout</a></li>
 {% endblock nav_links %}
 
 {% block content %}
@@ -33,10 +33,25 @@
               {% endif %}
               <h2>{{ book.title }}</h2>
               <p>{{ book.author }}</p>
-              <button class="borrowbtn" data-book-id="{{ book.id }}"
-                {% if book.status == 'Borrowed' %}disabled{% endif %}>
-                {{ book.status }}
-              </button>
+              {% if role == "Admin" %}
+                  <a 
+                  class="borrowbtn"
+                    href="/update_status/{{ book.id }}/"
+                    data-book-id="{{ book.id }}"
+                    data-status="{{ book.status }}"
+                    onclick="handleStatusChange({{ book.id }}, {{ book.status }}); return false;"
+                    {% if book.status == 'Borrowed' %}style="opacity: 0.5;"{% endif %}>
+                      {{ book.status }}
+                  </a>
+              {% else %}
+                  <a href="/borrow/{{ book.id }}/" 
+                    class="borrowbtn"
+                    data-book-id="{{ book.id }}"
+                    onclick="handleBtnBorrow({{ book.id }}); return false;"
+                    {% if book.status == 'Borrowed' %}style="pointer-events: none; opacity: 0.5;"{% endif %}>
+                      Borrow
+                  </a>
+              {% endif %}
             </div>
           {% endif %}
         {% endfor %}
@@ -59,10 +74,25 @@
               {% endif %}
               <h2>{{ book.title }}</h2>
               <p>{{ book.author }}</p>
-              <button class="borrowbtn" data-book-id="{{ book.id }}"
-                {% if book.status == 'Borrowed' %}disabled{% endif %}>
-                {{ book.status }}
-              </button>
+              <!-- <p class="statusofbook">Status: {{ book.status }}</p> -->
+              {% if role == "Admin" %}
+                  <a href="/update_status/{{ book.id }}/"
+                    class="borrowbtn"
+                    data-book-id="{{ book.id }}"
+                    data-status="{{ book.status }}"
+                    onclick="handleStatusChange({{ book.id }}, {{ book.status }}); return false;"
+                    {% if book.status == 'Borrowed' %}style="opacity: 0.5;"{% endif %}>
+                      {{ book.status }}
+                  </a>
+              {% else %}
+                  <a href="/borrow/{{ book.id }}/" 
+                    class="borrowbtn"
+                    data-book-id="{{ book.id }}"
+                    onclick="handleBtnBorrow({{ book.id }}); return false;"
+                    {% if book.status == 'Borrowed' %}style="pointer-events: none; opacity: 0.5;"{% endif %}>
+                      Borrow
+                  </a>
+              {% endif %}
             </div>
           {% endif %}
         {% endfor %}
@@ -85,10 +115,25 @@
               {% endif %}
               <h2>{{ book.title }}</h2>
               <p>{{ book.author }}</p>
-              <button class="borrowbtn" data-book-id="{{ book.id }}"
-                {% if book.status == 'Borrowed' %}disabled{% endif %}>
-                {{ book.status }}
-              </button>
+              <!-- <p class="statusofbook">Status: {{ book.status }}</p> -->
+              {% if role == "Admin" %}
+                    <a href="/update_status/{{ book.id }}/"
+                      class="borrowbtn"
+                      data-book-id="{{ book.id }}"
+                      data-status="{{ book.status }}"
+                      onclick="handleStatusChange({{ book.id }}, {{ book.status }}); return false;"
+                      {% if book.status == 'Borrowed' %}style="opacity: 0.5;"{% endif %}>
+                        {{ book.status }}
+                    </a>
+                {% else %}
+                    <a href="/borrow/{{ book.id }}/" 
+                      class="borrowbtn"
+                      data-book-id="{{ book.id }}"
+                      onclick="handleBtnBorrow({{ book.id }}); return false;"
+                      {% if book.status == 'Borrowed' %}style="pointer-events: none; opacity: 0.5;"{% endif %}>
+                        Borrow
+                    </a>
+                {% endif %}
             </div>
           {% endif %}
         {% endfor %}
@@ -115,6 +160,23 @@
   Book Borrowed Successfully ✅
 </div>
 
+<!-- Success Toast -->
+<div id="adminCongrats" style="
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #4caf50;
+    color: white;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 1000;">
+   Status Updated Successfully ✅
+</div>
+
 <!-- Warning Toast -->
 <div id="warning" style="
     display: none;
@@ -131,6 +193,13 @@
     z-index: 1000;">
   Sorry, Book is Unavailable ☹️
 </div>
+
+<script>
+  const role = "{{ role }}";
+  console.log("User Role:", role);
+  const isAdmin = role === "Admin";
+  console.log("Is Admin:", isAdmin);
+</script>
 <script src="{% static 'pages/js/Books-logic.js' %}"></script>
 
 {% endblock content %}
