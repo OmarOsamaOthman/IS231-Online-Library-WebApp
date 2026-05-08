@@ -1,0 +1,69 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'pages/css/book-detail.css' %}">
+
+<div class="details-container">
+    <div class="details-card">
+
+        {% if book.image %}
+            <img id="image-book" src="{{ book.image.url }}" alt="{{ book.title }}">
+        {% else %}
+            <img id="image-book" src="{% static 'pages/img/default-cover.png' %}" alt="No Cover">
+        {% endif %}
+
+        <div>
+            <div class="book-info">
+                <h2 id="title-book">{{ book.title }}</h2>
+                <p class="author"><strong>Author:</strong> <span id="author-book">{{ book.author }}</span></p>
+                <p><strong>Category:</strong> <span id="category-book">{{ book.category }}</span></p>
+                <p><strong>Status:</strong> <span id="status-book">{{ book.status }}</span></p>
+                <p><strong>Description:</strong> <span id="description-book">{{ book.description }}</span></p>
+            </div>
+
+            <div class="buttons-needed">
+
+                {% if role == "Admin" %}
+                    <!-- ADMIN BUTTONS -->
+                    <a href="/update_status/{{ book.id }}/" id="changeStatus">Change Status</a>
+                    <a href="/edit_book/{{ book.id }}/" id="editBtn">✏️ Edit Book</a>
+                    <a href="/delete_book/{{ book.id }}/" id="deleteBtn"
+                       onclick="return confirm('Are you sure you want to delete this book?')">
+                        🗑️ Delete Book
+                    </a>
+
+                {% else %}
+                    <!-- USER BUTTON -->
+                    <a href="/borrow/{{ book.id }}/"
+                       id="borrow"
+                       {% if book.status == 'Borrowed' %}style="pointer-events: none; opacity: 0.5;"{% endif %}>
+                        Borrow
+                    </a>
+                {% endif %}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toasts -->
+<div id="congrats" style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%);
+    background-color:#4caf50; color:white; padding:15px 30px; border-radius:10px;
+    font-size:18px; box-shadow:0 4px 10px rgba(0,0,0,0.2); z-index:1000;">
+    Book Borrowed Successfully ✅
+</div>
+
+<div id="deleted" style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%);
+    background-color:blue; color:white; padding:15px 30px; border-radius:10px;
+    font-size:18px; box-shadow:0 4px 10px rgba(0,0,0,0.2); z-index:1000;">
+    Book Deleted Successfully ✖️
+</div>
+
+<div id="warning" style="display:none; position:fixed; top:20px; left:50%; transform:translateX(-50%);
+    background-color:red; color:white; padding:15px 30px; border-radius:10px;
+    font-size:18px; box-shadow:0 4px 10px rgba(0,0,0,0.2); z-index:1000;">
+    Sorry, Book is Unavailable ☹️
+</div>
+
+{% endblock %}
