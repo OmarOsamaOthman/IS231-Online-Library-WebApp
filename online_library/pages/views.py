@@ -62,8 +62,12 @@ def login_view(request):
 
         if user is not None:
             login(request,user)
-            profile = Profile.objects.get(user=user)
-
+            profile, created = Profile.objects.get_or_create(
+                user=user,
+                defaults={
+                    'role': 'User'
+                }
+            )
 
             profile, created = Profile.objects.get_or_create(user=user)
 
@@ -73,7 +77,7 @@ def login_view(request):
 
             else:
                 print("Is User not admin")
-                #return redirect('library')
+                return redirect('library')
 
         else:
             messages.error(request, 'Invalid username or password')
@@ -82,6 +86,7 @@ def login_view(request):
 
 def logoutUser(request):
     logout(request)
+    User = None
     return redirect('login_view')
 
 def library(request):

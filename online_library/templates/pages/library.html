@@ -1,44 +1,22 @@
 {% extends 'pages/base.html' %}
 {% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'pages/css/library.css' %}">
+{% endblock extra_css %}
+
 {% block nav_links %}
 <li><a href="{% url 'login_view' %}">Login</a></li>
 <li><a href="{% url 'signup' %}">Signup</a></li>
 <li><a href="{% url 'logout' %}">Logout</a></li>
 {% endblock nav_links %}
 
-
 {% block content %}
 
-<head>
-
-    {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'pages/css/library.css' %}">
-    {% endblock extra_css %}
-</head>
-
-
-
-</div>
 <div class="main">
     <main class="main">
         <h1>Welcome To Our Library</h1>
         <img src="{% static 'pages/images/image.png' %}">
     </main>
 </div>
-<!--
-
-   <form class="form"> 
-        <label>Name</label>
-        <input type="text" name="Name" id="Name" placeholder="Name">
-         <label>Password</label>
-        <input type="password" name="Password" id="Password" placeholder="Password">
-        <button value="Login" >Login</button>
-        <button value="Sign Up">Sign Up</button>
-        
-    </form>
-
-
-   -->
-<!-- <script src="{% static 'js/signup.js' %}"></script> -->
-<script src="{% static 'js/login.js' %}"></script>
 {% endblock content %}
