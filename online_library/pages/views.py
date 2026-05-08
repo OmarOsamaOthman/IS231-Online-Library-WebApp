@@ -6,7 +6,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
 from .forms import LoginForm , CreateUserForm
-from .models import  Profile
+from .models import  Profile, Book , BorrowedBook
 from django.db import transaction
 # Create your views here.
 
@@ -73,11 +73,11 @@ def login_view(request):
 
             if profile.role == 'Admin':
                 print("Is AN Admin")
-                #return redirect('admin_dashboard')
+                return redirect('books')
 
             else:
                 print("Is User not admin")
-                return redirect('library')
+                return redirect('books')
 
         else:
             messages.error(request, 'Invalid username or password')
@@ -102,4 +102,31 @@ def edit_book(request):
 def books(request):
     books = Book.objects.all()
     print (books)
-    return render(request, 'pages/Books.html', {'books': books})
+    role = Profile.objects.get(user=request.user).role
+    return render(request, 'pages/Books.html', {'books': books, 'role': role})
+
+
+def borrow_book(request, book_id):
+    book = Book.objects.get(id=book_id)
+    if book.status == 'Available':
+        book.status = 'Borrowed'
+        book.save()
+        BorrowedBook.objects.create(user=request.user, book=book)
+        print(f"{request.user.username} borrowed {book.title}")
+        return redirect('books')
+    else:
+        print(f"{book.title} is already borrowed.")
+        messages.error(request, 'This book is already borrowed.')
+        return redirect('books')
+    
+    
+def update_status(request, book_id):
+    book = Book.objects.get(id=book_id)
+    if(book.status == 'Available'):
+        book.status = 'Borrowed'
+        
+    else:
+        book.status = 'Available'
+    book.save()
+    print(f"Updated status of {book.title} to {book.status}")
+    return redirect('books')
