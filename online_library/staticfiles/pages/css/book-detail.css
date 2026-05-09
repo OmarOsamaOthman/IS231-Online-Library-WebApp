@@ -72,7 +72,7 @@ html {
 }
 
 
-.buttons-needed button {
+.buttons-needed a {
   justify-self: flex-end;
   width: 150px;
   height: var(--btn-height);
@@ -85,7 +85,7 @@ html {
   transition: 0.25s ease;
 }
 
-.buttons-needed button:hover {
+.buttons-needed a:hover {
   transform: translateY(-2px);
 }
 

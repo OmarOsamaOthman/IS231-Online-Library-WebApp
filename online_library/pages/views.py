@@ -102,8 +102,8 @@ def library(request):
 def add_book(request):
     return render(request, 'pages/Add-book.html')
 
-def edit_book(request, id):
-    book = get_object_or_404(Book, id=id)
+def edit_book(request, pk):
+    book = get_object_or_404(Book, pk=pk)
 
     if request.user.profile.role != 'Admin':
         return redirect('books')
@@ -112,7 +112,7 @@ def edit_book(request, id):
 
         if form.is_valid():
             form.save()
-            return redirect('book_detail', id=id)
+            return redirect('book_detail', pk=pk)
     else:
         form = BookForm(instance=book)
     return render(request, 'pages/Edit-book.html', {'form':form})
@@ -152,6 +152,7 @@ def update_status(request, book_id):
 
 from django.shortcuts import render, get_object_or_404
 def book_detail(request, pk):
+
     book = get_object_or_404(Book, pk=pk)
     print("book in details....")
     print(book)
@@ -160,42 +161,44 @@ def book_detail(request, pk):
     
 
 
-    return render(request, 'pages/book-detail.html', { 'book': book })
+    return render(request, 'pages/book-detail.html', { 'book': book, 'role':role })
 
 
-@login_required 
-def borrow_book(request, id):
+def borrow_book(request, pk):
     book = get_object_or_404(Book, id=id)
 
     if book.status == 'Availiable':
         book.status = 'Borrowed'
-        book.borrowed_by = request.user
+
+        BorrowedBook.objects.create(
+            user=request.user,
+            book=book
+        )
 
         book.save()
+    else:
+        messages.error(request, "this book is already borrowed")
 
-    return redirect('book_details', id = id)
+    return redirect('book_detail', pk= pk)
 
-
-@login_required
-def delete_book(request, id):
+def delete_book(request, pk):
 
     if request.user.profile.role == 'Admin':
-        book = get_object_or_404(Book, id=id)
+        book = get_object_or_404(Book, pk=pk)
 
         book.delete()
 
     return redirect('books')
 
-@login_required
-def change_book_status(request, id):
+def change_book_status(request, pk):
 
     if request.user.profile.role == 'Admin':
-        book = get_object_or_404(Book, id=id)
+        book = get_object_or_404(Book, pk=pk)
 
         if book.status == 'Availiable':
             book.status = 'Borrowed'
         else:
             book.status = 'Availiable'
 
-    book.save()
-    return redirect('book_details', id=id)
+        book.save()
+    return redirect('book_detail', pk=pk)
