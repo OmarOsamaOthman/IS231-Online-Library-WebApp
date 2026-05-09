@@ -102,8 +102,19 @@ def library(request):
 def add_book(request):
     return render(request, 'pages/Add-book.html')
 
-def edit_book(request):
-    form = BookForm
+def edit_book(request, id):
+    book = get_object_or_404(Book, id=id)
+
+    if request.user.profile.role != 'Admin':
+        return redirect('books')
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES, instance=book)
+
+        if form.is_valid():
+            form.save()
+            return redirect('book_detail', id=id)
+    else:
+        form = BookForm(instance=book)
     return render(request, 'pages/Edit-book.html', {'form':form})
 
 def books(request):
@@ -145,6 +156,46 @@ def book_detail(request, pk):
     print("book in details....")
     print(book)
 
-    return render(request, 'pages/book-detail.html', {
-        'book': book
-    })
+    role = Profile.objects.get(user=request.user).role
+    
+
+
+    return render(request, 'pages/book-detail.html', { 'book': book })
+
+
+@login_required 
+def borrow_book(request, id):
+    book = get_object_or_404(Book, id=id)
+
+    if book.status == 'Availiable':
+        book.status = 'Borrowed'
+        book.borrowed_by = request.user
+
+        book.save()
+
+    return redirect('book_details', id = id)
+
+
+@login_required
+def delete_book(request, id):
+
+    if request.user.profile.role == 'Admin':
+        book = get_object_or_404(Book, id=id)
+
+        book.delete()
+
+    return redirect('books')
+
+@login_required
+def change_book_status(request, id):
+
+    if request.user.profile.role == 'Admin':
+        book = get_object_or_404(Book, id=id)
+
+        if book.status == 'Availiable':
+            book.status = 'Borrowed'
+        else:
+            book.status = 'Availiable'
+
+    book.save()
+    return redirect('book_details', id=id)

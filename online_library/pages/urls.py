@@ -14,4 +14,10 @@ urlpatterns=[
     path('borrow/<int:book_id>/', views.borrow_book, name='borrow_book'),
     path('update_status/<int:book_id>/', views.update_status, name='update_status'),
     path('book_detail/<int:pk>/', views.book_detail, name='book_detail'),
+
+    path('book/<int:id>/',views.book_detail,name='book_detail'),
+    path('book/<int:id>/borrow/',views.borrow_book,name='borrow_book'),
+    path('book/<int:id>/delete/',views.delete_book,name='delete_book'),
+    path('book/<int:id>/status/',views.change_status,name='change_status'),
+    path('book/<int:id>/edit/',views.edit_book,name='edit_book'),
 ]
