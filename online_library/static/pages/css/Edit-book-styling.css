@@ -80,14 +80,13 @@ main .content-container>div {
     align-content: center;
     display: flex;
     flex-flow: column wrap;
-    margin-bottom: 5px;
+    margin-bottom: 15px;
     width: 100%;
 }
 
 main div label {
     font-weight: 500;
-    font-size: 18px;
-    margin-bottom: 3px;
+    font-size: 20px;
 }
 
 main .content-container input,
@@ -124,9 +123,9 @@ main div textarea:focus {
     box-shadow: 0 3px 30px -25px var(--secondary);
 }
 
-main form .image input {
+main form .file {
     background-color: #fff;
-    padding-top: 5.6px;
+    padding-top: 5.4px;
 }
 
 main form button {

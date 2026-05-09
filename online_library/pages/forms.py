@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import  Profile
+from .models import  Profile, Book
 
 
 
@@ -21,10 +21,7 @@ class CreateUserForm(UserCreationForm):
         model = User
         fields = ['first_name','last_name','username','email', 'password1', 'password2' ]
 
-
-
 class LoginForm(forms.Form):
-    
     username = forms.CharField(
         max_length=100,
         widget=forms.TextInput(attrs={
@@ -37,3 +34,27 @@ class LoginForm(forms.Form):
             'placeholder': 'Password'
         })
     )
+
+
+class BookForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = ['title','author','category','description','status','cover']
+
+
+        widgets = {
+                    'title': forms.TextInput(attrs={'class': 'input'}),
+                    'author': forms.TextInput(attrs={'class': 'input'}),
+                    'description': forms.Textarea(attrs={'class': 'textarea'}),
+                    'category': forms.Select(attrs={'class': 'select'}),
+                    'status': forms.Select(attrs={'class': 'select'}),
+                    'cover': forms.ClearableFileInput(attrs={'class': 'file'}),}
+
+        labels = {
+        'title': 'Title',
+        'author': 'Writer Name',
+        'category': 'Category',
+        'description':'Description',
+        'status':'Status',
+        'cover':'Book Cover',
+        }

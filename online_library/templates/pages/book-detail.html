@@ -1,16 +1,40 @@
 {% extends 'pages/base.html' %}
 {% load static %}
 
-{% block content %}
+{% block extra_css %}
 <link rel="stylesheet" href="{% static 'pages/css/book-detail.css' %}">
+{% endblock extra_css %}
+
+{% block nav_links %}
+
+{% if request.user.is_authenticated %}
+{% if request.user.profile.role == "Admin" %}
+<li><a href="{% url 'books' %}">Books</a></li>
+<li><a href="{% url 'add_book' %}">Add Books</a></li>
+<li><a href="{% url 'logout' %}">Logout</a></li>
+{% else %}
+<li><a href="{% url 'books' %}">Books</a></li>
+<li><a href="#">Borrowed Books</a></li>
+<li><a href="{% url 'logout' %}">Logout</a></li>
+{% endif %}
+{% else %}
+<li><a href="{% url 'login_view' %}">Login</a></li>
+<li><a href="{% url 'signup' %}">Signup</a></li>
+{% endif %}
+
+{% endblock nav_links %}
+
+
+
+{% block content %}
 
 <div class="details-container">
     <div class="details-card">
 
         {% if book.image %}
-            <img id="image-book" src="{{ book.image.url }}" alt="{{ book.title }}">
+        <img id="image-book" src="{{ book.image.url }}" alt="{{ book.title }}">
         {% else %}
-            <img id="image-book" src="{% static 'pages/img/default-cover.png' %}" alt="No Cover">
+        <img id="image-book" src="{% static 'pages/img/default-cover.png' %}" alt="No Cover">
         {% endif %}
 
         <div>
@@ -25,21 +49,29 @@
             <div class="buttons-needed">
 
                 {% if role == "Admin" %}
-                    <!-- ADMIN BUTTONS -->
-                    <a href="/update_status/{{ book.id }}/" id="changeStatus">Change Status</a>
-                    <a href="/edit_book/{{ book.id }}/" id="editBtn">✏️ Edit Book</a>
-                    <a href="/delete_book/{{ book.id }}/" id="deleteBtn"
-                       onclick="return confirm('Are you sure you want to delete this book?')">
-                        🗑️ Delete Book
-                    </a>
+                <!-- ADMIN BUTTONS -->
+                <a href="/update_status/{{ book.id }}/" id="changeStatus">Change Status</a>
+                <a href="/edit_book/{{ book.id }}/" id="editBtn">✏️ Edit Book</a>
+                <a href="/delete_book/{{ book.id }}/" id="deleteBtn"
+                    onclick="return confirm('Are you sure you want to delete this book?')">
+                    🗑️ Delete Book
+                </a>
 
                 {% else %}
-                    <!-- USER BUTTON -->
-                    <a href="/borrow/{{ book.id }}/"
-                       id="borrow"
-                       {% if book.status == 'Borrowed' %}style="pointer-events: none; opacity: 0.5;"{% endif %}>
-                        Borrow
-                    </a>
+                <!-- USER BUTTON -->
+
+                {% if book.status == 'Borrowed' %}
+                <a href="/borrow/{{ book.id }}/" id="borrow"
+                    style="pointer-events: none; background-color: #ccc; opacity: 0.5;">
+                    Borrowed
+                </a>
+                {% else %}
+                <a href="/borrow/{{ book.id }}/" id="borrow" style="cursor: pointer; ">
+                    Borrow
+                </a>
+
+                {% endif %}
+
                 {% endif %}
 
             </div>

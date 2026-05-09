@@ -1,16 +1,15 @@
 {% extends 'pages/base.html' %}
 {% load static %}
 
-{% block title %}Add Book{% endblock title %}
+{% block title %}Edit Book{% endblock title %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'pages/css/Edit-book-styling.css' %}">
 {% endblock extra_css%}
 
 {% block nav_links %}
-<li><a href="{% url 'books' %}">Books</a></li>
-<li><a href="{% url 'library' %}">Home</a></li>
 <li><a href="{% url 'add_book' %}">Add Book</a></li>
+<li><a href="{% url 'books' %}">Books</a></li>
 {% endblock nav_links %}
 
 {% block content %}
@@ -23,64 +22,32 @@
         </header>
 
         <main>
-            <form method="get" action="" id="form">
+            <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
                 <div class="content-container">
+                    {% for field in form %}
                     <div>
-                        <label for="book-title">Book Title:</label>
-                        <input type="text" id="book-title" name="book_title" required autofocus>
-                    </div>
-                    <div>
-                        <label for="author">Author:</label>
-                        <input type="text" id="author" name="author" required>
-                    </div>
+                        <label>{{field.label}}:</label>
 
-                    <div>
-                        <label for="category">Category:</label>
-                        <select id="category" name="category">
-                            <option value="" id="choosed" selected>Choose Category</option>
-                            <option value="Trending">Trending</option>
-                            <option value="Coding">Coding</option>
-                            <option value="Novels">Novels</option>
-
-                        </select>
+                        {{field}}
                     </div>
-                    <div class="description">
-                        <label for="description">Description:</label>
-                        <textarea id="description" name="description"></textarea>
-                    </div>
-                    <div>
-                        <label for="status">Status:</label>
-                        <select id="status" name="status">
-                            <option value="available" selected>Available</option>
-                            <option value="borrowed">Borrowed</option>
-                            <option value="out of stock">Out of stock</option>
-                            <option value="maintenance">Maintenance</option>
-                        </select>
-                    </div>
-
-                    <div class="image">
-                        <label for="book-image">Upload Book Image:
-                        </label>
-                        <input type="file" id="book-image" accept="image/*">
-                    </div>
+                    {% endfor %}
                 </div>
 
                 <div class="buttons">
                     <button type="submit" class="save" id="save">Save Changes</button>
                     <button type="button" class="cancel" id="cancel">Cancel</button>
-                    <!-- <button type="button" class="delete">Delete Book</button> -->
 
                 </div>
-
             </form>
-
         </main>
     </section>
+
     <section class="preview">
+
     </section>
 </section>
 <footer>
     <p>© 2026 Online Library. All Rights Reserved. | Developed by Omar Osama</p>
 </footer>
-<script src="../js/Edit-book.js"></script>
 {% endblock content %}

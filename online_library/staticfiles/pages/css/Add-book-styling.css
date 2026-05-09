@@ -1,0 +1,134 @@
+.navbar nav ul {
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+}
+
+
+header,
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main div {
+    display: flex;
+    flex-flow: column wrap;
+    margin-bottom: 15px;
+}
+
+main div input,
+main div textarea,
+main div select,
+main form button {
+    width: 100%;
+    max-width: 500px;
+    height: 40px;
+    padding-left: 20px;
+    border-radius: var(--radius-sm);
+    outline: none;
+    border: solid var(--border-color) 2px;
+}
+
+main div label {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+#description {
+    resize: none;
+    width: 100%;
+    min-width: 500px;
+    height: 100px;
+    padding-top: 10px;
+}
+
+main div input:focus,
+main div select:focus,
+main form button:focus {
+    caret-color: var(--secondary);
+    border: var(--secondary) solid 1px;
+    box-shadow: 0 3px 30px -17px var(--secondary);
+
+}
+
+
+main div textarea:focus {
+    caret-color: var(--secondary);
+    border: var(--secondary) solid 1px;
+    box-shadow: 0 3px 30px -23px var(--secondary);
+}
+
+main form #book-image {
+    margin-bottom: 20px;
+}
+
+main form .buttons {
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+}
+
+main form .buttons button {
+    outline: none;
+    display: inline-block;
+    padding: 10px;
+    border-radius: calc(var(--radius-lg) + 5px);
+    background-color: var(--primary);
+    color: var(--surface);
+}
+
+
+main form .buttons .add {
+    margin-right: 15px;
+    width: 160px;
+    justify-self: center;
+    background-color: var(--primary);
+}
+
+main form .add:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px -3px var(--primary);
+}
+
+
+main form .buttons .cancel {
+    justify-self: center;
+    background-color: var(--surface);
+    border-color: var(--border-color);
+    color: var(--primary);
+    width: 120px;
+}
+
+main form .buttons .cancel:hover {
+    border: solid var(--border-color) 2px;
+    color: var(--danger);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px -5px var(--danger-hover);
+
+}
+
+
+
+
+main form button:hover {
+    background-color: #2548a9;
+    cursor: pointer;
+}
+
+
+main form .image input {
+    background-color: #fff;
+    padding-top: 8.4px;
+}
+
+
+footer {
+    font-size: 13px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 80px;
+}
