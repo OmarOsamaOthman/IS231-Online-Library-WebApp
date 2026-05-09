@@ -1,0 +1,174 @@
+html {
+  background-color: var(--bg);
+}
+
+.navbar nav ul {
+  display: grid;
+  grid-template-columns: repeat(4, 150px);
+}
+
+.details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  margin-top: 50px;
+  font-size: 20px;
+
+}
+
+.details-card {
+  min-height: 530px;
+  display: flex;
+  gap: var(--space-3);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font);
+  padding: var(--space-5);
+  border-radius: var(--radius-lg);
+  max-width: 1000px;
+  width: 100%;
+  box-shadow: var(--shadow);
+}
+
+.details-card img {
+  width: 300px;
+  height: 500px;
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  border: 1px solid var(--border-color);
+}
+
+.book-info h2 {
+  margin-top: -10px;
+  font-size: 40px;
+  color: var(--primary);
+}
+
+.book-info .author {
+  margin-top: -25px;
+}
+
+.book-info p {
+  color: var(--text-muted);
+}
+
+.book-info strong {
+  color: var(--text);
+}
+
+.book-info {
+  /* background-color: blue; */
+  min-height: 390px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+}
+
+.buttons-needed {
+  justify-self: center;
+}
+
+
+.buttons-needed button {
+  justify-self: flex-end;
+  width: 150px;
+  height: var(--btn-height);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: var(--fs-md);
+  background: var(--primary);
+  color: white;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.buttons-needed button:hover {
+  transform: translateY(-2px);
+}
+
+
+#borrow {
+  background: var(--success);
+}
+
+#borrow:hover {
+  background: var(--success-hover);
+}
+
+#borrow:active {
+  background: var(--success-active);
+}
+
+
+
+#deleteBtn {
+  background: var(--danger);
+}
+
+#deleteBtn:hover {
+  background: var(--danger-hover);
+}
+
+#deleteBtn:active {
+  background-color: var(--danger-active);
+}
+
+
+#changeStatus {
+  background: var(--third);
+}
+
+#changeStatus:hover {
+  background: var(--third-hover);
+}
+
+#changeStatus:active {
+  background: var(--third-active);
+}
+
+
+
+
+
+.buttons-needed {
+  margin-top: 50px;
+  margin-right: 180px;
+  display: flex;
+  gap: 10px;
+}
+
+
+.buttons-needed button:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+
+
+.toast {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 30px;
+  border-radius: var(--radius-md);
+  font-size: var(--fs-md);
+  color: white;
+  box-shadow: var(--shadow);
+  z-index: 1000;
+}
+
+.toast-success {
+  background: var(--success);
+}
+
+.toast-danger {
+  background: var(--danger);
+}
+
+.toast-info {
+  background: var(--info);
+}

@@ -1,0 +1,266 @@
+body {
+    padding-top: 20px;
+    font-family: var(--font);
+    color: var(--text);
+    height: 100vh;
+    background-color: var(--surface-2);
+    display: flex;
+    flex-flow: nowrap column;
+    align-items: center;
+
+}
+
+.navbar nav ul {
+    display: grid;
+    grid-template-columns: repeat(3, 150px);
+}
+
+/*-----------------------------------------*/
+
+
+body .container {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-flow: row;
+    width: 100%;
+}
+
+
+
+.editing,
+.preview {
+    border: 2px solid var(--surface);
+    border-radius: var(--radius-md);
+    background-color: var(--surface);
+    padding: 15px 0 30px;
+    width: 46%;
+    box-shadow: 0px 0px 20px -10px var(--primary);
+}
+
+.preview {
+    position: relative;
+    width: 45%;
+    top: 150px;
+    height: 55%;
+    padding: 0;
+    padding-left: 10px;
+}
+
+
+
+
+
+
+.editing header h1 {
+    text-align: center;
+    font-size: 25px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 30px;
+}
+
+main form {
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+}
+
+
+main .content-container {
+    width: 100%;
+}
+
+
+main .content-container>div {
+    align-content: center;
+    display: flex;
+    flex-flow: column wrap;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+main div label {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+main .content-container input,
+main .content-container textarea,
+main .content-container select,
+#description {
+    font-size: 16px;
+    width: 90%;
+    height: 37px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: var(--radius-sm);
+    outline: none;
+    border: solid var(--border-color) 2px;
+}
+
+#description {
+    resize: none;
+    height: 75px;
+    padding-top: 10px;
+    border-radius: var(--radius-sm);
+}
+
+main div input:focus,
+main div select:focus {
+    caret-color: var(--secondary);
+    border: var(--secondary) solid 1px;
+    box-shadow: 0 3px 30px -14px var(--secondary);
+}
+
+main div textarea:focus {
+    caret-color: var(--secondary);
+    border: var(--secondary) solid 1px;
+    box-shadow: 0 3px 30px -25px var(--secondary);
+}
+
+main form .image input {
+    background-color: #fff;
+    padding-top: 8.4px;
+}
+
+main form button {
+    min-width: 120px;
+    height: 40px;
+    padding: 5px;
+    color: var(--surface);
+}
+
+main form button:hover {
+    cursor: pointer;
+}
+
+main form button {
+    min-width: 120px;
+    height: 42px;
+    padding: 5px;
+    border-radius: 22px;
+    outline: none;
+    border: 2px solid var(--border-color);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+main form .buttons {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-areas:
+        "save save save save save save"
+        ". . cancel cancel . .";
+    row-gap: 12px;
+    column-gap: 5px;
+    width: 100%;
+    justify-items: center;
+    align-items: center;
+}
+
+main form .save {
+    grid-area: save;
+    width: 260px;
+    justify-self: center;
+    background-color: var(--primary);
+}
+
+
+main form .cancel {
+    grid-area: cancel;
+    background-color: var(--surface);
+    border-color: var(--border-color);
+    color: var(--primary);
+    width: 260px;
+}
+
+
+
+main form .save:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px -3px var(--primary);
+
+
+}
+
+main form .cancel:hover {
+    border: solid var(--border-color) 2px;
+    color: var(--danger);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px -5px var(--danger-hover);
+
+}
+
+
+/*--------------------------------*/
+
+.preview div {
+    font-size: 18px;
+    display: flex;
+    flex-flow: column;
+}
+
+
+.preview .card-div {
+    display: flex;
+    color: var(--text);
+    flex-flow: row;
+    background-color: #fff;
+    height: 100%;
+    border-radius: var(--radius-md);
+}
+
+.card-div .cover img {
+    border-radius: var(--radius-lg);
+    height: 350px;
+    margin: 25px;
+    border: solid white 2px;
+    max-width: 230px;
+}
+
+.card-div .info {
+    display: flex;
+    max-width: 370px;
+}
+
+.card-div .info p {
+    font-weight: bold;
+}
+
+.card-div .info span {
+    margin-left: 5px;
+    font-weight: normal;
+}
+
+.card-div .info .header {
+    font-size: 20px;
+    color: var(--primary);
+    position: relative;
+    margin-top: 30px;
+
+}
+
+
+.card-div .info div {
+    margin-top: 10px;
+    /* margin-bottom: 10px; */
+}
+
+.preview div footer {
+    margin-top: 30px;
+    font-size: 13px;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    height: 80px;
+}

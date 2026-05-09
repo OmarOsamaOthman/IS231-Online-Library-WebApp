@@ -1,6 +1,6 @@
 .navbar nav ul {
   display: grid;
-  grid-template-columns: repeat(5, 150px);
+  grid-template-columns: repeat(3, 150px);
 }
 
 
@@ -13,6 +13,7 @@
   font-weight: 500;
   justify-content: center;
 }
+
 
 ul:first-child li a {
   display: none;

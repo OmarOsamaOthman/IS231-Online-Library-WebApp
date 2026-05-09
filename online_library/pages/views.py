@@ -5,7 +5,7 @@ from django.contrib.auth.hashers import check_password
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 
-from .forms import LoginForm , CreateUserForm
+from .forms import LoginForm , CreateUserForm, BookForm
 from .models import  Profile, Book , BorrowedBook
 from django.db import transaction
 # Create your views here.
@@ -90,14 +90,21 @@ def logoutUser(request):
     return redirect('login_view')
 
 def library(request):
-     return render(request,'pages/library.html')
+     
+     profile = None
+
+     if request.user.is_authenticated:
+         profile, created = Profile.objects.get_or_create(user=request.user)
+
+     return render(request,'pages/library.html', {'profile': profile})
 
 
 def add_book(request):
     return render(request, 'pages/Add-book.html')
 
 def edit_book(request):
-    return render(request, 'pages/Edit-book.html')
+    form = BookForm
+    return render(request, 'pages/Edit-book.html', {'form':form})
 
 def books(request):
     books = Book.objects.all()

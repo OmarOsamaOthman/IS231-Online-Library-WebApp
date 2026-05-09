@@ -4,14 +4,33 @@
 {% block title %}Books{% endblock title %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'pages/css/books.css' %}">
+
+{% if request.user.is_authenticated %}
+{% if request.user.profile.role == "Admin" %}
+<link rel="stylesheet" href="{% static 'pages/css/books-admin.css' %}">
+{% else %}
+<link rel="stylesheet" href="{% static 'pages/css/books-user.css' %}">
+{% endif %}
+{% endif %}
+
 {% endblock extra_css%}
 
 {% block nav_links %}
+
+{% if request.user.is_authenticated %}
+{% if request.user.profile.role == "Admin" %}
+<li><a href="{% url 'add_book' %}">Add Books</a></li>
+<li><a href="{% url 'logout' %}">Logout</a></li>
+{% else %}
 <li id="borrowed-li"><a href="#">Borrowed Books</a></li>
-<li id="Add-li"><a href="{% url 'add_book' %}">Add Book</a></li>
 <li><a href="{% url 'about' %}">About</a></li>
 <li><a href="{% url 'logout' %}">Logout</a></li>
+{% endif %}
+{% else %}
+<li><a href="{% url 'login_view' %}">Login</a></li>
+<li><a href="{% url 'signup' %}">Signup</a></li>
+{% endif %}
+
 {% endblock nav_links %}
 {% block content %}
 
@@ -23,38 +42,48 @@
     <div class="category-row">
       <section id="main-books" class="book-track">
         {% for book in books %}
-          {% if book.category == "trending" %}
-            <div class="book">
-              <a href="{% url 'book_detail' book.id %}">
-                {% if book.image %}
-                  <img src="{{ book.image.url }}" alt="{{ book.title }}">
-                {% else %}
-                  <img src="{% static 'pages/images/default-cover.png' %}" alt="No Cover">
-                {% endif %}
-              </a>
-              <h2>{{ book.title }}</h2>
-              <p>{{ book.author }}</p>
-              {% if role == "Admin" %}
-                  <a 
-                  class="borrowbtn"
-                    href="/update_status/{{ book.id }}/"
-                    data-book-id="{{ book.id }}"
-                    data-status="{{ book.status }}"
-                    onclick="handleStatusChange({{ book.id }}, {{ book.status }});"
-                    {% if book.status == 'Borrowed' %}style="opacity: 0.5;"{% endif %}>
-                      {{ book.status }}
-                  </a>
-              {% else %}
-                  <a href="/borrow/{{ book.id }}/" 
-                    class="borrowbtn"
-                    data-book-id="{{ book.id }}"
-                    onclick="handleBtnBorrow({{ book.id }});"
-                    {% if book.status == 'Borrowed' %}style="pointer-events: none; opacity: 0.5;"{% endif %}>
-                      Borrow
-                  </a>
-              {% endif %}
-            </div>
+        {% if book.category == "trending" %}
+        <div class="book">
+          <a href="{% url 'book_detail' book.id %}">
+            {% if book.cover %}
+            <img src="{{ book.cover.url }}" alt="{{ book.title }}">
+            {% else %}
+            <img src="{% static 'pages/images/default-cover.png' %}" alt="No Cover">
+            {% endif %}
+          </a>
+          <h2>{{ book.title }}</h2>
+          <p>{{ book.author }}</p>
+          {% if role == "Admin" %}
+
+          {% if book.status == 'Borrowed' %}
+          <a class="borrowbtn" href="/update_status/{{ book.id }}/" data-book-id="{{ book.id }}"
+            data-status="{{ book.status }}" style="opacity: 0.5;"
+            onclick="handleStatusChange({{ book.id }}, {{ book.status }});">
+            {{ book.status }}
+          </a>
+          {% else %}
+          <a href="/update_status/{{ book.id }}/" data-book-id="{{ book.id }}" data-status="{{ book.status }}"
+            style="opacity: 0.5; background-color: #999;">
+            {{ book.status }}
+          </a>
           {% endif %}
+
+          {% else %}
+
+          {% if book.status == 'Borrowed'%}
+          <a href="/borrow/{{ book.id }}/" class="borrowbtn" data-book-id="{{ book.id }}"
+            onclick="handleBtnBorrow({{ book.id }});" style="pointer-events: none; opacity: 0.5;">
+            Borrow
+          </a>
+          {% else %}
+          <a href="/update_status/{{ book.id }}/" class="" data-book-id="{{ book.id }}" data-status="{{ book.status }}"
+            style="opacity: 0.5; background-color: #999;">
+            {{ book.status }}
+          </a>
+          {% endif %}
+          {% endif %}
+        </div>
+        {% endif %}
         {% endfor %}
       </section>
     </div>
@@ -66,37 +95,46 @@
     <div class="category-row">
       <section id="Coding-books" class="book-track">
         {% for book in books %}
-          {% if book.category == "coding" %}
-            <div class="book">
-              <a href="{% url 'book_detail' book.id %}">
-                {% if book.image %}
-                  <img src="{{ book.image.url }}" alt="{{ book.title }}">
-                {% else %}
-                  <img src="{% static 'pages/images/default-cover.png' %}" alt="No Cover">
-                {% endif %}
-              </a>
-              <h2>{{ book.title }}</h2>
-              <p>{{ book.author }}</p>
-              {% if role == "Admin" %}
-                  <a href="/update_status/{{ book.id }}/"
-                    class="borrowbtn"
-                    data-book-id="{{ book.id }}"
-                    data-status="{{ book.status }}"
-                    onclick="handleStatusChange({{ book.id }}, {{ book.status }});"
-                    {% if book.status == 'Borrowed' %}style="opacity: 0.5;"{% endif %}>
-                      {{ book.status }}
-                  </a>
-              {% else %}
-                  <a href="/borrow/{{ book.id }}/" 
-                    class="borrowbtn"
-                    data-book-id="{{ book.id }}"
-                    onclick="handleBtnBorrow({{ book.id }});"
-                    {% if book.status == 'Borrowed' %}style="pointer-events: none; opacity: 0.5;"{% endif %}>
-                      Borrow
-                  </a>
-              {% endif %}
-            </div>
+        {% if book.category == "coding" %}
+        <div class="book">
+          <a href="{% url 'book_detail' book.id %}">
+            {% if book.cover %}
+            <img src="{{ book.cover.url }}" alt="{{ book.title }}">
+            {% else %}
+            <img src="{% static 'pages/books/images/default-cover.png' %}" alt="No Cover">
+            {% endif %}
+          </a>
+          <h2>{{ book.title }}</h2>
+          <p>{{ book.author }}</p>
+          {% if role == "Admin" %}
+          {% if book.status == 'Borrowed' %}
+          <a href="/update_status/{{ book.id }}/" class="borrowbtn" data-book-id="{{ book.id }}"
+            data-status="{{ book.status }}" onclick="handleStatusChange({{ book.id }}, {{ book.status }});"
+            style="opacity: 0.5;">
+            {{ book.status }}
+          </a>
+          {% else %}
+          <a href="/update_status/{{ book.id }}/" class="borrowbtn" data-book-id="{{ book.id }}"
+            data-status="{{ book.status }}" style="opacity: 0.5; background-color: #999;">
+            {{ book.status }}
+          </a>
           {% endif %}
+          {% else %}
+
+          {% if book.status == 'Borrowed' %}
+          <a href="/borrow/{{ book.id }}/" class="borrowbtn" data-book-id="{{ book.id }}"
+            onclick="handleBtnBorrow({{ book.id }});" style="pointer-events: none; opacity: 0.5;">
+            Borrow
+          </a>
+          {% else %}
+          <a href="/update_status/{{ book.id }}/" class="borrowbtn" data-book-id="{{ book.id }}"
+            data-status="{{ book.status }}" style="opacity: 0.5; background-color: #999;">
+            {{ book.status }}
+          </a>
+          {% endif %}
+          {% endif %}
+        </div>
+        {% endif %}
         {% endfor %}
       </section>
     </div>
@@ -108,37 +146,45 @@
     <div class="category-row">
       <section id="Novels" class="book-track">
         {% for book in books %}
-          {% if book.category == "novels" %}
-            <div class="book">
-              <a href="{% url 'book_detail' book.id %}">
-                {% if book.image %}
-                  <img src="{{ book.image.url }}" alt="{{ book.title }}">
-                {% else %}
-                  <img src="{% static 'pages/images/default-cover.png' %}" alt="No Cover">
-                {% endif %}
-              </a>
-              <h2>{{ book.title }}</h2>
-              <p>{{ book.author }}</p>
-              {% if role == "Admin" %}
-                    <a href="/update_status/{{ book.id }}/"
-                      class="borrowbtn"
-                      data-book-id="{{ book.id }}"
-                      data-status="{{ book.status }}"
-                      onclick="handleStatusChange({{ book.id }}, {{ book.status }}); "
-                      {% if book.status == 'Borrowed' %}style="opacity: 0.5;"{% endif %}>
-                        {{ book.status }}
-                    </a>
-                {% else %}
-                    <a href="/borrow/{{ book.id }}/" 
-                      class="borrowbtn"
-                      data-book-id="{{ book.id }}"
-                      onclick="handleBtnBorrow({{ book.id }}); "
-                      {% if book.status == 'Borrowed' %}style="pointer-events: none; opacity: 0.5;"{% endif %}>
-                        Borrow
-                    </a>
-                {% endif %}
-            </div>
+        {% if book.category == "novels" %}
+        <div class="book">
+          <a href="{% url 'book_detail' book.id %}">
+            {% if book.cover %}
+            <img src="{{ book.cover.url }}" alt="{{ book.title }}">
+            {% else %}
+            <img src="{% static 'pages/images/default-cover.png' %}" alt="No Cover">
+            {% endif %}
+          </a>
+          <h2>{{ book.title }}</h2>
+          <p>{{ book.author }}</p>
+          {% if role == "Admin" %}
+          {% if book.status == 'Borrowed' %}
+          <a href="/update_status/{{ book.id }}/" class="borrowbtn" data-book-id="{{ book.id }}"
+            data-status="{{ book.status }}" onclick="handleStatusChange({{ book.id }}, {{ book.status }}); "
+            style="opacity: 0.5;">
+            {{ book.status }}
+          </a>
+          {% else %}
+          <a href="/update_status/{{ book.id }}/" class="borrowbtn" data-book-id="{{ book.id }}"
+            data-status="{{ book.status }}" style="opacity: 0.5; background-color: #999;">
+            {{ book.status }}
+          </a>
           {% endif %}
+          {% else %}
+          {% if book.status == 'Borrowed' %}
+          <a href="/borrow/{{ book.id }}/" class="borrowbtn" data-book-id="{{ book.id }}"
+            onclick="handleBtnBorrow({{ book.id }}); " style="pointer-events: none; opacity: 0.5;">
+            Borrow
+          </a>
+          {% else %}
+          <a href="/update_status/{{ book.id }}/" class="borrowbtn" data-book-id="{{ book.id }}"
+            data-status="{{ book.status }}" style="opacity: 0.5; background-color: #999;">
+            {{ book.status }}
+          </a>
+          {% endif %}
+          {% endif %}
+        </div>
+        {% endif %}
         {% endfor %}
       </section>
     </div>
@@ -177,7 +223,7 @@
     font-size: 18px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
     z-index: 1000;">
-   Status Updated Successfully ✅
+  Status Updated Successfully ✅
 </div>
 
 <!-- Warning Toast -->

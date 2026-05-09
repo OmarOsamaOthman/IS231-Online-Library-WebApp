@@ -6,9 +6,20 @@
 {% endblock extra_css %}
 
 {% block nav_links %}
+
+{% if request.user.is_authenticated %}
+{% if request.user.profile.role == "Admin" %}
+<li><a href="{% url 'books' %}">Books</a></li>
+<li><a href="{% url 'add_book' %}">Add Books</a></li>
+<li><a href="{% url 'logout' %}">Logout</a></li>
+{% else %}
+<li><a href="{% url 'books' %}">Books</a></li>
+<li><a href="{% url 'logout' %}">Logout</a></li>
+{% endif %}
+{% else %}
 <li><a href="{% url 'login_view' %}">Login</a></li>
 <li><a href="{% url 'signup' %}">Signup</a></li>
-<li><a href="{% url 'logout' %}">Logout</a></li>
+{% endif %}
 {% endblock nav_links %}
 
 {% block content %}
