@@ -6,7 +6,7 @@ const sections = {
   Novels: document.getElementById("Novels"),
 };
 
-console.log(books)
+// console.log(books)
 
 setupAdmin();
 
