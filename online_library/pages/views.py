@@ -102,8 +102,19 @@ def library(request):
 def add_book(request):
     return render(request, 'pages/Add-book.html')
 
-def edit_book(request):
-    form = BookForm
+def edit_book(request, pk):
+    book = get_object_or_404(Book, pk=pk)
+
+    if request.user.profile.role != 'Admin':
+        return redirect('books')
+    if request.method == 'POST':
+        form = BookForm(request.POST, request.FILES, instance=book)
+
+        if form.is_valid():
+            form.save()
+            return redirect('book_detail', pk=pk)
+    else:
+        form = BookForm(instance=book)
     return render(request, 'pages/Edit-book.html', {'form':form})
 
 def books(request):
@@ -141,10 +152,53 @@ def update_status(request, book_id):
 
 from django.shortcuts import render, get_object_or_404
 def book_detail(request, pk):
+
     book = get_object_or_404(Book, pk=pk)
     print("book in details....")
     print(book)
 
-    return render(request, 'pages/book-detail.html', {
-        'book': book
-    })
+    role = Profile.objects.get(user=request.user).role
+    
+
+
+    return render(request, 'pages/book-detail.html', { 'book': book, 'role':role })
+
+
+def borrow_book(request, pk):
+    book = get_object_or_404(Book, id=id)
+
+    if book.status == 'Availiable':
+        book.status = 'Borrowed'
+
+        BorrowedBook.objects.create(
+            user=request.user,
+            book=book
+        )
+
+        book.save()
+    else:
+        messages.error(request, "this book is already borrowed")
+
+    return redirect('book_detail', pk= pk)
+
+def delete_book(request, pk):
+
+    if request.user.profile.role == 'Admin':
+        book = get_object_or_404(Book, pk=pk)
+
+        book.delete()
+
+    return redirect('books')
+
+def change_book_status(request, pk):
+
+    if request.user.profile.role == 'Admin':
+        book = get_object_or_404(Book, pk=pk)
+
+        if book.status == 'Availiable':
+            book.status = 'Borrowed'
+        else:
+            book.status = 'Availiable'
+
+        book.save()
+    return redirect('book_detail', pk=pk)

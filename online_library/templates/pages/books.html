@@ -62,8 +62,8 @@
             {{ book.status }}
           </a>
           {% else %}
-          <a href="/update_status/{{ book.id }}/" data-book-id="{{ book.id }}" data-status="{{ book.status }}"
-            style="opacity: 0.5; background-color: #999;">
+          <a href="/update_status/{{ book.id }}/" class="borrowbtn" data-book-id="{{ book.id }}"
+            data-status="{{ book.status }}" style="opacity: 0.5; background-color: #999;">
             {{ book.status }}
           </a>
           {% endif %}
@@ -76,8 +76,8 @@
             Borrow
           </a>
           {% else %}
-          <a href="/update_status/{{ book.id }}/" class="" data-book-id="{{ book.id }}" data-status="{{ book.status }}"
-            style="opacity: 0.5; background-color: #999;">
+          <a href="/update_status/{{ book.id }}/" class="borrowbtn" data-book-id="{{ book.id }}"
+            data-status="{{ book.status }}" style="opacity: 0.5; background-color: #999;">
             {{ book.status }}
           </a>
           {% endif %}

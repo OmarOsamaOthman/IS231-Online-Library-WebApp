@@ -123,9 +123,9 @@ main div textarea:focus {
     box-shadow: 0 3px 30px -25px var(--secondary);
 }
 
-main form .image input {
+main form .file {
     background-color: #fff;
-    padding-top: 8.4px;
+    padding-top: 5.4px;
 }
 
 main form button {

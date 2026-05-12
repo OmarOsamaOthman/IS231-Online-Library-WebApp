@@ -1,7 +1,4 @@
-const bookId = Number(localStorage.getItem("selectedBookId"));
-let allBooks = JSON.parse(localStorage.getItem("allBooks")) || [];
 
-const editBook = allBooks.find((book) => book.id === bookId);
 
 let preview = document.getElementsByClassName("preview")[0];
 
