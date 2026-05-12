@@ -51,7 +51,7 @@
                 <!-- ADMIN BUTTONS -->
                 <a href="/update_status/{{ book.id }}/" id="changeStatus">Change Status</a>
                 <a href="{% url 'edit_book' book.pk %}" id="editBtn">✏️ Edit Book</a>
-                <a href="/delete_book/{{ book.id }}/" id="deleteBtn"
+                <a href="/book/{{ book.id }}/delete/" id="deleteBtn"
                     onclick="return confirm('Are you sure you want to delete this book?')">
                     🗑️ Delete Book
                 </a>

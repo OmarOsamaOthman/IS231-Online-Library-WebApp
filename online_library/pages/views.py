@@ -124,20 +124,8 @@ def books(request):
     return render(request, 'pages/Books.html', {'books': books, 'role': role})
 
 
-def borrow_book(request, book_id):
-    book = Book.objects.get(id=book_id)
-    if book.status == 'Available':
-        book.status = 'Borrowed'
-        book.save()
-        BorrowedBook.objects.create(user=request.user, book=book)
-        print(f"{request.user.username} borrowed {book.title}")
-        return redirect('books')
-    else:
-        print(f"{book.title} is already borrowed.")
-        messages.error(request, 'This book is already borrowed.')
-        return redirect('books')
-    
-    
+
+
 def update_status(request, book_id):
     book = Book.objects.get(id=book_id)
     if(book.status == 'Available'):
@@ -164,22 +152,24 @@ def book_detail(request, pk):
     return render(request, 'pages/book-detail.html', { 'book': book, 'role':role })
 
 
-def borrow_book(request, pk):
-    book = get_object_or_404(Book, id=id)
 
-    if book.status == 'Availiable':
+
+
+
+def borrow_book(request, book_id):
+    book = Book.objects.get(id=book_id)
+    if book.status == 'Available':
         book.status = 'Borrowed'
-
-        BorrowedBook.objects.create(
-            user=request.user,
-            book=book
-        )
-
         book.save()
+        BorrowedBook.objects.create(user=request.user, book=book)
+        print(f"{request.user.username} borrowed {book.title}")
+        return redirect('books')
     else:
-        messages.error(request, "this book is already borrowed")
-
-    return redirect('book_detail', pk= pk)
+        print(f"{book.title} is already borrowed.")
+        messages.error(request, 'This book is already borrowed.')
+        return redirect('books')
+    
+    
 
 def delete_book(request, pk):
 
