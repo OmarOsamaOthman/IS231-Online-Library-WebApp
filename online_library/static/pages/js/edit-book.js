@@ -1,17 +1,23 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    // ── Get form inputs ──
-    const titleInput = document.getElementById("id_title");
-    const authorInput = document.getElementById("id_author");
-    const categoryInput = document.getElementById("id_category");
-    const statusInput = document.getElementById("id_status");
-    const descriptionInput = document.getElementById("id_description");
-    const imageInput = document.getElementById("id_cover");
+  console.log(document.getElementById("book-title"));
+  console.log(document.getElementById("id_author"));
+  console.log(document.getElementById("id_category"));
+  console.log(document.getElementById("id_status"));
+  console.log(document.getElementById("id_description"));
+  console.log(document.getElementById("id_cover"));
 
-    // ── Build the preview card ──
-    const preview = document.querySelector(".preview");
+  const titleInput = document.getElementById("book-title");
+  const authorInput = document.getElementById("auther");
+  const categoryInput = document.getElementById("category");
+  const statusInput = document.getElementById("status");
+  const descriptionInput = document.getElementById("description");
+  const imageInput = document.getElementById("book-image");
 
-    preview.innerHTML = `
+
+  const preview = document.querySelector(".preview");
+
+  preview.innerHTML = `
     <div class="card-div">
       <div class="cover">
         <img id="preview-cover" src="" alt="Book cover" />
@@ -34,57 +40,60 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </div>
     </div>
-  `;
+    `;
 
-    const previewTitle = document.getElementById("preview-title");
-    const previewAuthor = document.getElementById("preview-author");
-    const previewCategory = document.getElementById("preview-category");
-    const previewStatus = document.getElementById("preview-status");
-    const previewDescription = document.getElementById("preview-description");
-    const previewCover = document.getElementById("preview-cover");
+  const previewTitle = document.getElementById("preview-title");
+  const previewAuthor = document.getElementById("preview-author");
+  const previewCategory = document.getElementById("preview-category");
+  const previewStatus = document.getElementById("preview-status");
+  const previewDescription = document.getElementById("preview-description");
+  const previewCover = document.getElementById("preview-cover");
 
-    // ── Seed preview with current values ──
-    previewTitle.textContent = titleInput.value;
-    previewAuthor.textContent = authorInput.value;
-    previewCategory.textContent = categoryInput.options[categoryInput.selectedIndex]?.text;
-    previewStatus.textContent = statusInput.options[statusInput.selectedIndex]?.text;
-    previewDescription.textContent = descriptionInput.value;
+  // const currentImageLink = document.querySelector('a[href*="book_covers"]');
+  // if (currentImageLink) {
+  //   previewCover.src = currentImageLink.href;
+  // }
 
+  previewCover.src = imageInput.dataset.url || "";
 
-    const currentImageLink = document.querySelector('a[href*="book_covers"]');
-    if (currentImageLink) previewCover.src = currentImageLink.href;
+  // Seed preview
+  previewTitle.textContent = titleInput.value;
+  previewAuthor.textContent = authorInput.value;
+  previewCategory.textContent = categoryInput.options[categoryInput.selectedIndex]?.text;
+  previewStatus.textContent = statusInput.options[statusInput.selectedIndex]?.text;
+  previewDescription.textContent = descriptionInput.value;
 
-    // ── Live update listeners ──
-    titleInput.addEventListener("input", () => {
-        previewTitle.textContent = titleInput.value.trim() || "Book Title";
-    });
+  // Live listeners
+  titleInput.addEventListener("input", () => {
+    previewTitle.textContent = titleInput.value.trim() || "Book Title";
+  });
 
-    authorInput.addEventListener("input", () => {
-        previewAuthor.textContent = authorInput.value.trim() || "—";
-    });
+  authorInput.addEventListener("input", () => {
+    previewAuthor.textContent = authorInput.value.trim() || "—";
+  });
 
-    categoryInput.addEventListener("change", () => {
-        previewCategory.textContent = categoryInput.options[categoryInput.selectedIndex].text;
-    });
+  categoryInput.addEventListener("change", () => {
+    previewCategory.textContent = categoryInput.options[categoryInput.selectedIndex].text;
+  });
 
-    statusInput.addEventListener("change", () => {
-        previewStatus.textContent = statusInput.options[statusInput.selectedIndex].text;
-    });
+  statusInput.addEventListener("change", () => {
+    previewStatus.textContent = statusInput.options[statusInput.selectedIndex].text;
+  });
 
-    descriptionInput.addEventListener("input", () => {
-        previewDescription.textContent = descriptionInput.value.trim() || "—";
-    });
+  descriptionInput.addEventListener("input", () => {
+    previewDescription.textContent = descriptionInput.value.trim() || "—";
+  });
 
-    imageInput.addEventListener("change", () => {
-        const file = imageInput.files[0];
-        if (!file) return;
-        previewCover.src = URL.createObjectURL(file);
-    });
+  imageInput.addEventListener("change", () => {
+    const file = imageInput.files[0];
+    if (!file) return;
+    previewCover.src = URL.createObjectURL(file);
+  });
 
-    // ── Cancel button ──
-    document.getElementById("cancel").addEventListener("click", () => {
-        const pk = document.getElementById("cancel").dataset.pk;
-        window.location.href = `/book/${pk}/`;
-    });
+  // Cancel
+  document.getElementById("cancel").addEventListener("click", () => {
+    const pk = document.getElementById("cancel").dataset.pk;
+    window.location.href = `/book/${pk}/`;
+  });
 
 }); // end DOMContentLoaded

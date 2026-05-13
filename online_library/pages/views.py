@@ -114,16 +114,16 @@ def edit_book(request, pk):
 
     if request.user.profile.role != 'Admin':
         return redirect('books')
+
     if request.method == 'POST':
         form = BookForm(request.POST, request.FILES, instance=book)
-
         if form.is_valid():
             form.save()
             return redirect('book_detail', pk=pk)
     else:
         form = BookForm(instance=book)
-    return render(request, 'pages/Edit-book.html', {'form':form})
 
+    return render(request, 'pages/Edit-book.html', {'form': form})
 
 def books(request):
     books = Book.objects.all()

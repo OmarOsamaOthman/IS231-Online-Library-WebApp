@@ -14,7 +14,6 @@
 
 {% block content %}
 
-
 <section class="container">
     <section class="editing">
         <header>
@@ -24,37 +23,63 @@
         <main>
             <form method="POST" action="" enctype="multipart/form-data">
                 {% csrf_token %}
+
+                {% if form.instance.image %}
+                <span class="current-cover-url" data-src="{{ form.instance.image.url }}" hidden></span>
+                {% endif %}
+
+                <!-- <div class="content-container">
+                    {% for field in form %}
+                    <div>
+
+                        {% if field.name != 'cover' %}
+                        {% if form.instance.cover %}
+
+                        <label>{{field.label}}:</label>
+                        {{field}}
+
+                        {% else %}
+                        <input type="file" name="cover" id="book-image" class="file" accept="image/*">
+                        {% endif %}
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div> -->
+
+
                 <div class="content-container">
                     {% for field in form %}
                     <div>
-                        <label>{{field.label}}:</label>
-
-                        {{field}}
+                        {% if field.name == 'cover' %}
+                        <label>{{ field.label }}:</label>
+                        {% if form.instance.cover %}
+                        <img src="{{ form.instance.cover.url }}" id="current-book-cover" class="current-cover-preview"
+                            style="display: none;" />
+                        {% endif %}
+                        <input type="file" name="cover" id="book-image" class="file" accept="image/*"
+                            data-url="{{ form.instance.cover.url }}">
+                        {% else %}
+                        <label>{{ field.label }}:</label>
+                        {{ field }}
+                        {% endif %}
                     </div>
-
                     {% endfor %}
                 </div>
 
                 <div class="buttons">
                     <button type="submit" class="save" id="save">Save Changes</button>
                     <button type="button" class="cancel" id="cancel" data-pk="{{ form.instance.pk }}">Cancel</button>
-
                 </div>
             </form>
         </main>
     </section>
 
-    <section class=" preview">
-        {% if form.instance.image %}
-        <span class="current-cover-url" data-src="{{ form.instance.image.url }}" hidden></span>
-        {% endif %}
-
-    </section>
+    <section class="preview"></section>
 </section>
+
 <footer>
     <p>© 2026 Online Library. All Rights Reserved. | Developed by Omar Osama</p>
 </footer>
-{% block extra_js %}
+
 <script src="{% static 'pages/js/edit-book.js'%}"></script>
-{% endblock extra_js %}
 {% endblock content %}

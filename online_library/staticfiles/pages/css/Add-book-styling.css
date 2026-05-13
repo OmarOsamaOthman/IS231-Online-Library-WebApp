@@ -61,6 +61,7 @@ main div textarea:focus {
 
 main form #book-image {
     margin-bottom: 20px;
+    padding-top: 8px;
 }
 
 main form .buttons {
