@@ -43,12 +43,12 @@ class BookForm(forms.ModelForm):
 
 
         widgets = {
-                    'title': forms.TextInput(attrs={'class': 'input'}),
-                    'author': forms.TextInput(attrs={'class': 'input'}),
-                    'description': forms.Textarea(attrs={'class': 'textarea'}),
-                    'category': forms.Select(attrs={'class': 'select'}),
-                    'status': forms.Select(attrs={'class': 'select'}),
-                    'cover': forms.ClearableFileInput(attrs={'class': 'file'}),}
+                    'title': forms.TextInput(attrs={'class': 'input', 'id':'book-title'}),
+                    'author': forms.TextInput(attrs={'class': 'input', 'id':'auther'}),
+                    'description': forms.Textarea(attrs={'class': 'textarea', 'id':'description'}),
+                    'category': forms.Select(attrs={'class': 'select', 'id':'category'}),
+                    'status': forms.Select(attrs={'class': 'select','id':'status' }),
+                    'cover': forms.ClearableFileInput(attrs={'class': 'file', 'id':'book-image'}),}
 
         labels = {
         'title': 'Title',
