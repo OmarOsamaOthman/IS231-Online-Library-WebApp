@@ -21,6 +21,8 @@ urlpatterns=[
 
 
     path('update_status/<int:pk>/', views.change_book_status, name='update_status'),
+    path('search/', views.search_books, name='search_books'),
+    path('borrowed-books/', views.borrowed_books, name='borrowed_books'),
     # path('book/<int:pk>/status/',views.change_book_status,name='change_status'),
     
     # path('borrow/<int:book_id>/', views.borrow_book, name='borrow_book'),

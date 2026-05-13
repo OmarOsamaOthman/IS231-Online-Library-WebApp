@@ -4,6 +4,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
+from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 from .forms import LoginForm , CreateUserForm, BookForm
 from .models import  Profile, Book , BorrowedBook
@@ -166,7 +168,34 @@ def book_detail(request, pk):
     return render(request, 'pages/book-detail.html', { 'book': book, 'role':role })
 
 
+def search_books(request):
+    query = request.GET.get('search_query', '')
+    category = request.GET.get('category', '')
+    
+    books = Book.objects.all()
+    
+    if query:
+        books = books.filter(Q(title__icontains=query) | Q(author__icontains=query))
+        
+    if category:
+        books = books.filter(category=category)
+        
+    context = {
+        'books': books,
+        'query': query,
+        'category': category
+    }
+    return render(request, 'pages/search-books.html', context)
 
+
+@login_required(login_url='login_view')
+def borrowed_books(request):
+    borrowed_records = BorrowedBook.objects.filter(user=request.user)
+    
+    context = {
+        'borrowed_records': borrowed_records
+    }
+    return render(request, 'pages/borrowed-books.html', context)
 
 
 

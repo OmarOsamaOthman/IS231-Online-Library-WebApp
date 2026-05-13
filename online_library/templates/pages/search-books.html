@@ -1,0 +1,57 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %} Search Books {% endblock title %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'pages/css/search-books.css' %}">
+{% endblock extra_css %}
+
+{% block nav_links %}
+    <li><a href="{% url 'books' %}">Books</a></li>
+    <li><a href="{% url 'borrowed_books' %}">Borrowed</a></li>
+    <li><a href="{% url 'search_books' %}">Search</a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+{% endblock nav_links %}
+
+{% block content %}
+<header>
+    <h1>Search Books</h1>
+</header>
+<main>
+    <form method="get" action="{% url 'search_books' %}">
+        <div>
+            <label for="search-query">Search:</label>
+            <input type="text" id="search-query" name="search_query" value="{{ query }}" placeholder="Search by Title or Author" autofocus>
+        </div>
+        <div>
+            <label for="category">Category:</label>
+            <select id="category" name="category">
+                <option value="" {% if not category %}selected{% endif %}>All Categories</option>
+                <option value="trending" {% if category == 'trending' %}selected{% endif %}>Trending</option>
+                <option value="coding" {% if category == 'coding' %}selected{% endif %}>Coding</option>
+                <option value="novels" {% if category == 'novels' %}selected{% endif %}>Novels</option>
+            </select>
+        </div>
+        <div class="buttons">
+            <button id="search-button" type="submit">Search</button>
+            <a href="{% url 'search_books' %}"><button id="reset-button" type="button">Clear</button></a>
+        </div>
+    </form>
+
+    <div id="search-results">
+        {% if books %}
+            <ul>
+            {% for book in books %}
+                <li>
+                    <strong><a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a></strong> by {{ book.author }} 
+                    ({{ book.get_category_display }}) - Status: {{ book.status }}
+                </li>
+            {% endfor %}
+            </ul>
+        {% elif query or category %}
+            <p>No books found matching your search.</p>
+        {% endif %}
+    </div>
+</main>
+{% endblock content %}

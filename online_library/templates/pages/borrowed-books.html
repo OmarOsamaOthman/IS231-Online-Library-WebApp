@@ -1,0 +1,37 @@
+{% extends 'pages/base.html' %}
+{% load static %}
+
+{% block title %} Borrowed Books {% endblock title %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'pages/css/borrowed-books.css' %}">
+{% endblock extra_css %}
+
+{% block nav_links %}
+    <li><a href="{% url 'books' %}">Books</a></li>
+    <li><a href="{% url 'borrowed_books' %}">Borrowed</a></li>
+    <li><a href="{% url 'search_books' %}">Search</a></li>
+    <li><a href="{% url 'about' %}">About</a></li>
+{% endblock nav_links %}
+
+{% block content %}
+<header>
+    <h1>My Borrowed Books</h1>
+</header>
+<main>
+    <div class="borrowed-list">
+        {% if borrowed_records %}
+            <ul>
+            {% for record in borrowed_records %}
+                <li>
+                    <strong>{{ record.book.title }}</strong> by {{ record.book.author }}<br>
+                    Borrowed on: {{ record.borrowed_at|date:"M d, Y H:i" }}
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>You haven't borrowed any books yet!</p>
+        {% endif %}
+    </div>
+</main>
+{% endblock content %}
