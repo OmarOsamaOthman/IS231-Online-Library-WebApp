@@ -65,7 +65,15 @@
                    class="borrowbtn"
                    data-book-id="{{ book.id }}"
                    {% if book.status == 'Borrowed' %}style="pointer-events: none; opacity: 0.5;"{% endif %}>
-                  Borrow
+                  {% if book.status == 'Borrowed' %}
+                    {% if book.id in borrowed_by_me %}
+                      Borrowed by You
+                    {% else %}
+                      Unavailable
+                    {% endif %}
+                  {% else %}
+                    Borrow
+                  {% endif %}
                 </a>
               {% endif %}
             </div>
@@ -107,7 +115,15 @@
                    class="borrowbtn"
                    data-book-id="{{ book.id }}"
                    {% if book.status == 'Borrowed' %}style="pointer-events: none; opacity: 0.5;"{% endif %}>
-                  Borrow
+                  {% if book.status == 'Borrowed' %}
+                    {% if book.id in borrowed_by_me %}
+                      Borrowed by You 
+                    {% else %}
+                      Unavailable
+                    {% endif %}
+                  {% else %}
+                    Borrow
+                  {% endif %}
                 </a>
               {% endif %}
             </div>
@@ -149,7 +165,15 @@
                    class="borrowbtn"
                    data-book-id="{{ book.id }}"
                    {% if book.status == 'Borrowed' %}style="pointer-events: none; opacity: 0.5;"{% endif %}>
-                  Borrow
+                  {% if book.status == 'Borrowed' %}
+                    {% if book.id in borrowed_by_me %}
+                      Borrowed by You 
+                    {% else %}
+                      Unavailable
+                    {% endif %}
+                  {% else %}
+                    Borrow
+                  {% endif %}
                 </a>
               {% endif %}
             </div>

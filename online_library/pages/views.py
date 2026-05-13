@@ -124,20 +124,27 @@ def edit_book(request, pk):
         form = BookForm(instance=book)
     return render(request, 'pages/Edit-book.html', {'form':form})
 
+
 def books(request):
     books = Book.objects.all()
-    print (books)
-    role = Profile.objects.get(user=request.user).role
-    return render(request, 'pages/Books.html', {'books': books, 'role': role})
+    role = request.user.profile.role if request.user.is_authenticated else None
 
+    borrowed_by_me = []
+    if request.user.is_authenticated and role != 'Admin':
+        borrowed_by_me = BorrowedBook.objects.filter(user=request.user).values_list('book_id', flat=True)
 
+    return render(request, 'pages/books.html', {
+        'books': books,
+        'role': role,
+        'borrowed_by_me': borrowed_by_me,
+    })
 
 
 def update_status(request, book_id):
     book = Book.objects.get(id=book_id)
     if(book.status == 'Available'):
         book.status = 'Borrowed'
-        
+        print("book borrowed...")
     else:
         book.status = 'Available'
     book.save()
@@ -173,6 +180,7 @@ def borrow_book(request, book_id):
         return redirect('books')
     else:
         print(f"{book.title} is already borrowed.")
+        print(f"book is ... {book.status}")
         messages.error(request, 'This book is already borrowed.')
         return redirect('books')
     
