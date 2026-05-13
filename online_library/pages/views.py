@@ -98,9 +98,16 @@ def library(request):
 
      return render(request,'pages/library.html', {'profile': profile})
 
-
 def add_book(request):
-    return render(request, 'pages/Add-book.html')
+    if request.method == 'POST':
+        form = BookForm(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('books')
+    else:
+        form = BookForm()
+    return render(request, 'pages/Add-book.html', {'form': form})
+
 
 def edit_book(request, pk):
     book = get_object_or_404(Book, pk=pk)
