@@ -1,6 +1,6 @@
 .navbar nav ul {
   display: grid;
-  grid-template-columns: repeat(4, 150px);
+  grid-template-columns: repeat(5, 150px);
 }
 
 header {
@@ -19,13 +19,28 @@ main {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 25px;
 }
-
+/* 
 .book {
   background-color: white;
   border-radius: 12px;
   padding: 20px;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+} */
+
+
+.book {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  width: 180px;
+  flex: 0 0 180px;
+  text-align: center;
+  transition: 0.3s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .book h2 {
@@ -35,7 +50,7 @@ main {
 }
 
 .book img {
-  width: 100%;
+  width: 180px;
   height: 260px;
   object-fit: cover;
   border-radius: 8px;

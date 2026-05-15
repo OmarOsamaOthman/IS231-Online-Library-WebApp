@@ -19,7 +19,8 @@
     <li><a href="{% url 'add_book' %}">Add Books</a></li>
     <li><a href="{% url 'logout' %}">Logout</a></li>
   {% else %}
-    <li id="borrowed-li"><a href="{% url 'borrowed_books' %}">Borrowed Books</a></li>
+    <li id="borrowed-li"><a href="{% url 'borrowed_books' %}">Borrowed</a></li>
+    <li id="borrowed-li"><a href="{% url 'search_books' %}">Search</a></li>
     <li><a href="{% url 'about' %}">About</a></li>
     <li><a href="{% url 'logout' %}">Logout</a></li>
   {% endif %}

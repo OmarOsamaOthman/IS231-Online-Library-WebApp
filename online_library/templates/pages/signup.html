@@ -11,18 +11,34 @@
 {% endblock nav_links %}
 
 {% block form %}
-<form method="POST" class="form" onsubmit="handleLogin(event)">
-    {% csrf_token %}
-    {% for field in form %}
+<main>
+
+    <header>
+        <h1>Sign Up</h1>
+    </header>
+
+    <form method="POST" class="form" onsubmit="handleLogin(event)">
+        {% csrf_token %}
+        {% for field in form %}
+
+        <div>
+
+            {{field.label}}
+            {{field}}
+        </div>
+        {% endfor %}
+
+        {{form.errors}}
+        <div class="buttons">
+            <button type="submit" name="Create User" class="signup">Create User</button>
+        </div>
+        <p class="login-link">
+            Already have an account? <a href="{% url 'login_view'   %}">Login here</a>
+        </p>
 
 
-    {{field.label}}
-    {{field}}
-    {% endfor %}
-
-    {{form.errors}}
-    <button type="submit" name="Create User">Create User</button>
-</form>
+    </form>
+</main>
 
 {% endblock form%}
 

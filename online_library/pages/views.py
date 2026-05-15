@@ -94,11 +94,13 @@ def logoutUser(request):
 def library(request):
      
      profile = None
+     books = Book.objects.all()
 
      if request.user.is_authenticated:
          profile, created = Profile.objects.get_or_create(user=request.user)
+     
 
-     return render(request,'pages/library.html', {'profile': profile})
+     return render(request,'pages/library.html', {'profile': profile, 'books':books})
 
 def add_book(request):
     if request.method == 'POST':
@@ -236,3 +238,14 @@ def change_book_status(request, pk):
 
         book.save()
     return redirect('book_detail', pk=pk)
+
+
+
+def return_book(request, book_id):
+    book = get_object_or_404(Book, id=book_id)
+    borrowed = BorrowedBook.objects.filter(user=request.user, book=book).first()
+    if borrowed:
+        borrowed.delete()
+        book.status = 'Available'
+        book.save()
+    return redirect('borrowed_books')

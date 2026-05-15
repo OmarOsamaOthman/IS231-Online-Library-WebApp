@@ -4,14 +4,13 @@
 {% block title %} Borrowed Books {% endblock title %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'pages/css/borrowed-books.css' %}">
+<link rel="stylesheet" href="{% static 'pages/css/borrowed-books.css' %}">
 {% endblock extra_css %}
 
 {% block nav_links %}
-    <li><a href="{% url 'books' %}">Books</a></li>
-    <li><a href="{% url 'borrowed_books' %}">Borrowed</a></li>
-    <li><a href="{% url 'search_books' %}">Search</a></li>
-    <li><a href="{% url 'about' %}">About</a></li>
+<li><a href="{% url 'books' %}">Books</a></li>
+<li><a href="{% url 'search_books' %}">Search</a></li>
+<li><a href="{% url 'about' %}">About</a></li>
 {% endblock nav_links %}
 
 {% block content %}
@@ -19,19 +18,48 @@
     <h1>My Borrowed Books</h1>
 </header>
 <main>
-    <div class="borrowed-list">
-        {% if borrowed_records %}
-            <ul>
-            {% for record in borrowed_records %}
-                <li>
-                    <strong>{{ record.book.title }}</strong> by {{ record.book.author }}<br>
-                    Borrowed on: {{ record.borrowed_at|date:"M d, Y H:i" }}
-                </li>
-            {% endfor %}
-            </ul>
-        {% else %}
-            <p>You haven't borrowed any books yet!</p>
-        {% endif %}
+    {% if borrowed_records %}
+    <div class="books-grid">
+
+        {% for record in borrowed_records %}
+        <div class="book">
+
+            <h2>{{ record.book.title }}</h2>
+
+            <a href="{% url 'book_detail' record.book.id %}" class="borrowed-link">
+
+                {% if record.book.cover %}
+                <img src="{{ record.book.cover.url }}" alt="{{ record.book.title }}">
+                {% else %}
+                <img src="{% static 'pages/images/default-cover.png' %}" alt="No Cover">
+                {% endif %}
+
+            </a>
+
+            <p>by {{ record.book.author }}</p>
+
+            <p>
+                <strong>Category:</strong>
+                {{ record.book.category }}
+            </p>
+
+            <a href="{% url 'return_book' record.book.id %}" class="return-btn" >
+                Return Book
+            </a>
+
+        </div>
+        {% endfor %}
+
     </div>
+
+    {% else %}
+    <p class="empty-msg" style="display: flex;
+    align-items: center;
+    justify-content: center;
+    ">
+        You have not borrowed any books yet.
+        <a href="{% url 'books' %}" style="color:var(--primary); font-weight: bold;">Browse books</a>
+    </p>
+    {% endif %}
 </main>
 {% endblock content %}

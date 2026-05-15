@@ -4,7 +4,7 @@ html {
 
 .navbar nav ul {
   display: grid;
-  grid-template-columns: repeat(4, 150px);
+  grid-template-columns: repeat(5, 150px);
 }
 
 .details-container {

@@ -15,23 +15,37 @@ class CreateUserForm(UserCreationForm):
     ) 
     
     phone = forms.CharField(
-        max_length=11
+        max_length=11,
+        widget=forms.TextInput(attrs={
+        'id':'Phone'
+        })    
     )
     class Meta:
         model = User
         fields = ['first_name','last_name','username','email', 'password1', 'password2' ]
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['first_name'].widget.attrs.update({'id': 'UserName', 'autofocus':True})
+        self.fields['last_name'].widget.attrs.update({'id': 'lastName'})
+        self.fields['username'].widget.attrs.update({'id': 'userName'})
+        self.fields['email'].widget.attrs.update({'id': 'Email'})
+        self.fields['password1'].widget.attrs.update({'id': 'Password'})
+        self.fields['password2'].widget.attrs.update({'id': 'Password'})
 
 class LoginForm(forms.Form):
     username = forms.CharField(
         max_length=100,
         widget=forms.TextInput(attrs={
-            'placeholder': 'Username'
+            'placeholder': 'Username',
+            'id':'UserName',
+            'autofocus':True,
         })
     )
 
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            'placeholder': 'Password'
+            'placeholder': 'Password',
+            'id':'Password'
         })
     )
 
