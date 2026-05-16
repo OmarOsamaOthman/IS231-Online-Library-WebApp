@@ -36,12 +36,15 @@
     </style>
 </head>
 
+{% block navbar %}
+{% endblock %}
+
 <body style="margin: 0; font-family: Arial, sans-serif; display: flex; flex-direction: column; min-height: 100vh;">
 
-    <header style="background-color: #000; color: #fff; padding: 25px 0;">
+    <header style="background-color: #000; color: #fff; padding: 25px 0; ">
         <table width="90%" align="center">
             <tr>
-                <td style="font-size: 20px; color: #fff;"><strong>Online Library</strong></td>
+                <td style="font-size: 20px; color: #fff; "><strong>Online Library</strong></td>
                 <td align="right">
                     <a href="{% url 'library' %}" class="nav-button">Home</a>
                     <span class="separastor">|</span>
@@ -155,5 +158,3 @@
 </body>
 
 {% endblock content %}
-
-
